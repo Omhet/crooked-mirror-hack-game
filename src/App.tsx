@@ -15,14 +15,14 @@ const initialSteps: DrawImageStep[] = [
     posOptions: { col: 2, row: 2, gridSize },
     imgOptions: { flipY: true },
   },
-  // { posOptions: { col: 1, gridSize }, imgOptions: { flipX: true } },
-  // { posOptions: { row: 1, gridSize }, imgOptions: { flipX: true } },
+  { posOptions: { row: 1, col: 2, gridSize }, imgOptions: { flipX: true } },
+  { posOptions: { row: 1, gridSize }, imgOptions: { flipX: true } },
 ];
 
 const buttonSteps: DrawImageStep[] = [
   ...shuffle([...initialSteps]),
-  // { posOptions: { row: 2, gridSize: 2 }, imgOptions: { flipX: true } },
-  // { posOptions: { row: 1, col: 1, gridSize: 2 }, imgOptions: { flipX: true } },
+  { posOptions: { row: 2, gridSize: 2 }, imgOptions: { flipX: true } },
+  { posOptions: { row: 1, col: 1, gridSize: 2 }, imgOptions: { flipX: true } },
 ];
 
 function App() {

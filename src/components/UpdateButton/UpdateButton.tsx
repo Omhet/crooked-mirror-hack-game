@@ -24,21 +24,30 @@ export const UpdateButton: FC<UpdateButtonProps> = ({
   const colStart = !col ? 1 : col;
   const colEnd = !col ? `span ${gridSize}` : col;
 
+  const gridStyle = {
+    gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
+    gridTemplateRows: `repeat(${gridSize}, 1fr)`,
+  };
+
   return (
-    <button
-      style={{
-        gridTemplateColumns: `repeat(${gridSize}, 1fr)`,
-        gridTemplateRows: `repeat(${gridSize}, 1fr)`,
-      }}
-      onClick={() => onClick(step)}
-      className={cs(s.main, { [s.clicked]: isClicked })}
-    >
-      <div
-        style={{
-          gridArea: `${rowStart} / ${colStart} / ${rowEnd} / ${colEnd}`,
-        }}
-        className={cs(s.lineWrapper, s.line, { [s.v]: flipY, [s.h]: flipX })}
-      ></div>
-    </button>
+    <div className={s.main}>
+      <button
+        style={gridStyle}
+        onClick={() => onClick(step)}
+        className={cs(s.btn, { [s.clicked]: isClicked })}
+      >
+        <div
+          style={{
+            gridArea: `${rowStart} / ${colStart} / ${rowEnd} / ${colEnd}`,
+          }}
+          className={cs(s.line, { [s.v]: flipY, [s.h]: flipX })}
+        ></div>
+      </button>
+      <div style={gridStyle} className={s.gridTracks}>
+        {[...new Array(gridSize * gridSize)].fill(0).map(() => (
+          <div className={s.sector} />
+        ))}
+      </div>
+    </div>
   );
 };

@@ -1,39 +1,52 @@
 .main {
+  width: 60px;
+  height: 60px;
+  position: relative;
+}
+
+.btn {
   display: grid;
   align-items: center;
   justify-items: center;
-  width: 60px;
-  height: 60px;
+  width: 100%;
+  height: 100%;
   padding: 0;
-  background: white;
-  border: 1px solid #eee;
+  background: transparent;
+  border: none;
   outline: none;
 }
 
-.main:hover {
-  background: #eee;
+.btn:hover {
+  background: rgba(0, 0, 0, 0.1);
 }
 
-.main:active,
+.btn:active,
 .clicked {
-  background: #ddd;
-}
-
-.lineWrapper {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .line {
-  background: black;
+  background: #333;
 }
 
 .h {
   width: 100%;
-  height: 1px;
+  height: 2px;
 }
 .v {
-  width: 1px;
+  width: 2px;
   height: 100%;
+}
+
+.gridTracks {
+  position: absolute;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: -1;
+}
+
+.sector {
+  border: 1px solid #ddd;
 }
