@@ -28,12 +28,17 @@ const buttonSteps: DrawImageStep[] = [
   { posOptions: { row: 1, col: 1, gridSize: 2 }, imgOptions: { flipX: true } },
 ];
 
+type GameState = "start" | "win" | "lose";
+
 function App() {
   const [updateSteps, setUpdateSteps] = useState<DrawImageStep[]>([]);
   const [clickedSet, setClickedSet] = useState<Set<string>>(new Set());
   const [isImageEqual, setIsImageEqual] = useState(false);
   const [isLevelLoading, setIsLevelLoading] = useState(false);
-  const [originalImageSrc, setOriginalImageSrc] = useState(images[0]);
+  const [gameState, setGameState] = useState<GameState>("start");
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const originalImageSrc = images[currentImage];
 
   const addStep = useCallback((step: DrawImageStep, index: string) => {
     if (isImageEqual) return;
@@ -50,7 +55,13 @@ function App() {
   useEffect(() => {
     if (isImageEqual) {
       setTimeout(() => {
+        if (currentImage === images.length - 1) {
+          setGameState("win");
+          return;
+        }
+
         setIsLevelLoading(true);
+        setCurrentImage((prev) => prev + 1);
 
         setTimeout(() => {
           setClickedSet(new Set());
@@ -62,23 +73,37 @@ function App() {
     }
   }, [isImageEqual]);
 
+  if (gameState === "win") {
+    return (
+      <div className={s.main}>
+        <div className={s.loader}>Congratulations. You win!</div>
+      </div>
+    );
+  }
+
+  if (isLevelLoading) {
+    return (
+      <div className={s.main}>
+        <div className={s.loader}>Loading...</div>
+      </div>
+    );
+  }
+
   return (
     <div className={s.main}>
       <div className={s.images}>
         <div className={s.canvasWrapper}>
-          {isLevelLoading ? (
-            <div>Loading...</div>
-          ) : (
-            <Canvas
-              originalImageSrc={originalImageSrc}
-              onUpdate={setIsImageEqual}
-              initialSteps={initialSteps}
-              updateSteps={updateSteps}
-            />
-          )}
+          <Canvas
+            originalImageSrc={originalImageSrc}
+            onUpdate={setIsImageEqual}
+            initialSteps={initialSteps}
+            updateSteps={updateSteps}
+          />
         </div>
+
         <img className={s.originalImg} src={originalImageSrc} alt="" />
       </div>
+
       {isImageEqual && <div>Congratulations!</div>}
       <div className={s.btnGrid}>
         {buttonSteps.map((step, index) => (
