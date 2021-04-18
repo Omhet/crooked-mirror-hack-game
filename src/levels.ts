@@ -1,20 +1,22 @@
-import img1 from "./img.png";
-import img2 from "./img2.png";
+import img0 from "./images/img-0.png";
+import img1 from "./images/img-1.png";
 import { Level } from "./types";
 
 export const levels: Level[] = [
   {
-    img: img1,
-    initialSteps: [{ imgOptions: { flipX: true } }],
-    redundantSteps: [{ imgOptions: { flipY: true } }],
+    img: img0,
+    initialSteps: [{ imgOptions: { flipY: true } }],
+    redundantSteps: [{ imgOptions: { flipX: true } }],
+    tries: 10,
   },
   {
-    img: img2,
+    img: img1,
     initialSteps: [
       { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
     ],
     redundantSteps: [
       { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
     ],
+    tries: 10,
   },
 ];
