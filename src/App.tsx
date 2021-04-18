@@ -11,17 +11,30 @@ const initialSteps: DrawImageStep[] = [
 
 function App() {
   const [updateSteps, setUpdateSteps] = useState<DrawImageStep[]>([]);
+  const [clickedSet, setClickedSet] = useState<Set<string>>(new Set());
 
   const addStep = useCallback((step: DrawImageStep) => {
+    if (clickedSet.has(step.id)) {
+      clickedSet.delete(step.id);
+    } else {
+      clickedSet.add(step.id);
+    }
+
+    setClickedSet(new Set(clickedSet));
     setUpdateSteps([...updateSteps, step]);
   }, []);
 
   return (
     <div className="app">
       <Canvas initialSteps={initialSteps} updateSteps={updateSteps} />
-
-      <UpdateButton step={initialSteps[0]} onClick={addStep} />
-      <UpdateButton step={initialSteps[1]} onClick={addStep} />
+      {initialSteps.map((step) => (
+        <UpdateButton
+          key={step.id}
+          isClicked={clickedSet.has(step.id)}
+          step={step}
+          onClick={addStep}
+        />
+      ))}
     </div>
   );
 }
