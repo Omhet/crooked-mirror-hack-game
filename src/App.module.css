@@ -25,3 +25,11 @@
   padding-left: 16px;
   border-left: 2px solid #ddd;
 }
+
+.canvasWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 500px;
+}

@@ -1,33 +1,16 @@
 import React, { FC, useEffect, useRef, useState } from "react";
-//@ts-ignore
-import { canvasCompare } from "../../canvasCompare";
-import imgSrc from "../../img.png";
-import { drawSteps } from "./image";
+import { drawSteps, drawUpdatedSteps } from "./image";
 import { DrawImageStep } from "./types";
 
 export type CanvasProps = {
+  originalImageSrc: string;
   initialSteps: DrawImageStep[];
   updateSteps: DrawImageStep[];
   onUpdate(isEqual: boolean): void;
 };
 
-const drawUpdatedSteps = async (
-  canvas: HTMLCanvasElement,
-  ctx: CanvasRenderingContext2D,
-  updateSteps: DrawImageStep[]
-) => {
-  await drawSteps(ctx, canvas, canvas.toDataURL(), updateSteps);
-
-  //@ts-ignore
-  const { getPercentage } = await canvasCompare({
-    baseImageUrl: imgSrc,
-    targetImageUrl: canvas.toDataURL(),
-  });
-
-  return getPercentage() === 0;
-};
-
 export const Canvas: FC<CanvasProps> = ({
+  originalImageSrc,
   initialSteps,
   updateSteps,
   onUpdate,
@@ -38,12 +21,12 @@ export const Canvas: FC<CanvasProps> = ({
 
   useEffect(() => {
     if (!ctx || !canvas) return;
-    drawSteps(ctx, canvas, imgSrc, initialSteps);
+    drawSteps(ctx, canvas, originalImageSrc, initialSteps);
   }, [initialSteps, ctx, canvas]);
 
   useEffect(() => {
     if (!ctx || !canvas || updateSteps.length === 0) return;
-    drawUpdatedSteps(canvas, ctx, updateSteps)
+    drawUpdatedSteps(ctx, canvas, originalImageSrc, updateSteps)
       .then(onUpdate)
       .catch((err) => console.error(err));
   }, [updateSteps, ctx, canvas]);

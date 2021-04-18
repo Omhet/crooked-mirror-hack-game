@@ -1,4 +1,21 @@
 import { DrawImageStep, ImageOptions, PosOptions } from "./types";
+import { canvasCompare } from "../../canvasCompare";
+
+export const drawUpdatedSteps = async (
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement,
+  baseImageUrl: string,
+  updateSteps: DrawImageStep[]
+) => {
+  await drawSteps(ctx, canvas, canvas.toDataURL(), updateSteps);
+
+  const { getPercentage } = await canvasCompare({
+    baseImageUrl,
+    targetImageUrl: canvas.toDataURL(),
+  });
+
+  return getPercentage() === 0;
+};
 
 export async function drawSteps(
   ctx: CanvasRenderingContext2D,
