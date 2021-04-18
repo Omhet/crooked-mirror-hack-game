@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import imgSrc from "../../img.png";
 import { drawSteps } from "./image";
 import { DrawImageStep } from "./types";

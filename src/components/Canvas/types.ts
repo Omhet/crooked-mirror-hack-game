@@ -12,6 +12,7 @@ export type ImageOptions = {
 };
 
 export type DrawImageStep = {
+  id: string;
   posOptions?: PosOptions;
   imgOptions?: ImageOptions;
 };
