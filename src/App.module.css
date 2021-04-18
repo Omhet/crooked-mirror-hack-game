@@ -1,0 +1,27 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100vh;
+}
+
+.btnGrid {
+  display: grid;
+  grid-gap: 8px;
+  width: 500px;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+}
+
+.images {
+  display: flex;
+}
+
+.originalImg {
+  margin-left: 16px;
+  padding-left: 16px;
+  border-left: 2px solid #ddd;
+}

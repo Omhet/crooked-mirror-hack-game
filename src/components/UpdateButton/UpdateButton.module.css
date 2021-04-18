@@ -1,10 +1,10 @@
 .main {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   align-items: center;
-  justify-content: center;
+  justify-items: center;
   width: 60px;
   height: 60px;
+  padding: 0;
   background: white;
   border: 1px solid #eee;
   outline: none;
@@ -17,4 +17,23 @@
 .main:active,
 .clicked {
   background: #ddd;
+}
+
+.lineWrapper {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+
+.line {
+  background: black;
+}
+
+.h {
+  width: 100%;
+  height: 1px;
+}
+.v {
+  width: 1px;
+  height: 100%;
 }
