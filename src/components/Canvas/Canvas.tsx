@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from "react";
+import { DrawImageStep } from "../../types";
 import { drawSteps, drawUpdatedSteps } from "./image";
-import { DrawImageStep } from "./types";
 
 export type CanvasProps = {
   originalImageSrc: string;

@@ -1,3 +1,5 @@
+import { DrawImageStep, Level } from "./types";
+
 export function shuffle<T>(array: T[]) {
   let currentIndex = array.length;
   let temporaryValue;
@@ -13,3 +15,7 @@ export function shuffle<T>(array: T[]) {
 
   return array;
 }
+
+export const getButtonSteps = (level: Level): DrawImageStep[] => [
+  ...shuffle([...level.initialSteps, ...level.redundantSteps]),
+];

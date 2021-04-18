@@ -15,3 +15,9 @@ export type DrawImageStep = {
   posOptions?: PosOptions;
   imgOptions?: ImageOptions;
 };
+
+export type Level = {
+  img: string;
+  initialSteps: DrawImageStep[];
+  redundantSteps: DrawImageStep[];
+};

@@ -1,5 +1,5 @@
-import { DrawImageStep, ImageOptions, PosOptions } from "./types";
 import { canvasCompare } from "../../canvasCompare";
+import { DrawImageStep, PosOptions, ImageOptions } from "../../types";
 
 export const drawUpdatedSteps = async (
   ctx: CanvasRenderingContext2D,

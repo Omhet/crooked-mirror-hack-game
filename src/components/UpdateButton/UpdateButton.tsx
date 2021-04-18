@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import cs from "classnames";
-import { DrawImageStep } from "../Canvas/types";
 import s from "./UpdateButton.module.css";
+import { DrawImageStep } from "../../types";
 
 export type UpdateButtonProps = {
   step: DrawImageStep;

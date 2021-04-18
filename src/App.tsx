@@ -1,32 +1,10 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect, useMemo } from "react";
 import s from "./App.module.css";
-import img1 from "./img.png";
-import img2 from "./img2.png";
 import { Canvas } from "./components/Canvas/Canvas";
-import { DrawImageStep } from "./components/Canvas/types";
 import { UpdateButton } from "./components/UpdateButton/UpdateButton";
-import { shuffle } from "./utils";
-
-const images = [img1, img2];
-
-const gridSize = 2;
-
-const initialSteps: DrawImageStep[] = [
-  { imgOptions: { flipX: true } },
-  // { posOptions: { col: 2, gridSize }, imgOptions: { flipY: true } },
-  // {
-  //   posOptions: { col: 2, row: 2, gridSize },
-  //   imgOptions: { flipY: true },
-  // },
-  // { posOptions: { row: 1, col: 2, gridSize }, imgOptions: { flipX: true } },
-  // { posOptions: { row: 1, gridSize }, imgOptions: { flipX: true } },
-];
-
-const buttonSteps: DrawImageStep[] = [
-  ...shuffle([...initialSteps]),
-  { posOptions: { row: 2, gridSize: 2 }, imgOptions: { flipX: true } },
-  { posOptions: { row: 1, col: 1, gridSize: 2 }, imgOptions: { flipX: true } },
-];
+import { DrawImageStep } from "./types";
+import { getButtonSteps } from "./utils";
+import { levels } from "./levels";
 
 type GameState = "start" | "win" | "lose";
 
@@ -36,9 +14,12 @@ function App() {
   const [isImageEqual, setIsImageEqual] = useState(false);
   const [isLevelLoading, setIsLevelLoading] = useState(false);
   const [gameState, setGameState] = useState<GameState>("start");
-  const [currentImage, setCurrentImage] = useState(0);
+  const [levelNumber, setLevelNumber] = useState(0);
 
-  const originalImageSrc = images[currentImage];
+  const level = levels[levelNumber];
+  const { img: levelImg, initialSteps } = level;
+
+  const buttonSteps = useMemo(() => getButtonSteps(level), [level]);
 
   const addStep = useCallback((step: DrawImageStep, index: string) => {
     if (isImageEqual) return;
@@ -55,13 +36,13 @@ function App() {
   useEffect(() => {
     if (isImageEqual) {
       setTimeout(() => {
-        if (currentImage === images.length - 1) {
+        if (levelNumber === levels.length - 1) {
           setGameState("win");
           return;
         }
 
         setIsLevelLoading(true);
-        setCurrentImage((prev) => prev + 1);
+        setLevelNumber((prev) => prev + 1);
 
         setTimeout(() => {
           setClickedSet(new Set());
@@ -94,26 +75,29 @@ function App() {
       <div className={s.images}>
         <div className={s.canvasWrapper}>
           <Canvas
-            originalImageSrc={originalImageSrc}
+            originalImageSrc={levelImg}
             onUpdate={setIsImageEqual}
             initialSteps={initialSteps}
             updateSteps={updateSteps}
           />
         </div>
 
-        <img className={s.originalImg} src={originalImageSrc} alt="" />
+        <img className={s.originalImg} src={levelImg} alt="" />
       </div>
 
       {isImageEqual && <div>Congratulations!</div>}
       <div className={s.btnGrid}>
-        {buttonSteps.map((step, index) => (
-          <UpdateButton
-            key={index}
-            isClicked={clickedSet.has(String(index))}
-            step={step}
-            onClick={(step) => addStep(step, String(index))}
-          />
-        ))}
+        {buttonSteps.map((step, index) => {
+          const id = `${levelNumber}-${index}`;
+          return (
+            <UpdateButton
+              key={id}
+              isClicked={clickedSet.has(id)}
+              step={step}
+              onClick={(step) => addStep(step, id)}
+            />
+          );
+        })}
       </div>
     </div>
   );
