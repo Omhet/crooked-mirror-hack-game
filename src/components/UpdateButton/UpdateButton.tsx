@@ -9,29 +9,21 @@ export type UpdateButtonProps = {
   isClicked?: boolean;
 };
 
-const getStr = (str: string, item?: any, withItem: boolean = false) =>
-  item ? (withItem ? `${str} ${item}` : str) : "";
-
 export const UpdateButton: FC<UpdateButtonProps> = ({
   step,
   onClick,
   isClicked = false,
 }) => {
   const { posOptions = {}, imgOptions = {} } = step;
-  const { gridSize = 1, col = 1, row = 1 } = posOptions;
+  const { gridSize = 1, col, row } = posOptions;
   const { flipX, flipY } = imgOptions;
 
-  // const hLine = (
-  //   <svg viewBox="0 0 100 1" xmlns="http://www.w3.org/2000/svg">
-  //     <line x1="0" y1="0" x2="100" y2="0" stroke="black" />
-  //   </svg>
-  // );
+  const rowStart = !row ? 1 : row;
+  const rowEnd = !row ? `span ${gridSize}` : row;
 
-  // const vLine = (
-  //   <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
-  //     <line x1="5" y1="0" x2="5" y2="10" stroke="black" />
-  //   </svg>
-  // );
+  const colStart = !col ? 1 : col;
+  const colEnd = !col ? `span ${gridSize}` : col;
+
   return (
     <button
       style={{
@@ -43,12 +35,10 @@ export const UpdateButton: FC<UpdateButtonProps> = ({
     >
       <div
         style={{
-          gridArea: `${row} / ${col} / ${row} / ${col}`,
+          gridArea: `${rowStart} / ${colStart} / ${rowEnd} / ${colEnd}`,
         }}
         className={cs(s.lineWrapper, s.line, { [s.v]: flipY, [s.h]: flipX })}
-      >
-        {/* <div className={cs(s.line, { [s.v]: flipY, [s.h]: flipX })}></div> */}
-      </div>
+      ></div>
     </button>
   );
 };
