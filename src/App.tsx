@@ -28,6 +28,7 @@ const buttonSteps: DrawImageStep[] = [
 function App() {
   const [updateSteps, setUpdateSteps] = useState<DrawImageStep[]>([]);
   const [clickedSet, setClickedSet] = useState<Set<string>>(new Set());
+  const [isImageEqual, setIsImageEqual] = useState(false);
 
   const addStep = useCallback((step: DrawImageStep, index: string) => {
     if (clickedSet.has(index)) {
@@ -42,9 +43,14 @@ function App() {
   return (
     <div className={s.main}>
       <div className={s.images}>
-        <Canvas initialSteps={initialSteps} updateSteps={updateSteps} />
+        <Canvas
+          onUpdate={setIsImageEqual}
+          initialSteps={initialSteps}
+          updateSteps={updateSteps}
+        />
         <img className={s.originalImg} src={originalImgSrc} alt="" />
       </div>
+      {isImageEqual && <div>Images are equal</div>}
       <div className={s.btnGrid}>
         {buttonSteps.map((step, index) => (
           <UpdateButton

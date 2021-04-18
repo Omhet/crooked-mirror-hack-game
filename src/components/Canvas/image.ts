@@ -1,6 +1,6 @@
 import { DrawImageStep, ImageOptions, PosOptions } from "./types";
 
-export function drawSteps(
+export async function drawSteps(
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
   imgSrc: string,
@@ -9,18 +9,24 @@ export function drawSteps(
   const img = new Image();
   img.src = imgSrc;
 
-  let step = 0;
-  img.onload = () => {
-    if (step === steps.length) return;
+  return new Promise((resolve) => {
+    let step = 0;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawEntireImage(ctx, img);
-    const { imgOptions = {}, posOptions = {} } = steps[step];
-    drawImage(ctx, img, posOptions, imgOptions);
-    img.src = canvas.toDataURL();
+    img.onload = () => {
+      if (step === steps.length) {
+        resolve(null);
+        return;
+      }
 
-    step++;
-  };
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawEntireImage(ctx, img);
+      const { imgOptions = {}, posOptions = {} } = steps[step];
+      drawImage(ctx, img, posOptions, imgOptions);
+      img.src = canvas.toDataURL();
+
+      step++;
+    };
+  });
 }
 
 export function drawEntireImage(

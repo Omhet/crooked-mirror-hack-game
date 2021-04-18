@@ -44,8 +44,8 @@ export const UpdateButton: FC<UpdateButtonProps> = ({
         ></div>
       </button>
       <div style={gridStyle} className={s.gridTracks}>
-        {[...new Array(gridSize * gridSize)].fill(0).map(() => (
-          <div className={s.sector} />
+        {[...new Array(gridSize * gridSize)].fill(0).map((_, index) => (
+          <div key={index} className={s.sector} />
         ))}
       </div>
     </div>
