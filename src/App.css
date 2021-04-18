@@ -1,0 +1,43 @@
+.grid {
+  --w: 250px;
+  display: grid;
+  grid-template-columns: var(--w) var(--w);
+  grid-template-rows: var(--w) var(--w);
+  width: fit-content;
+}
+
+.sector {
+  display: inline-block;
+  width: var(--w);
+  height: var(--w);
+  background: url("./img.png");
+
+  --oph: 0%;
+  --opv: 0%;
+  background-position: var(--oph) var(--opv);
+
+  --flipX: 1;
+  --flipY: 1;
+  --r: 0deg;
+  transform: scale(var(--flipX), var(--flipY)) rotate(var(--r));
+}
+
+.flipX {
+  --flipX: -1;
+}
+.flipY {
+  --flipY: -1;
+}
+
+.halfHL {
+  --oph: 0%;
+}
+.halfHR {
+  --oph: 100%;
+}
+.halfVT {
+  --opv: 0%;
+}
+.halfVB {
+  --opv: 100%;
+}
