@@ -25,10 +25,28 @@
   background: rgba(0, 0, 0, 0.2);
 }
 
+.lineWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border: 1px solid #ddd;
+  width: 100%;
+  height: 100%;
+}
+
+.btn:hover .lineWrapper {
+  background: #eee;
+}
+
+.btn:active .lineWrapper,
+.clicked .lineWrapper {
+  background: #ccc;
+}
+
 .line {
   background: #333;
 }
-
 .h {
   width: 100%;
   height: 2px;

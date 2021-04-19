@@ -29,6 +29,10 @@ export const UpdateButton: FC<UpdateButtonProps> = ({
     gridTemplateRows: `repeat(${gridSize}, 1fr)`,
   };
 
+  const lineStyle = {
+    gridArea: `${rowStart} / ${colStart} / ${rowEnd} / ${colEnd}`,
+  };
+
   return (
     <div className={s.main}>
       <button
@@ -36,12 +40,9 @@ export const UpdateButton: FC<UpdateButtonProps> = ({
         onClick={() => onClick(step)}
         className={cs(s.btn, { [s.clicked]: isClicked })}
       >
-        <div
-          style={{
-            gridArea: `${rowStart} / ${colStart} / ${rowEnd} / ${colEnd}`,
-          }}
-          className={cs(s.line, { [s.v]: flipY, [s.h]: flipX })}
-        ></div>
+        <div style={lineStyle} className={s.lineWrapper}>
+          <div className={cs(s.line, { [s.v]: flipY, [s.h]: flipX })}></div>
+        </div>
       </button>
       <div style={gridStyle} className={s.gridTracks}>
         {[...new Array(gridSize * gridSize)].fill(0).map((_, index) => (
