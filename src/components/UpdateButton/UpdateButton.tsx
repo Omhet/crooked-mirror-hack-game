@@ -7,12 +7,14 @@ export type UpdateButtonProps = {
   step: DrawImageStep;
   onClick(step: DrawImageStep): void;
   isClicked?: boolean;
+  isDisabled?: boolean;
 };
 
 export const UpdateButton: FC<UpdateButtonProps> = ({
   step,
   onClick,
   isClicked = false,
+  isDisabled = false,
 }) => {
   const { posOptions = {}, imgOptions = {} } = step;
   const { gridSize = 1, col, row } = posOptions;
@@ -36,6 +38,7 @@ export const UpdateButton: FC<UpdateButtonProps> = ({
   return (
     <div className={s.main}>
       <button
+        disabled={isDisabled}
         style={gridStyle}
         onClick={() => onClick(step)}
         className={cs(s.btn, { [s.clicked]: isClicked })}

@@ -35,6 +35,8 @@ function App() {
   const addStep = useCallback((step: DrawImageStep, index: string) => {
     if (isImageEqual || isLevelLoading) return;
 
+    setIsStepUpdating(true);
+
     if (clickedSet.has(index)) {
       clickedSet.delete(index);
     } else {
@@ -45,8 +47,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log(isStepUpdating);
-
     if (!isImageEqual && !isStepUpdating && userTries >= level.tries) {
       setGameState("lose");
     }
@@ -126,6 +126,7 @@ function App() {
             <UpdateButton
               key={id}
               isClicked={clickedSet.has(id)}
+              isDisabled={isStepUpdating}
               step={step}
               onClick={(step) => addStep(step, id)}
             />

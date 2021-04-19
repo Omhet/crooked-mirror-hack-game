@@ -25,6 +25,11 @@
   background: rgba(0, 0, 0, 0.2);
 }
 
+.btn:disabled,
+.btn:disabled .lineWrapper {
+  background: #444 !important;
+}
+
 .lineWrapper {
   display: flex;
   justify-content: center;
