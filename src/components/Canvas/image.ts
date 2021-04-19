@@ -21,7 +21,6 @@ export const drawUpdatedStep = async (
     targetImageUrl: canvas.toDataURL(),
     threshold: 50,
   });
-  console.log(getPercentage());
 
   return getPercentage() === 0;
 };
