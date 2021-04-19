@@ -55,7 +55,7 @@ export function drawEntireImage(
   ctx: CanvasRenderingContext2D,
   img: HTMLImageElement
 ) {
-  drawImage(ctx, img);
+  ctx.drawImage(img, 0, 0);
 }
 
 export function drawImage(
@@ -65,27 +65,34 @@ export function drawImage(
   imageOptions: ImageOptions = {},
   scaleAmount = 1
 ) {
-  const { sx, sy, w, h, dx, dy, tx, ty, fx, fy } = getCoords(
+  const { sx, sy, w, h, scaleX, scaleY } = getCoords(
     posOptions,
     imageOptions,
-    img
+    img,
+    scaleAmount
   );
 
+  const x = sx;
+  const y = sy;
+  const dx = -w / 2;
+  const dy = -h / 2;
+  const tx = w / 2 + x;
+  const ty = h / 2 + y;
+
+  ctx.clearRect(x, y, w, h);
   ctx.translate(tx, ty);
-  ctx.scale(fx, fy);
-
-  ctx.clearRect(dx, dy, w, h);
-  ctx.drawImage(img, sx, sy, w, h, dx, dy, w, h);
-
+  ctx.scale(scaleX, scaleY);
+  ctx.drawImage(img, x, y, w, h, dx, dy, w, h);
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
 
 function getCoords(
   posOptions: PosOptions,
   imageOptions: ImageOptions,
-  img: HTMLImageElement
+  img: HTMLImageElement,
+  scaleAmount: number
 ) {
-  const { gridSize = 1, row, col, dRow = row, dCol = col } = posOptions;
+  const { gridSize = 1, row, col } = posOptions;
   const { flipX = false, flipY = false } = imageOptions;
   const rowM = !col ? gridSize : 1;
   const colM = !row ? gridSize : 1;
@@ -94,28 +101,19 @@ function getCoords(
   const h = imgSize * colM;
   const sx = getCoord(imgSize, col);
   const sy = getCoord(imgSize, row);
-  const dx = getCoord(imgSize, dCol);
-  const dy = getCoord(imgSize, dRow);
-  const tx = getTranslateCoord(flipX, imgSize * (dCol ?? 1) + dx) * rowM;
-  const ty = getTranslateCoord(flipY, imgSize * (dRow ?? 1) + dy) * colM;
   const fx = getFlipCoord(flipX);
   const fy = getFlipCoord(flipY);
+  const scaleX = flipX ? scaleAmount * fx : fx;
+  const scaleY = flipY ? scaleAmount * fy : fy;
 
   return {
     sx,
     sy,
     w,
     h,
-    dx,
-    dy,
-    fx,
-    fy,
-    tx,
-    ty,
+    scaleX,
+    scaleY,
   };
-}
-function getTranslateCoord(flip: boolean, size: number) {
-  return flip ? size : 0;
 }
 
 function getFlipCoord(flip: boolean) {
