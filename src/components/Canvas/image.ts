@@ -31,6 +31,9 @@ export async function drawSteps(
   steps: DrawImageStep[]
 ) {
   const img = await loadImage(imgSrc);
+  canvas.width = img.width;
+  canvas.height = img.height;
+
   clearCanvas(ctx, canvas);
   drawEntireImage(ctx, img);
   for (const step of steps) {
@@ -113,11 +116,12 @@ function getCoords(
   const { flipX = false, flipY = false } = imageOptions;
   const rowM = !col ? gridSize : 1;
   const colM = !row ? gridSize : 1;
-  const imgSize = img.width / gridSize;
-  const w = imgSize * rowM;
-  const h = imgSize * colM;
-  const sx = getCoord(imgSize, col);
-  const sy = getCoord(imgSize, row);
+  const sectorW = img.width / gridSize;
+  const sectorH = img.height / gridSize;
+  const w = sectorW * rowM;
+  const h = sectorH * colM;
+  const sx = getCoord(sectorW, col);
+  const sy = getCoord(sectorH, row);
   const fx = getFlipCoord(flipX);
   const fy = getFlipCoord(flipY);
   const scaleX = flipX ? scaleAmount * fx : fx;

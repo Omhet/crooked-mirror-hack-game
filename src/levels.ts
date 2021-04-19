@@ -1,4 +1,4 @@
-import img0 from "./images/img-0.png";
+import img0 from "./images/img-0.jpg";
 import img1 from "./images/img-1.png";
 import { Level } from "./types";
 

@@ -96,18 +96,12 @@ function App() {
       </div>
       {isImageEqual && <div>Congratulations!</div>}
 
-      <div className={s.images}>
-        <div className={s.canvasWrapper}>
-          <Canvas
-            originalImageSrc={levelImg}
-            onUpdate={setIsImageEqual}
-            initialSteps={initialSteps}
-            updateStep={updateStep}
-          />
-        </div>
-
-        <img className={s.originalImg} src={levelImg} alt="" />
-      </div>
+      <Canvas
+        originalImageSrc={levelImg}
+        onUpdate={setIsImageEqual}
+        initialSteps={initialSteps}
+        updateStep={updateStep}
+      />
 
       <div className={s.btnGrid}>
         {buttonSteps.map((step, index) => {

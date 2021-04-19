@@ -40,5 +40,5 @@ export const Canvas: FC<CanvasProps> = ({
     setCtx(ctx);
   }, []);
 
-  return <canvas width={500} height={500} ref={canvasRef} />;
+  return <canvas ref={canvasRef} />;
 };
