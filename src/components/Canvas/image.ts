@@ -40,7 +40,15 @@ export async function drawStep(
 ) {
   const img = await loadImage(imgSrc);
   const { imgOptions = {}, posOptions = {} } = step;
-  drawImage(ctx, img, posOptions, imgOptions);
+
+  let d = -100;
+  function animate() {
+    drawImage(ctx, img, posOptions, imgOptions, d / 100);
+    d += 5;
+    if (d > 100) return;
+    requestAnimationFrame(animate);
+  }
+  animate();
 }
 
 export function drawEntireImage(
@@ -54,38 +62,58 @@ export function drawImage(
   ctx: CanvasRenderingContext2D,
   img: HTMLImageElement,
   posOptions: PosOptions = {},
-  imageOptions: ImageOptions = {}
+  imageOptions: ImageOptions = {},
+  scaleAmount = 1
 ) {
-  const { gridSize = 1, row, col, dRow = row, dCol = col } = posOptions;
-  const { flipX = false, flipY = false } = imageOptions;
+  const { sx, sy, w, h, dx, dy, tx, ty, fx, fy } = getCoords(
+    posOptions,
+    imageOptions,
+    img
+  );
 
-  const imgSize = img.width / gridSize;
-  const sx = getCoord(imgSize, col);
-  const sy = getCoord(imgSize, row);
-  const dx = getCoord(imgSize, dCol);
-  const dy = getCoord(imgSize, dRow);
-
-  const tx = getTranslateCoord(flipX, imgSize * (dCol ?? 1) + dx);
-  const ty = getTranslateCoord(flipY, imgSize * (dRow ?? 1) + dy);
-
-  const rowM = !col ? gridSize : 1;
-  const colM = !row ? gridSize : 1;
-
-  ctx.translate(tx * rowM, ty * colM);
-  const fx = getFlipCoord(flipX);
-  const fy = getFlipCoord(flipY);
+  ctx.translate(tx, ty);
   ctx.scale(fx, fy);
 
-  const w = imgSize * rowM;
-  const h = imgSize * colM;
-
   ctx.clearRect(dx, dy, w, h);
-
   ctx.drawImage(img, sx, sy, w, h, dx, dy, w, h);
 
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
 
+function getCoords(
+  posOptions: PosOptions,
+  imageOptions: ImageOptions,
+  img: HTMLImageElement
+) {
+  const { gridSize = 1, row, col, dRow = row, dCol = col } = posOptions;
+  const { flipX = false, flipY = false } = imageOptions;
+  const rowM = !col ? gridSize : 1;
+  const colM = !row ? gridSize : 1;
+  const imgSize = img.width / gridSize;
+  const w = imgSize * rowM;
+  const h = imgSize * colM;
+  const sx = getCoord(imgSize, col);
+  const sy = getCoord(imgSize, row);
+  const dx = getCoord(imgSize, dCol);
+  const dy = getCoord(imgSize, dRow);
+  const tx = getTranslateCoord(flipX, imgSize * (dCol ?? 1) + dx) * rowM;
+  const ty = getTranslateCoord(flipY, imgSize * (dRow ?? 1) + dy) * colM;
+  const fx = getFlipCoord(flipX);
+  const fy = getFlipCoord(flipY);
+
+  return {
+    sx,
+    sy,
+    w,
+    h,
+    dx,
+    dy,
+    fx,
+    fy,
+    tx,
+    ty,
+  };
+}
 function getTranslateCoord(flip: boolean, size: number) {
   return flip ? size : 0;
 }
