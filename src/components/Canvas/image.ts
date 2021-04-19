@@ -41,14 +41,19 @@ export async function drawStep(
   const img = await loadImage(imgSrc);
   const { imgOptions = {}, posOptions = {} } = step;
 
-  let d = -100;
-  function animate() {
-    drawImage(ctx, img, posOptions, imgOptions, d / 100);
-    d += 5;
-    if (d > 100) return;
-    requestAnimationFrame(animate);
-  }
-  animate();
+  return new Promise((resolve) => {
+    let d = -100;
+    function animate() {
+      drawImage(ctx, img, posOptions, imgOptions, d / 100);
+      d += 5;
+      if (d > 100) {
+        resolve(null);
+        return;
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  });
 }
 
 export function drawEntireImage(
