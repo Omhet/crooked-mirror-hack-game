@@ -16,6 +16,10 @@ export type DrawImageStep = {
   imgOptions?: ImageOptions;
 };
 
+export type DrawStepOptions = {
+  isAnimated?: boolean;
+};
+
 export type Level = {
   img: string;
   initialSteps: DrawImageStep[];

@@ -1,6 +1,11 @@
 // @ts-ignore
 import { canvasCompare } from "../../canvasCompare";
-import { DrawImageStep, PosOptions, ImageOptions } from "../../types";
+import {
+  DrawImageStep,
+  PosOptions,
+  ImageOptions,
+  DrawStepOptions,
+} from "../../types";
 import { loadImage } from "../../utils";
 
 export const drawUpdatedStep = async (
@@ -9,7 +14,7 @@ export const drawUpdatedStep = async (
   baseImageUrl: string,
   updateStep: DrawImageStep
 ) => {
-  await drawStep(ctx, canvas.toDataURL(), updateStep);
+  await drawStep(ctx, canvas.toDataURL(), updateStep, { isAnimated: true });
 
   const { getPercentage } = await canvasCompare({
     baseImageUrl,
@@ -36,10 +41,17 @@ export async function drawSteps(
 export async function drawStep(
   ctx: CanvasRenderingContext2D,
   imgSrc: string,
-  step: DrawImageStep
+  step: DrawImageStep,
+  drawStepOptions: DrawStepOptions = {}
 ) {
   const img = await loadImage(imgSrc);
   const { imgOptions = {}, posOptions = {} } = step;
+  const { isAnimated } = drawStepOptions;
+
+  if (!isAnimated) {
+    drawImage(ctx, img, posOptions, imgOptions);
+    return Promise.resolve();
+  }
 
   return new Promise((resolve) => {
     let d = -100;
