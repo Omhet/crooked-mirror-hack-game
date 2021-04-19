@@ -7,6 +7,7 @@ export const levels: Level[] = [
     img: img0,
     initialSteps: [
       { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 1 } },
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 3, row: 1 } },
     ],
     redundantSteps: [{ imgOptions: { flipX: true } }],
     tries: 10,
