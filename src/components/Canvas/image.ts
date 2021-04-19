@@ -1,13 +1,15 @@
+// @ts-ignore
 import { canvasCompare } from "../../canvasCompare";
 import { DrawImageStep, PosOptions, ImageOptions } from "../../types";
+import { loadImage } from "../../utils";
 
-export const drawUpdatedSteps = async (
+export const drawUpdatedStep = async (
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
   baseImageUrl: string,
-  updateSteps: DrawImageStep[]
+  updateStep: DrawImageStep
 ) => {
-  await drawSteps(ctx, canvas, canvas.toDataURL(), updateSteps);
+  await drawStep(ctx, canvas.toDataURL(), updateStep);
 
   const { getPercentage } = await canvasCompare({
     baseImageUrl,
@@ -23,45 +25,35 @@ export async function drawSteps(
   imgSrc: string,
   steps: DrawImageStep[]
 ) {
-  const img = new Image();
-  img.src = imgSrc;
+  const img = await loadImage(imgSrc);
+  clearCanvas(ctx, canvas);
+  drawEntireImage(ctx, img);
+  for (const step of steps) {
+    await drawStep(ctx, canvas.toDataURL(), step);
+  }
+}
 
-  return new Promise((resolve) => {
-    let step = 0;
-
-    img.onload = () => {
-      if (step === steps.length) {
-        resolve(null);
-        return;
-      }
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      drawEntireImage(ctx, img);
-      const { imgOptions = {}, posOptions = {} } = steps[step];
-      drawImage(ctx, img, posOptions, imgOptions);
-      img.src = canvas.toDataURL();
-
-      step++;
-    };
-  });
+export async function drawStep(
+  ctx: CanvasRenderingContext2D,
+  imgSrc: string,
+  step: DrawImageStep
+) {
+  const img = await loadImage(imgSrc);
+  const { imgOptions = {}, posOptions = {} } = step;
+  drawImage(ctx, img, posOptions, imgOptions);
 }
 
 export function drawEntireImage(
   ctx: CanvasRenderingContext2D,
-  img: HTMLImageElement,
-  gridSize: number = 1
+  img: HTMLImageElement
 ) {
-  for (let row = 1; row <= gridSize; row++) {
-    for (let col = 1; col <= gridSize; col++) {
-      drawImage(ctx, img, { gridSize, row, col });
-    }
-  }
+  drawImage(ctx, img);
 }
 
 export function drawImage(
   ctx: CanvasRenderingContext2D,
   img: HTMLImageElement,
-  posOptions: PosOptions,
+  posOptions: PosOptions = {},
   imageOptions: ImageOptions = {}
 ) {
   const { gridSize = 1, row, col, dRow = row, dCol = col } = posOptions;
@@ -104,4 +96,8 @@ function getFlipCoord(flip: boolean) {
 
 function getCoord(imgSize: number, rowOrCol = 1) {
   return (rowOrCol - 1) * imgSize;
+}
+
+function clearCanvas(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }

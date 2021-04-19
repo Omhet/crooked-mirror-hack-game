@@ -9,7 +9,7 @@ import { levels } from "./levels";
 type GameState = "start" | "win" | "lose";
 
 function App() {
-  const [updateSteps, setUpdateSteps] = useState<DrawImageStep[]>([]);
+  const [updateStep, setUpdateStep] = useState<DrawImageStep>();
   const [clickedSet, setClickedSet] = useState<Set<string>>(new Set());
   const [isImageEqual, setIsImageEqual] = useState(false);
   const [isLevelLoading, setIsLevelLoading] = useState(false);
@@ -37,7 +37,7 @@ function App() {
         clickedSet.add(index);
       }
       setClickedSet(new Set(clickedSet));
-      setUpdateSteps([step]);
+      setUpdateStep({ ...step });
       setUserTries((prev) => prev + 1);
     },
     [userTries]
@@ -56,7 +56,7 @@ function App() {
 
         setTimeout(() => {
           setClickedSet(new Set());
-          setUpdateSteps([]);
+          setUpdateStep(undefined);
           setIsImageEqual(false);
           setIsLevelLoading(false);
           setUserTries(0);
@@ -102,7 +102,7 @@ function App() {
             originalImageSrc={levelImg}
             onUpdate={setIsImageEqual}
             initialSteps={initialSteps}
-            updateSteps={updateSteps}
+            updateStep={updateStep}
           />
         </div>
 

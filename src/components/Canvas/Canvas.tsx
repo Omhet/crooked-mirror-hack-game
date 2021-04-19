@@ -1,18 +1,18 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import { DrawImageStep } from "../../types";
-import { drawSteps, drawUpdatedSteps } from "./image";
+import { drawSteps, drawUpdatedStep } from "./image";
 
 export type CanvasProps = {
   originalImageSrc: string;
   initialSteps: DrawImageStep[];
-  updateSteps: DrawImageStep[];
+  updateStep?: DrawImageStep;
   onUpdate(isEqual: boolean): void;
 };
 
 export const Canvas: FC<CanvasProps> = ({
   originalImageSrc,
   initialSteps,
-  updateSteps,
+  updateStep,
   onUpdate,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -25,11 +25,11 @@ export const Canvas: FC<CanvasProps> = ({
   }, [initialSteps, ctx, canvas]);
 
   useEffect(() => {
-    if (!ctx || !canvas || updateSteps.length === 0) return;
-    drawUpdatedSteps(ctx, canvas, originalImageSrc, updateSteps)
+    if (!ctx || !canvas || !updateStep) return;
+    drawUpdatedStep(ctx, canvas, originalImageSrc, updateStep)
       .then(onUpdate)
       .catch((err) => console.error(err));
-  }, [updateSteps, ctx, canvas]);
+  }, [updateStep, ctx, canvas]);
 
   useEffect(() => {
     const canvas = canvasRef.current;

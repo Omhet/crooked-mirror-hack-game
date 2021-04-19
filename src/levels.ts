@@ -5,7 +5,9 @@ import { Level } from "./types";
 export const levels: Level[] = [
   {
     img: img0,
-    initialSteps: [{ imgOptions: { flipY: true } }],
+    initialSteps: [
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 1 } },
+    ],
     redundantSteps: [{ imgOptions: { flipX: true } }],
     tries: 10,
   },
