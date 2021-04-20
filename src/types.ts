@@ -26,3 +26,5 @@ export type Level = {
   redundantSteps: DrawImageStep[];
   tries: number;
 };
+
+export type GameState = "start" | "win" | "lose";

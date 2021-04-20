@@ -1,2 +1,9 @@
 .main {
 }
+
+.btnGrid {
+  display: grid;
+  grid-gap: 8px;
+  width: 500px;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+}
