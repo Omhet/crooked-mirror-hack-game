@@ -1,0 +1,8 @@
+.main {
+}
+
+.header {
+  height: 24px;
+  padding: 4px 12px;
+  background: var(--pink-dark);
+}

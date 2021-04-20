@@ -1,3 +1,11 @@
+html {
+  --black: #0d0b16;
+  --text: #dcc9dc;
+  --pink: rgba(226, 0, 225, 1);
+  --pink-dark: rgba(226, 0, 225, 0.35);
+  --pink-header: rgba(226, 0, 225, 0.65);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -6,6 +14,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
+  background: var(--black);
+  color: var(--text);
+  font-family: "IBM Plex Mono";
+  font-size: 14px;
+  line-height: 18px;
+}
+
+h2 {
+  margin: 0;
+  font-family: "Major Mono Display";
+  font-size: 16px;
+  line-height: 16px;
+  color: var(--pink-header);
 }
 
 body * {
