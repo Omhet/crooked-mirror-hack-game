@@ -14,43 +14,47 @@
   background: transparent;
   border: none;
   outline: none;
+  transition: all 0.3s;
 }
 
 .btn:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--pink-dark);
 }
 
 .btn:active,
 .clicked {
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--pink-dark);
 }
 
 .btn:disabled,
-.btn:disabled .lineWrapper {
-  background: #444 !important;
+.btn:disabled .lineWrapper,
+.btn:disabled .line {
+  background: #221d38 !important;
+  border-color: #221d38;
 }
 
 .lineWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: white;
-  border: 1px solid #ddd;
+  background: var(--black);
+  border: 1px solid var(--pink-dark);
   width: 100%;
   height: 100%;
+  transition: all 0.1s;
 }
 
 .btn:hover .lineWrapper {
-  background: #eee;
+  background: #88058c;
 }
 
 .btn:active .lineWrapper,
 .clicked .lineWrapper {
-  background: #ccc;
+  background: #88058c;
 }
 
 .line {
-  background: #333;
+  background: var(--pink);
 }
 .h {
   width: 100%;
@@ -71,5 +75,5 @@
 }
 
 .sector {
-  border: 1px solid #ddd;
+  border: 1px solid var(--pink-dark);
 }

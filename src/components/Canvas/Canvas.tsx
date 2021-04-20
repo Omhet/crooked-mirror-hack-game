@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import { DrawImageStep } from "../../types";
 import { drawSteps, drawUpdatedStep } from "./image";
+import s from "./Canvas.module.css";
 
 export type CanvasProps = {
   originalImageSrc: string;
@@ -40,5 +41,5 @@ export const Canvas: FC<CanvasProps> = ({
     setCtx(ctx);
   }, []);
 
-  return <canvas ref={canvasRef} />;
+  return <canvas className={s.main} ref={canvasRef} />;
 };
