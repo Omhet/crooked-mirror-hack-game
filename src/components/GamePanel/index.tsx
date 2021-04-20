@@ -8,6 +8,7 @@ import s from "./index.module.css";
 
 type Props = {
   areButtonsDisabled: boolean;
+  isLoading: boolean;
   isButtonClicked(id: string): boolean;
   level: Level;
   onAddStep(step: DrawImageStep, id: string): void;
@@ -22,6 +23,7 @@ export const GamePanel: FC<Props> = ({
   updateStep,
   areButtonsDisabled,
   isButtonClicked,
+  isLoading,
 }) => {
   const { img: levelImg, initialSteps } = level;
 
@@ -30,27 +32,33 @@ export const GamePanel: FC<Props> = ({
   return (
     <div className={s.main}>
       <Panel contentClassName={s.content} title="CROOKED MIRROR CRACKER">
-        <Canvas
-          originalImageSrc={levelImg}
-          onUpdate={onStepUpdate}
-          initialSteps={initialSteps}
-          updateStep={updateStep}
-        />
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <Canvas
+              originalImageSrc={levelImg}
+              onUpdate={onStepUpdate}
+              initialSteps={initialSteps}
+              updateStep={updateStep}
+            />
 
-        <div className={s.btnGrid}>
-          {buttonSteps.map((step, index) => {
-            const id = `${index}`;
-            return (
-              <UpdateButton
-                key={id}
-                isClicked={isButtonClicked(id)}
-                isDisabled={areButtonsDisabled}
-                step={step}
-                onClick={(step) => onAddStep(step, id)}
-              />
-            );
-          })}
-        </div>
+            <div className={s.btnGrid}>
+              {buttonSteps.map((step, index) => {
+                const id = `${index}`;
+                return (
+                  <UpdateButton
+                    key={id}
+                    isClicked={isButtonClicked(id)}
+                    isDisabled={areButtonsDisabled}
+                    step={step}
+                    onClick={(step) => onAddStep(step, id)}
+                  />
+                );
+              })}
+            </div>
+          </>
+        )}
       </Panel>
     </div>
   );

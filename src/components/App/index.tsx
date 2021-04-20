@@ -2,7 +2,9 @@ import React, { FC, useCallback, useEffect, useState } from "react";
 import { levels } from "../../levels";
 import { DrawImageStep, GameState } from "../../types";
 import { ChatPanel } from "../ChatPanel";
+import { GameOver } from "../GameOver";
 import { GamePanel } from "../GamePanel/index";
+import { GameWin } from "../GameWin";
 import { PlayerPanel } from "../PlayerPanel";
 import { StatsPanel } from "../StatsPanel";
 import s from "./index.module.css";
@@ -81,35 +83,18 @@ export const App: FC<Props> = ({ isClicked }) => {
   };
 
   if (gameState === "lose") {
-    return (
-      <div className={s.main}>
-        <div className={s.loader}>
-          <h2>Sorry. You lose :(</h2>
-          <button onClick={handleLevelReset}>Reset</button>
-        </div>
-      </div>
-    );
+    return <GameOver onReset={handleLevelReset} />;
   }
 
   if (gameState === "win") {
-    return (
-      <div className={s.main}>
-        <div className={s.loader}>Congratulations. You win!</div>
-      </div>
-    );
+    return <GameWin />;
   }
 
-  if (isLevelLoading) {
-    return (
-      <div className={s.main}>
-        <div className={s.loader}>Loading...</div>
-      </div>
-    );
-  }
   return (
     <div className={s.main}>
       <StatsPanel />
       <GamePanel
+        isLoading={isLevelLoading}
         level={level}
         isButtonClicked={(id: string) => clickedSet.has(id)}
         areButtonsDisabled={isStepUpdating}
