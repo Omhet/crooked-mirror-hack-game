@@ -29,7 +29,7 @@ export const GamePanel: FC<Props> = ({
 
   return (
     <div className={s.main}>
-      <Panel title="CROOKED MIRROR CRACKER">
+      <Panel contentClassName={s.content} title="CROOKED MIRROR CRACKER">
         <Canvas
           originalImageSrc={levelImg}
           onUpdate={onStepUpdate}
