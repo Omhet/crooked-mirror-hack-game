@@ -1,7 +1,10 @@
 import React, { FC, useCallback, useEffect, useState } from "react";
 import { levels } from "../../levels";
 import { DrawImageStep, GameState } from "../../types";
+import { ChatPanel } from "../ChatPanel";
 import { GamePanel } from "../GamePanel/index";
+import { PlayerPanel } from "../PlayerPanel";
+import { StatsPanel } from "../StatsPanel";
 import s from "./index.module.css";
 
 type Props = {
@@ -105,6 +108,7 @@ export const App: FC<Props> = ({ isClicked }) => {
   }
   return (
     <div className={s.main}>
+      <StatsPanel />
       <GamePanel
         level={level}
         isButtonClicked={(id: string) => clickedSet.has(id)}
@@ -113,6 +117,8 @@ export const App: FC<Props> = ({ isClicked }) => {
         onAddStep={handleAddStep}
         onStepUpdate={handleStepUpdate}
       />
+      <ChatPanel />
+      <PlayerPanel />
     </div>
   );
 };

@@ -28,28 +28,30 @@ export const GamePanel: FC<Props> = ({
   const buttonSteps = useMemo(() => getButtonSteps(level), [level]);
 
   return (
-    <Panel title="CROOKED MIRROR CRACKER">
-      <Canvas
-        originalImageSrc={levelImg}
-        onUpdate={onStepUpdate}
-        initialSteps={initialSteps}
-        updateStep={updateStep}
-      />
+    <div className={s.main}>
+      <Panel title="CROOKED MIRROR CRACKER">
+        <Canvas
+          originalImageSrc={levelImg}
+          onUpdate={onStepUpdate}
+          initialSteps={initialSteps}
+          updateStep={updateStep}
+        />
 
-      <div className={s.btnGrid}>
-        {buttonSteps.map((step, index) => {
-          const id = `${index}`;
-          return (
-            <UpdateButton
-              key={id}
-              isClicked={isButtonClicked(id)}
-              isDisabled={areButtonsDisabled}
-              step={step}
-              onClick={(step) => onAddStep(step, id)}
-            />
-          );
-        })}
-      </div>
-    </Panel>
+        <div className={s.btnGrid}>
+          {buttonSteps.map((step, index) => {
+            const id = `${index}`;
+            return (
+              <UpdateButton
+                key={id}
+                isClicked={isButtonClicked(id)}
+                isDisabled={areButtonsDisabled}
+                step={step}
+                onClick={(step) => onAddStep(step, id)}
+              />
+            );
+          })}
+        </div>
+      </Panel>
+    </div>
   );
 };

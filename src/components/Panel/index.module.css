@@ -1,8 +1,17 @@
 .main {
+  height: 100%;
 }
 
 .header {
   height: 24px;
   padding: 4px 12px;
   background: var(--pink-dark);
+  border: 1px solid var(--pink);
+}
+
+.content {
+  padding: 32px;
+  border: 1px solid var(--pink);
+  border-top: none;
+  height: calc(100% - 24px);
 }

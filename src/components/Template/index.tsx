@@ -5,6 +5,6 @@ type Props = {
   isClicked?: boolean;
 };
 
-export const Panel: FC<Props> = ({ isClicked }) => {
+export const Template: FC<Props> = ({ isClicked }) => {
   return <div className={s.main}></div>;
 };

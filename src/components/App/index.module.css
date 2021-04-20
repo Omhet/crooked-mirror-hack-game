@@ -1,34 +1,11 @@
 .main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-  height: 100vh;
-}
-
-.header {
+  height: calc(100vh - 1px);
   display: grid;
-  width: 100%;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-.header :last-child {
-  justify-self: center;
-}
-
-.gameProgress {
-  font-weight: bold;
-}
-
-.originalImg {
-  margin-left: 16px;
-  padding-left: 16px;
-  border-left: 2px solid #ddd;
-}
-
-.loader {
-  margin: auto;
+  grid-template-areas:
+    "s s c"
+    "g g c"
+    "g g c"
+    "g g p";
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(0, 1fr));
 }
