@@ -1,3 +1,11 @@
 .main {
   grid-area: s;
 }
+
+.content {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 40px;
+  justify-content: center;
+  align-items: center;
+}

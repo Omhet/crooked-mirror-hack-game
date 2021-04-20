@@ -92,7 +92,10 @@ export const App: FC<Props> = ({ isClicked }) => {
 
   return (
     <div className={s.main}>
-      <StatsPanel />
+      <StatsPanel
+        memesLeft={levels.length - levelNumber}
+        triesLeft={level.tries - userTries}
+      />
       <GamePanel
         isLoading={isLevelLoading}
         level={level}
