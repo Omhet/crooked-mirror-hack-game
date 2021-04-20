@@ -7,11 +7,14 @@
   padding: 4px 12px;
   background: var(--pink-dark);
   border: 1px solid var(--pink);
+  /* box-shadow: 0px 1px 3px 1px var(--pink), 0px -1px 3px 1px var(--pink); */
 }
 
 .content {
   padding: 32px;
   border: 1px solid var(--pink);
+  /* box-shadow: 0px 1px 1px 1px var(--pink), 0px -1px 1px 1px var(--pink); */
+
   border-top: none;
   height: calc(100% - 24px);
 }
