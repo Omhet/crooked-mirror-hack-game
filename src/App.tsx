@@ -109,7 +109,12 @@ function App() {
 
   return (
     <div className={s.main}>
-      <div>You have {level.tries - userTries} tries left</div>
+      <div className={s.header}>
+        <div className={s.gameProgress}>
+          {levels.length - levelNumber} memes left till the Internet is free
+        </div>
+        <div>You have {level.tries - userTries} tries left</div>
+      </div>
       {isImageEqual && <div>Congratulations!</div>}
 
       <Canvas

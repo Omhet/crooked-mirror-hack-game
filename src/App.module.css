@@ -9,6 +9,20 @@
   height: 100vh;
 }
 
+.header {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.header :last-child {
+  justify-self: center;
+}
+
+.gameProgress {
+  font-weight: bold;
+}
+
 .btnGrid {
   display: grid;
   grid-gap: 8px;
