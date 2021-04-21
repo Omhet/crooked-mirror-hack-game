@@ -2,18 +2,18 @@ import React, { FC } from "react";
 import { Button } from "../Button";
 import GameOverIcon from "../../images/burn.svg";
 import s from "./index.module.css";
+import { useStore } from "effector-react";
+import { gameStateStore } from "../../store/gameState";
+import { startAction } from "../../store/level";
 
-type Props = {
-  onReset(): void;
-  reason: string;
-};
+export const GameOver: FC = () => {
+  const { gameOverReason } = useStore(gameStateStore);
 
-export const GameOver: FC<Props> = ({ onReset, reason }) => {
   return (
     <div className={s.main}>
       <GameOverIcon />
-      <h2>{reason}</h2>
-      <Button onClick={onReset}>RESET</Button>
+      <h2>{gameOverReason}</h2>
+      <Button onClick={startAction}>RESET</Button>
     </div>
   );
 };

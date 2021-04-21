@@ -16,100 +16,91 @@ import { GameWin } from "../GameWin";
 import { PlayerPanel } from "../PlayerPanel";
 import { StatsPanel } from "../StatsPanel";
 import s from "./index.module.css";
+import { levelStore } from "../../store/level";
 
 type Props = {
   isClicked?: boolean;
 };
 
 export const App: FC<Props> = () => {
-  const [clickedSet, setClickedSet] = useState<Set<string>>(new Set());
-  const [isLevelLoading, setIsLevelLoading] = useState(false);
-  const [levelNumber, setLevelNumber] = useState(0);
-  const [userTries, setUserTries] = useState(0);
-  const [time, setTime] = useState(0);
-  const [timer, setTimer] = useState(0);
-
   const { isImageEqual, isStepUpdating, updateStep } = useStore(
     updateStepStore
   );
-  const { gameState, gameOverReason } = useStore(gameStateStore);
+  const { gameState } = useStore(gameStateStore);
+  const {
+    levelNumber,
+    clickedSet,
+    time,
+    timer,
+    userTries,
+    isLevelLoading,
+    level,
+  } = useStore(levelStore);
 
-  const level = levels[levelNumber];
+  // useEffect(() => {
+  //   let timer: number | undefined;
+  //   if (level.time && gameState === "start") {
+  //     timer = setInterval(() => {
+  //       setTime((prev) => prev + 1);
+  //     }, 1000);
+  //     setTimer(timer);
+  //   }
+  //   return () => clearInterval(timer);
+  // }, [level.time, gameState, levelNumber]);
+  // useEffect(() => {
+  //   if (time === level.time) {
+  //     clearInterval(timer);
+  //     loseAction("You've been catched by the cops");
+  //   }
+  // }, [time]);
 
-  useEffect(() => {
-    let timer: number | undefined;
-    if (level.time && gameState === "start") {
-      timer = setInterval(() => {
-        setTime((prev) => prev + 1);
-      }, 1000);
-      setTimer(timer);
-    }
-    return () => clearInterval(timer);
-  }, [level.time, gameState, levelNumber]);
-  useEffect(() => {
-    if (time === level.time) {
-      clearInterval(timer);
-      loseAction("You've been catched by the cops");
-    }
-  }, [time]);
+  // const handleAddStep = useCallback((step: DrawImageStep, index: string) => {
+  //   if (isImageEqual || isLevelLoading) return;
 
-  const resetState = () => {
-    startAction();
-    setClickedSet(new Set());
-    updateStepAction(undefined);
-    setIsLevelLoading(false);
-    setUserTries(0);
-    setTime(0);
-    clearInterval(timer);
-  };
+  //   if (clickedSet.has(index)) {
+  //     clickedSet.delete(index);
+  //   } else {
+  //     clickedSet.add(index);
+  //   }
+  //   setClickedSet(new Set(clickedSet));
+  //   updateStepAction({ ...step });
+  // }, []);
 
-  const handleAddStep = useCallback((step: DrawImageStep, index: string) => {
-    if (isImageEqual || isLevelLoading) return;
+  // useEffect(() => {
+  //   if (!isImageEqual && !isStepUpdating && userTries >= level.tries) {
+  //     loseAction("You've been hacked");
+  //   }
+  // }, [isStepUpdating, isImageEqual, userTries]);
 
-    if (clickedSet.has(index)) {
-      clickedSet.delete(index);
-    } else {
-      clickedSet.add(index);
-    }
-    setClickedSet(new Set(clickedSet));
-    updateStepAction({ ...step });
-  }, []);
+  // useEffect(() => {
+  //   if (isImageEqual) {
+  //     setTimeout(() => {
+  //       if (levelNumber === levels.length - 1) {
+  //         winAction();
+  //         return;
+  //       }
 
-  useEffect(() => {
-    if (!isImageEqual && !isStepUpdating && userTries >= level.tries) {
-      loseAction("You've been hacked");
-    }
-  }, [isStepUpdating, isImageEqual, userTries]);
+  //       setIsLevelLoading(true);
+  //       setLevelNumber((prev) => prev + 1);
+  //       clearInterval(timer);
 
-  useEffect(() => {
-    if (isImageEqual) {
-      setTimeout(() => {
-        if (levelNumber === levels.length - 1) {
-          winAction();
-          return;
-        }
+  //       setTimeout(() => {
+  //         resetState();
+  //       }, 1000);
+  //     }, 1000);
+  //   }
+  // }, [isImageEqual]);
 
-        setIsLevelLoading(true);
-        setLevelNumber((prev) => prev + 1);
-        clearInterval(timer);
+  // useEffect(() => {
+  //   startAction();
+  // }, [levelNumber]);
 
-        setTimeout(() => {
-          resetState();
-        }, 1000);
-      }, 1000);
-    }
-  }, [isImageEqual]);
-
-  const handleLevelReset = () => {
-    resetState();
-  };
-
-  const handleStepUpdate = () => {
-    setUserTries((prev) => prev + 1);
-  };
+  // const handleStepUpdate = () => {
+  //   setUserTries((prev) => prev + 1);
+  // };
 
   if (gameState === "lose") {
-    return <GameOver reason={gameOverReason} onReset={handleLevelReset} />;
+    return <GameOver />;
   }
 
   if (gameState === "win") {
@@ -127,15 +118,7 @@ export const App: FC<Props> = () => {
         triesLeft={level.tries - userTries}
         timeLeft={timeLeft}
       />
-      <GamePanel
-        isLoading={isLevelLoading}
-        level={level}
-        isButtonClicked={(id: string) => clickedSet.has(id)}
-        areButtonsDisabled={isStepUpdating}
-        updateStep={updateStep}
-        onAddStep={handleAddStep}
-        onStepUpdate={handleStepUpdate}
-      />
+      <GamePanel isLoading={isLevelLoading} />
       <ChatPanel />
       <PlayerPanel />
     </div>

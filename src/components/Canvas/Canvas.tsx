@@ -1,28 +1,27 @@
+import { useStore } from "effector-react";
 import React, { FC, useEffect, useRef, useState } from "react";
-import { DrawImageStep } from "../../types";
-import { drawSteps, drawUpdatedStepFx } from "./image";
+import { levelStore } from "../../store/level";
+import { updateStepStore } from "../../store/updateStep";
 import s from "./Canvas.module.css";
+import { drawSteps, drawUpdatedStepFx } from "./image";
 
 export type CanvasProps = {
-  originalImageSrc: string;
-  initialSteps: DrawImageStep[];
-  updateStep?: DrawImageStep;
   onUpdate(isEqual: boolean): void;
 };
 
-export const Canvas: FC<CanvasProps> = ({
-  originalImageSrc,
-  initialSteps,
-  updateStep,
-  onUpdate,
-}) => {
+export const Canvas: FC<CanvasProps> = ({ onUpdate }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
 
+  const {
+    level: { img, initialSteps },
+  } = useStore(levelStore);
+  const { updateStep } = useStore(updateStepStore);
+
   useEffect(() => {
     if (!ctx || !canvas) return;
-    drawSteps(ctx, canvas, originalImageSrc, initialSteps);
+    drawSteps(ctx, canvas, img, initialSteps);
   }, [initialSteps, ctx, canvas]);
 
   useEffect(() => {
@@ -30,7 +29,7 @@ export const Canvas: FC<CanvasProps> = ({
     drawUpdatedStepFx({
       ctx,
       canvas,
-      baseImageUrl: originalImageSrc,
+      baseImageUrl: img,
       updateStep,
     })
       .then(onUpdate)

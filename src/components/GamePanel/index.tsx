@@ -1,34 +1,15 @@
-import React, { FC, useMemo } from "react";
+import React, { FC } from "react";
 import { DrawImageStep, Level } from "../../types";
-import { getButtonSteps } from "../../utils";
 import { Canvas } from "../Canvas/Canvas";
 import { Panel } from "../Panel/Panel";
-import { UpdateButton } from "../UpdateButton/UpdateButton";
+import { UpdateButtons } from "../UpdateButtons";
 import s from "./index.module.css";
 
 type Props = {
-  areButtonsDisabled: boolean;
   isLoading: boolean;
-  isButtonClicked(id: string): boolean;
-  level: Level;
-  onAddStep(step: DrawImageStep, id: string): void;
-  onStepUpdate(isEqual: boolean): void;
-  updateStep?: DrawImageStep;
 };
 
-export const GamePanel: FC<Props> = ({
-  level,
-  onAddStep,
-  onStepUpdate,
-  updateStep,
-  areButtonsDisabled,
-  isButtonClicked,
-  isLoading,
-}) => {
-  const { img: levelImg, initialSteps } = level;
-
-  const buttonSteps = useMemo(() => getButtonSteps(level), [level]);
-
+export const GamePanel: FC<Props> = ({ isLoading }) => {
   return (
     <div className={s.main}>
       <Panel contentClassName={s.content} title="CROOKED MIRROR CRACKER">
@@ -36,27 +17,9 @@ export const GamePanel: FC<Props> = ({
           <div>Loading...</div>
         ) : (
           <>
-            <Canvas
-              originalImageSrc={levelImg}
-              onUpdate={onStepUpdate}
-              initialSteps={initialSteps}
-              updateStep={updateStep}
-            />
+            <Canvas onUpdate={() => console.log("update")} />
 
-            <div className={s.btnGrid}>
-              {buttonSteps.map((step, index) => {
-                const id = `${index}`;
-                return (
-                  <UpdateButton
-                    key={id}
-                    isClicked={isButtonClicked(id)}
-                    isDisabled={areButtonsDisabled}
-                    step={step}
-                    onClick={(step) => onAddStep(step, id)}
-                  />
-                );
-              })}
-            </div>
+            <UpdateButtons />
           </>
         )}
       </Panel>

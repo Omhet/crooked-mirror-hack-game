@@ -1,0 +1,6 @@
+.btnGrid {
+  margin-top: 64px;
+  display: grid;
+  grid-gap: 16px;
+  grid-auto-flow: column;
+}
