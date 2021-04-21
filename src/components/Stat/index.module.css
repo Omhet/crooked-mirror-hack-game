@@ -1,0 +1,16 @@
+.top {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.title {
+  font-size: 18px;
+}
+
+.description {
+  margin-top: 16px;
+}
