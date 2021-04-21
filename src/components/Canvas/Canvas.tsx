@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useRef, useState } from "react";
 import { DrawImageStep } from "../../types";
-import { drawSteps, drawUpdatedStep } from "./image";
+import { drawSteps, drawUpdatedStepFx } from "./image";
 import s from "./Canvas.module.css";
 
 export type CanvasProps = {
@@ -27,7 +27,12 @@ export const Canvas: FC<CanvasProps> = ({
 
   useEffect(() => {
     if (!ctx || !canvas || !updateStep) return;
-    drawUpdatedStep(ctx, canvas, originalImageSrc, updateStep)
+    drawUpdatedStepFx({
+      ctx,
+      canvas,
+      baseImageUrl: originalImageSrc,
+      updateStep,
+    })
       .then(onUpdate)
       .catch((err) => console.error(err));
   }, [updateStep, ctx, canvas]);

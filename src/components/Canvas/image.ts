@@ -1,3 +1,4 @@
+import { createEffect } from "effector";
 // @ts-ignore
 import { canvasCompare } from "../../canvasCompare";
 import {
@@ -8,23 +9,25 @@ import {
 } from "../../types";
 import { loadImage } from "../../utils";
 
-export const drawUpdatedStep = async (
-  ctx: CanvasRenderingContext2D,
-  canvas: HTMLCanvasElement,
-  baseImageUrl: string,
-  updateStep: DrawImageStep
-) => {
-  await drawStep(ctx, canvas.toDataURL(), updateStep, { isAnimated: true });
-
-  const { getPercentage } = await canvasCompare({
-    baseImageUrl,
-    targetImageUrl: canvas.toDataURL(),
-    threshold: 50,
-  });
-
-  return getPercentage() === 0;
+type DrawUpdatedStepFx = {
+  ctx: CanvasRenderingContext2D;
+  canvas: HTMLCanvasElement;
+  baseImageUrl: string;
+  updateStep: DrawImageStep;
 };
+export const drawUpdatedStepFx = createEffect(
+  async ({ ctx, canvas, updateStep, baseImageUrl }: DrawUpdatedStepFx) => {
+    await drawStep(ctx, canvas.toDataURL(), updateStep, { isAnimated: true });
 
+    const { getPercentage } = await canvasCompare({
+      baseImageUrl,
+      targetImageUrl: canvas.toDataURL(),
+      threshold: 50,
+    });
+
+    return getPercentage() === 0;
+  }
+);
 export async function drawSteps(
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,

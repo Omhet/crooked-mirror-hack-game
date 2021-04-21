@@ -1,5 +1,7 @@
+import { useStore } from "effector-react";
 import React, { FC, useCallback, useEffect, useState } from "react";
 import { levels } from "../../levels";
+import { updateStepAction, updateStepStore } from "../../store/updateStep";
 import { DrawImageStep, GameState } from "../../types";
 import { ChatPanel } from "../ChatPanel";
 import { GameOver } from "../GameOver";
@@ -13,11 +15,8 @@ type Props = {
   isClicked?: boolean;
 };
 
-export const App: FC<Props> = ({ isClicked }) => {
-  const [updateStep, setUpdateStep] = useState<DrawImageStep>();
+export const App: FC<Props> = () => {
   const [clickedSet, setClickedSet] = useState<Set<string>>(new Set());
-  const [isImageEqual, setIsImageEqual] = useState(false);
-  const [isStepUpdating, setIsStepUpdating] = useState(false);
   const [isLevelLoading, setIsLevelLoading] = useState(false);
   const [gameOverReason, setGameOverReason] = useState("You've been hacked");
   const [gameState, setGameState] = useState<GameState>("start");
@@ -25,6 +24,10 @@ export const App: FC<Props> = ({ isClicked }) => {
   const [userTries, setUserTries] = useState(0);
   const [time, setTime] = useState(0);
   const [timer, setTimer] = useState(0);
+
+  const { isImageEqual, isStepUpdating, updateStep } = useStore(
+    updateStepStore
+  );
 
   const level = levels[levelNumber];
 
@@ -49,8 +52,7 @@ export const App: FC<Props> = ({ isClicked }) => {
   const resetState = () => {
     setGameState("start");
     setClickedSet(new Set());
-    setUpdateStep(undefined);
-    setIsImageEqual(false);
+    updateStepAction(undefined);
     setIsLevelLoading(false);
     setUserTries(0);
     setTime(0);
@@ -60,15 +62,13 @@ export const App: FC<Props> = ({ isClicked }) => {
   const handleAddStep = useCallback((step: DrawImageStep, index: string) => {
     if (isImageEqual || isLevelLoading) return;
 
-    setIsStepUpdating(true);
-
     if (clickedSet.has(index)) {
       clickedSet.delete(index);
     } else {
       clickedSet.add(index);
     }
     setClickedSet(new Set(clickedSet));
-    setUpdateStep({ ...step });
+    updateStepAction({ ...step });
   }, []);
 
   useEffect(() => {
@@ -100,9 +100,7 @@ export const App: FC<Props> = ({ isClicked }) => {
     resetState();
   };
 
-  const handleStepUpdate = (isImageEqual: boolean) => {
-    setIsStepUpdating(false);
-    setIsImageEqual(isImageEqual);
+  const handleStepUpdate = () => {
     setUserTries((prev) => prev + 1);
   };
 
