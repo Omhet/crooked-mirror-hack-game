@@ -28,4 +28,9 @@ export type Level = {
   time?: number;
 };
 
-export type GameState = "start" | "win" | "lose";
+export enum GameState {
+  Start = "start",
+  Play = "play",
+  Lose = "lose",
+  Win = "win",
+}

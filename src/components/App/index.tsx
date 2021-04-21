@@ -1,8 +1,14 @@
 import { useStore } from "effector-react";
 import React, { FC, useCallback, useEffect, useState } from "react";
 import { levels } from "../../levels";
+import {
+  gameStateStore,
+  loseAction,
+  startAction,
+  winAction,
+} from "../../store/gameState";
 import { updateStepAction, updateStepStore } from "../../store/updateStep";
-import { DrawImageStep, GameState } from "../../types";
+import { DrawImageStep } from "../../types";
 import { ChatPanel } from "../ChatPanel";
 import { GameOver } from "../GameOver";
 import { GamePanel } from "../GamePanel/index";
@@ -18,8 +24,6 @@ type Props = {
 export const App: FC<Props> = () => {
   const [clickedSet, setClickedSet] = useState<Set<string>>(new Set());
   const [isLevelLoading, setIsLevelLoading] = useState(false);
-  const [gameOverReason, setGameOverReason] = useState("You've been hacked");
-  const [gameState, setGameState] = useState<GameState>("start");
   const [levelNumber, setLevelNumber] = useState(0);
   const [userTries, setUserTries] = useState(0);
   const [time, setTime] = useState(0);
@@ -28,6 +32,7 @@ export const App: FC<Props> = () => {
   const { isImageEqual, isStepUpdating, updateStep } = useStore(
     updateStepStore
   );
+  const { gameState, gameOverReason } = useStore(gameStateStore);
 
   const level = levels[levelNumber];
 
@@ -44,13 +49,12 @@ export const App: FC<Props> = () => {
   useEffect(() => {
     if (time === level.time) {
       clearInterval(timer);
-      setGameState("lose");
-      setGameOverReason("You've been catched by the cops");
+      loseAction("You've been catched by the cops");
     }
   }, [time]);
 
   const resetState = () => {
-    setGameState("start");
+    startAction();
     setClickedSet(new Set());
     updateStepAction(undefined);
     setIsLevelLoading(false);
@@ -73,15 +77,15 @@ export const App: FC<Props> = () => {
 
   useEffect(() => {
     if (!isImageEqual && !isStepUpdating && userTries >= level.tries) {
-      setGameState("lose");
+      loseAction("You've been hacked");
     }
-  }, [isStepUpdating, isStepUpdating, userTries]);
+  }, [isStepUpdating, isImageEqual, userTries]);
 
   useEffect(() => {
     if (isImageEqual) {
       setTimeout(() => {
         if (levelNumber === levels.length - 1) {
-          setGameState("win");
+          winAction();
           return;
         }
 
