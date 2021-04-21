@@ -1,10 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import s from "./index.module.css";
 
 type Props = {
-  title: string;
+  title: ReactNode;
   description: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
 };
 
 export const Stat: FC<Props> = ({ title, description, icon }) => {

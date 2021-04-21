@@ -1,0 +1,11 @@
+.main {
+  width: 100%;
+  height: 12px;
+  background: var(--pink-dark);
+}
+
+.bar {
+  width: 100%;
+  height: 100%;
+  background: var(--pink);
+}
