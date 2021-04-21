@@ -1,3 +1,4 @@
+import { winAction } from "./gameState";
 import { createEvent, createStore } from "effector";
 import { Level } from "../types";
 import { levels } from "../levels";
@@ -31,5 +32,15 @@ export const levelStore = createStore<LevelStore>(initialState)
   .on(nextLevelAction, (state) => {
     clearInterval(state.timer);
     const levelNumber = state.levelNumber + 1;
+    if (levelNumber >= levels.length) {
+      winAction();
+      return;
+    }
     return { ...initialState, levelNumber, level: levels[levelNumber] };
   });
+
+// levelStore.watch(({ levelNumber }) => {
+//   if (levelNumber >= levels.length) {
+//     winAction();
+//   }
+// });
