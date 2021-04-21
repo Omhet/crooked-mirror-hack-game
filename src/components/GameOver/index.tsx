@@ -3,8 +3,7 @@ import { Button } from "../Button";
 import GameOverIcon from "../../images/burn.svg";
 import s from "./index.module.css";
 import { useStore } from "effector-react";
-import { gameStateStore } from "../../store/gameState";
-import { startAction } from "../../store/level";
+import { gameStateStore, startGameAction } from "../../store/gameState";
 
 export const GameOver: FC = () => {
   const { gameOverReason } = useStore(gameStateStore);
@@ -13,7 +12,7 @@ export const GameOver: FC = () => {
     <div className={s.main}>
       <GameOverIcon />
       <h2>{gameOverReason}</h2>
-      <Button onClick={startAction}>RESET</Button>
+      <Button onClick={startGameAction}>RESET</Button>
     </div>
   );
 };

@@ -7,7 +7,7 @@ type GameStateStore = {
 };
 export const loseAction = createEvent<string>();
 export const winAction = createEvent();
-export const startAction = createEvent();
+export const startGameAction = createEvent();
 export const playAction = createEvent();
 export const gameStateStore = createStore<GameStateStore>({
   gameState: GameState.Start,
@@ -22,7 +22,7 @@ export const gameStateStore = createStore<GameStateStore>({
     ...state,
     gameState: GameState.Win,
   }))
-  .on(startAction, (state) => ({
+  .on(startGameAction, (state) => ({
     ...state,
     gameState: GameState.Start,
   }))

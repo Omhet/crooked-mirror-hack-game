@@ -1,4 +1,4 @@
-import { loseAction, winAction } from "./gameState";
+import { loseAction, startGameAction, winAction } from "./gameState";
 import { createEvent, createStore } from "effector";
 import { Level } from "../types";
 import { levels } from "../levels";
@@ -14,7 +14,6 @@ type LevelStore = {
 };
 
 export const nextLevelAction = createEvent();
-export const startAction = createEvent();
 export const userTryAction = createEvent();
 
 const initialState: LevelStore = {
@@ -30,10 +29,9 @@ export const levelStore = createStore<LevelStore>(initialState)
   .on(userTryAction, (state) => {
     return { ...state, userTries: state.userTries + 1 };
   })
-  .on(startAction, (state) => {
-    clearInterval(state.timer);
-    return { ...initialState };
-  })
+  // .on(startGameAction, () => {
+  //   return { ...initialState };
+  // })
   .on(nextLevelAction, (state) => {
     clearInterval(state.timer);
     const levelNumber = state.levelNumber + 1;
@@ -49,3 +47,5 @@ levelStore.watch(({ userTries, level }) => {
     loseAction("Your computer burned out");
   }
 });
+
+levelStore.reset(startGameAction);
