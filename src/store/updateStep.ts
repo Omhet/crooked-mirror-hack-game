@@ -1,6 +1,7 @@
 import { createEvent, createStore } from "effector";
 import { drawUpdatedStepFx } from "../components/Canvas/image";
 import { DrawImageStep } from "../types";
+import { nextLevelAction } from "./level";
 
 type UpdateStepStore = {
   updateStep?: DrawImageStep;
@@ -25,3 +26,9 @@ export const updateStepStore = createStore<UpdateStepStore>({
     ...state,
     isStepUpdating,
   }));
+
+drawUpdatedStepFx.doneData.watch((isEqual) => {
+  if (isEqual) {
+    nextLevelAction();
+  }
+});
