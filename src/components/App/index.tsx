@@ -23,8 +23,28 @@ export const App: FC<Props> = ({ isClicked }) => {
   const [gameState, setGameState] = useState<GameState>("start");
   const [levelNumber, setLevelNumber] = useState(0);
   const [userTries, setUserTries] = useState(0);
+  const [time, setTime] = useState(0);
+  const [timer, setTimer] = useState(0);
 
   const level = levels[levelNumber];
+
+  useEffect(() => {
+    let timer: number | undefined;
+    if (level.time && gameState === "start") {
+      timer = setInterval(() => {
+        setTime((prev) => prev + 1);
+      }, 1000);
+      setTimer(timer);
+    }
+    return () => clearInterval(timer);
+  }, [level.time, gameState, levelNumber]);
+  useEffect(() => {
+    if (time === level.time) {
+      clearInterval(timer);
+      setGameState("lose");
+      setGameOverReason("You've been catched by the cops");
+    }
+  }, [time]);
 
   const resetState = () => {
     setGameState("start");
@@ -33,6 +53,8 @@ export const App: FC<Props> = ({ isClicked }) => {
     setIsImageEqual(false);
     setIsLevelLoading(false);
     setUserTries(0);
+    setTime(0);
+    clearInterval(timer);
   };
 
   const handleAddStep = useCallback((step: DrawImageStep, index: string) => {
@@ -65,6 +87,7 @@ export const App: FC<Props> = ({ isClicked }) => {
 
         setIsLevelLoading(true);
         setLevelNumber((prev) => prev + 1);
+        clearInterval(timer);
 
         setTimeout(() => {
           resetState();
@@ -91,11 +114,16 @@ export const App: FC<Props> = ({ isClicked }) => {
     return <GameWin />;
   }
 
+  const timeLeft = level.time
+    ? ((level.time - time) / level.time) * 100
+    : undefined;
+
   return (
     <div className={s.main}>
       <StatsPanel
         memesLeft={levels.length - levelNumber}
         triesLeft={level.tries - userTries}
+        timeLeft={timeLeft}
       />
       <GamePanel
         isLoading={isLevelLoading}

@@ -10,9 +10,10 @@ import { Progress } from "../Progress";
 type Props = {
   triesLeft: number;
   memesLeft: number;
+  timeLeft?: number;
 };
 
-export const StatsPanel: FC<Props> = ({ triesLeft, memesLeft }) => {
+export const StatsPanel: FC<Props> = ({ triesLeft, memesLeft, timeLeft }) => {
   return (
     <div className={s.main}>
       <Panel contentClassName={s.content} title="STATS">
@@ -26,11 +27,13 @@ export const StatsPanel: FC<Props> = ({ triesLeft, memesLeft }) => {
           description="till the Internet is free"
           icon={<HackerIcon />}
         />
-        <Stat
-          title={<Progress percent={50} />}
-          description="till the cops catch you"
-          icon={<PoliceIcon />}
-        />
+        {timeLeft && (
+          <Stat
+            title={<Progress percent={timeLeft} />}
+            description="till the cops catch you"
+            icon={<PoliceIcon />}
+          />
+        )}
       </Panel>
     </div>
   );

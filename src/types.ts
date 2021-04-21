@@ -25,6 +25,7 @@ export type Level = {
   initialSteps: DrawImageStep[];
   redundantSteps: DrawImageStep[];
   tries: number;
+  time?: number;
 };
 
 export type GameState = "start" | "win" | "lose";
