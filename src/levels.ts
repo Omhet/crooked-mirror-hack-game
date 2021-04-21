@@ -1,5 +1,5 @@
-import img0 from "./images/img-0.jpg";
-import img1 from "./images/img-1.jpg";
+import img0 from "./images/memes/0.jpg";
+import img1 from "./images/memes/1.jpg";
 import { Level } from "./types";
 
 export const levels: Level[] = [
