@@ -5,11 +5,13 @@ import { getButtonSteps } from "../../utils";
 import { UpdateButton } from "../UpdateButton/UpdateButton";
 import s from "./index.module.css";
 import { DrawImageStep } from "../../types";
+import { updateStepAction, updateStepStore } from "../../store/updateStep";
 
 type Props = {};
 
 export const UpdateButtons: FC<Props> = () => {
   const { levelNumber, level } = useStore(levelStore);
+  const { isStepUpdating } = useStore(updateStepStore);
   const [clickedSet, setClickedSet] = useState<Set<string>>(new Set());
 
   const handleClick = (step: DrawImageStep, id: string) => {
@@ -19,6 +21,8 @@ export const UpdateButtons: FC<Props> = () => {
       clickedSet.add(id);
     }
     setClickedSet(new Set(clickedSet));
+
+    updateStepAction({ ...step });
   };
 
   const buttonSteps = useMemo(() => getButtonSteps(level), [level]);
@@ -30,7 +34,7 @@ export const UpdateButtons: FC<Props> = () => {
         return (
           <UpdateButton
             key={id}
-            isDisabled={false}
+            isDisabled={isStepUpdating}
             isClicked={clickedSet.has(id)}
             step={step}
             onClick={(step) => handleClick(step, id)}
