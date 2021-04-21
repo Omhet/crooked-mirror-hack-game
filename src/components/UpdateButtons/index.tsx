@@ -1,6 +1,6 @@
 import { useStore } from "effector-react";
 import React, { FC, useMemo, useState } from "react";
-import { levelStore } from "../../store/level";
+import { levelStore, userTryAction } from "../../store/level";
 import { getButtonSteps } from "../../utils";
 import { UpdateButton } from "../UpdateButton/UpdateButton";
 import s from "./index.module.css";
@@ -23,6 +23,7 @@ export const UpdateButtons: FC<Props> = () => {
     setClickedSet(new Set(clickedSet));
 
     updateStepAction({ ...step });
+    userTryAction();
   };
 
   const buttonSteps = useMemo(() => getButtonSteps(level), [level]);
