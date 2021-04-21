@@ -29,9 +29,6 @@ export const levelStore = createStore<LevelStore>(initialState)
   .on(userTryAction, (state) => {
     return { ...state, userTries: state.userTries + 1 };
   })
-  // .on(startGameAction, () => {
-  //   return { ...initialState };
-  // })
   .on(nextLevelAction, (state) => {
     clearInterval(state.timer);
     const levelNumber = state.levelNumber + 1;
