@@ -10,7 +10,7 @@ export const levels: Level[] = [
       { imgOptions: { flipY: true }, posOptions: { gridSize: 3, row: 1 } },
     ],
     redundantSteps: [{ imgOptions: { flipX: true } }],
-    tries: 10,
+    tries: 3,
   },
   {
     img: img1,
@@ -20,6 +20,6 @@ export const levels: Level[] = [
     redundantSteps: [
       { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
     ],
-    tries: 10,
+    tries: 2,
   },
 ];

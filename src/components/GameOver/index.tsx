@@ -1,17 +1,19 @@
 import React, { FC } from "react";
+import { Button } from "../Button";
+import GameOverIcon from "../../images/burn.svg";
 import s from "./index.module.css";
 
 type Props = {
   onReset(): void;
+  reason: string;
 };
 
-export const GameOver: FC<Props> = ({ onReset }) => {
+export const GameOver: FC<Props> = ({ onReset, reason }) => {
   return (
     <div className={s.main}>
-      <div className={s.loader}>
-        <h2>Sorry. You lose :(</h2>
-        <button onClick={onReset}>Reset</button>
-      </div>
+      <GameOverIcon />
+      <h2>{reason}</h2>
+      <Button onClick={onReset}>RESET</Button>
     </div>
   );
 };

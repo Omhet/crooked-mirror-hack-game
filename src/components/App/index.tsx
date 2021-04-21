@@ -19,6 +19,7 @@ export const App: FC<Props> = ({ isClicked }) => {
   const [isImageEqual, setIsImageEqual] = useState(false);
   const [isStepUpdating, setIsStepUpdating] = useState(false);
   const [isLevelLoading, setIsLevelLoading] = useState(false);
+  const [gameOverReason, setGameOverReason] = useState("You've been hacked");
   const [gameState, setGameState] = useState<GameState>("start");
   const [levelNumber, setLevelNumber] = useState(0);
   const [userTries, setUserTries] = useState(0);
@@ -83,7 +84,7 @@ export const App: FC<Props> = ({ isClicked }) => {
   };
 
   if (gameState === "lose") {
-    return <GameOver onReset={handleLevelReset} />;
+    return <GameOver reason={gameOverReason} onReset={handleLevelReset} />;
   }
 
   if (gameState === "win") {

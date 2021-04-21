@@ -3,7 +3,9 @@ html {
   --text: #dcc9dc;
   --pink: rgba(226, 0, 225, 1);
   --pink-dark: rgba(226, 0, 225, 0.35);
+  --pink-darker: rgba(226, 0, 225, 0.1);
   --pink-header: rgba(226, 0, 225, 0.65);
+  --text-font: "IBM Plex Mono";
 }
 
 body {
@@ -16,7 +18,7 @@ body {
   box-sizing: border-box;
   background: var(--black);
   color: var(--text);
-  font-family: "IBM Plex Mono";
+  font-family: var(--text-font);
   font-size: 14px;
   line-height: 18px;
 }
