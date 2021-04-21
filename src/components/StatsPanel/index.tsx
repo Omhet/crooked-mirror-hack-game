@@ -6,14 +6,20 @@ import HackerIcon from "../../images/hacker.svg";
 import PoliceIcon from "../../images/police.svg";
 import { Stat } from "../Stat";
 import { Progress } from "../Progress";
+import { useStore } from "effector-react";
+import { levels } from "../../levels";
+import { levelStore } from "../../store/level";
 
-type Props = {
-  triesLeft: number;
-  memesLeft: number;
-  timeLeft?: number;
-};
+type Props = {};
 
-export const StatsPanel: FC<Props> = ({ triesLeft, memesLeft, timeLeft }) => {
+export const StatsPanel: FC<Props> = () => {
+  const { levelNumber, time, userTries, level } = useStore(levelStore);
+  const memesLeft = levels.length - levelNumber;
+  const triesLeft = level.tries - userTries;
+  const timeLeft = level.time
+    ? ((level.time - time) / level.time) * 100
+    : undefined;
+
   return (
     <div className={s.main}>
       <Panel contentClassName={s.content} title="STATS">

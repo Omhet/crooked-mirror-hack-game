@@ -1,19 +1,20 @@
+import { useStore } from "effector-react";
 import React, { FC } from "react";
-import { DrawImageStep, Level } from "../../types";
+import { levelStore } from "../../store/level";
 import { Canvas } from "../Canvas/Canvas";
 import { Panel } from "../Panel/Panel";
 import { UpdateButtons } from "../UpdateButtons";
 import s from "./index.module.css";
 
-type Props = {
-  isLoading: boolean;
-};
+type Props = {};
 
-export const GamePanel: FC<Props> = ({ isLoading }) => {
+export const GamePanel: FC<Props> = ({}) => {
+  const { isLevelLoading } = useStore(levelStore);
+
   return (
     <div className={s.main}>
       <Panel contentClassName={s.content} title="CROOKED MIRROR CRACKER">
-        {isLoading ? (
+        {isLevelLoading ? (
           <div>Loading...</div>
         ) : (
           <>
