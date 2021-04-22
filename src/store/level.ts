@@ -73,4 +73,4 @@ loseAction.watch(() => {
   clearInterval(timer);
 });
 
-startGameAction.watch(() => console.log(0));
+startGameAction.watch(() => startLevelAction(0));
