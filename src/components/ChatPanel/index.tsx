@@ -15,20 +15,25 @@ const MessageClassNameMap: Record<ChatMessageFrom, string> = {
 
 const MessageAuthorNameMap: Record<ChatMessageFrom, string> = {
   [ChatMessageFrom.Friend]: "Nagibator",
-  [ChatMessageFrom.User]: userStore.getState().name,
+  [ChatMessageFrom.User]: "",
   [ChatMessageFrom.Police]: "COP_14",
+};
+
+const getAuthorName = (from: ChatMessageFrom, userName: string) => {
+  return from === ChatMessageFrom.User ? userName : MessageAuthorNameMap[from];
 };
 
 export const ChatPanel: FC = () => {
   const { messages } = useStore(chatStore);
+  const { name: userName } = useStore(userStore);
 
   return (
     <div className={s.main}>
       <Panel contentClassName={s.content} title="CHAT">
         {messages.map(({ text, from }, index) => (
           <div key={index} className={cs(s.message, MessageClassNameMap[from])}>
-            <h4 className={s.name}>{MessageAuthorNameMap[from]}</h4>
-            {text}
+            <h4 className={s.name}>{getAuthorName(from, userName)}</h4>
+            <p className={s.text}>{text}</p>
           </div>
         ))}
       </Panel>
