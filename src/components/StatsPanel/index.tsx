@@ -20,10 +20,12 @@ export const StatsPanel: FC<Props> = () => {
   const { showOriginal } = useStore(imageStore);
 
   const memesLeft = levels.length - levelNumber;
-  const triesLeft = level.tries - userTries;
-  const timeLeft = level.time
-    ? ((level.time - time) / level.time) * 100
-    : undefined;
+  const triesLeft =
+    level.tries !== undefined ? level.tries - userTries : undefined;
+  const timeLeft =
+    level.time !== undefined
+      ? ((level.time - time) / level.time) * 100
+      : undefined;
 
   return (
     <div className={s.main}>
@@ -33,11 +35,13 @@ export const StatsPanel: FC<Props> = () => {
           description="till the Internet is free"
           icon={<HackerIcon />}
         />
-        <Stat
-          title={`${triesLeft} tries left`}
-          description="till the computer burned out"
-          icon={<ComputerIcon />}
-        />
+        {triesLeft && (
+          <Stat
+            title={`${triesLeft} tries left`}
+            description="till the computer burned out"
+            icon={<ComputerIcon />}
+          />
+        )}
         {timeLeft && (
           <Stat
             title={<Progress percent={timeLeft} />}

@@ -24,7 +24,7 @@ export type Level = {
   img: string;
   initialSteps: DrawImageStep[];
   redundantSteps: DrawImageStep[];
-  tries: number;
+  tries?: number;
   time?: number;
 };
 

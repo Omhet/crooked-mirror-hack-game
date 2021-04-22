@@ -52,7 +52,7 @@ export const levelStore = createStore<LevelStore>(initialState)
   });
 
 levelStore.watch(({ userTries, level }) => {
-  if (level.tries - userTries <= 0) {
+  if (level.tries !== undefined && level.tries - userTries <= 0) {
     loseAction("Your computer burned out");
   }
 });

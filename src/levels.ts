@@ -9,6 +9,13 @@ export const levels: Level[] = [
       { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
     ],
     redundantSteps: [{ imgOptions: { flipX: true } }],
+  },
+  {
+    img: img0,
+    initialSteps: [
+      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
+    ],
+    redundantSteps: [{ imgOptions: { flipX: true } }],
     tries: 2,
   },
   {
