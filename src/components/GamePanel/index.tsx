@@ -1,5 +1,6 @@
 import { useStore } from "effector-react";
 import React, { FC } from "react";
+import { imageStore } from "../../store/image";
 import { levelStore } from "../../store/level";
 import { Canvas } from "../Canvas/Canvas";
 import { Panel } from "../Panel/Panel";
@@ -9,7 +10,8 @@ import s from "./index.module.css";
 type Props = {};
 
 export const GamePanel: FC<Props> = ({}) => {
-  const { isLevelLoading } = useStore(levelStore);
+  const { isLevelLoading, level } = useStore(levelStore);
+  const { showOriginal } = useStore(imageStore);
 
   return (
     <div className={s.main}>
@@ -18,7 +20,10 @@ export const GamePanel: FC<Props> = ({}) => {
           <div>Loading...</div>
         ) : (
           <>
-            <Canvas onUpdate={() => console.log("update")} />
+            <div className={s.imageArea}>
+              <Canvas onUpdate={() => console.log("update")} />
+              {showOriginal && <img className={s.original} src={level.img} />}
+            </div>
 
             <UpdateButtons />
           </>

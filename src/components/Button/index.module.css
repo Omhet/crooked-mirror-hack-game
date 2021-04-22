@@ -9,11 +9,13 @@
   font-family: var(--text-font);
 }
 
-.main:hover {
+.main:hover,
+.clicked {
   background: var(--pink-dark);
 }
 
 .main:active,
-.main:focus {
+.main:focus,
+.clicked {
   outline: 1px solid var(--pink);
 }
