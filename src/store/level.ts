@@ -9,7 +9,6 @@ type LevelStore = {
   levelNumber: number;
   userTries: number;
   time: number;
-  timer: number;
   level: Level;
 };
 
@@ -24,17 +23,12 @@ const initialState: LevelStore = {
   levelNumber: 0,
   userTries: 0,
   time: 0,
-  timer: 0,
   level: levels[0],
 };
+
+let timer = 0;
+
 export const levelStore = createStore<LevelStore>(initialState)
-  .on(startTimerAction, (state, levelNumber) => {
-    clearInterval(state.timer);
-    const timer = levels[levelNumber].time
-      ? setInterval(() => increaseTimeAction(), 1000)
-      : 0;
-    return { ...state, timer };
-  })
   .on(increaseTimeAction, (state) => {
     return { ...state, time: state.time + 1 };
   })
@@ -48,13 +42,31 @@ export const levelStore = createStore<LevelStore>(initialState)
       winAction();
       return;
     }
-    return { ...initialState, levelNumber, level: levels[levelNumber] };
+    return {
+      ...initialState,
+      levelNumber,
+      level: levels[levelNumber],
+    };
   });
 
-levelStore.watch(({ userTries, level }) => {
+levelStore.watch(({ userTries, level, time }) => {
   if (level.tries !== undefined && level.tries - userTries <= 0) {
     loseAction("Your computer burned out");
+  }
+  if (level.time !== undefined && level.time - time <= 0) {
+    loseAction("Cops catched you");
   }
 });
 
 levelStore.reset(startGameAction);
+
+startTimerAction.watch((levelNumber) => {
+  clearInterval(timer);
+  timer = levels[levelNumber].time
+    ? setInterval(() => increaseTimeAction(), 1000)
+    : timer;
+});
+
+loseAction.watch(() => {
+  clearInterval(timer);
+});

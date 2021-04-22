@@ -17,6 +17,7 @@ export const levels: Level[] = [
     ],
     redundantSteps: [{ imgOptions: { flipX: true } }],
     tries: 2,
+    time: 5,
   },
   {
     img: img1,
