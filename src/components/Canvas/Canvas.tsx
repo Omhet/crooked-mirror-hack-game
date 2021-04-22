@@ -5,11 +5,9 @@ import { updateStepStore } from "../../store/updateStep";
 import s from "./Canvas.module.css";
 import { drawSteps, drawUpdatedStepFx } from "./image";
 
-export type CanvasProps = {
-  onUpdate(isEqual: boolean): void;
-};
+export type CanvasProps = {};
 
-export const Canvas: FC<CanvasProps> = ({ onUpdate }) => {
+export const Canvas: FC<CanvasProps> = ({}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
   const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);

@@ -21,7 +21,7 @@ export const GamePanel: FC<Props> = ({}) => {
         ) : (
           <>
             <div className={s.imageArea}>
-              <Canvas onUpdate={() => console.log("update")} />
+              <Canvas />
               {showOriginal && <img className={s.original} src={level.img} />}
             </div>
 

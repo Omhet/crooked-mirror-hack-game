@@ -34,3 +34,8 @@ export enum GameState {
   Lose = "lose",
   Win = "win",
 }
+
+export enum GameOverReason {
+  Time,
+  Tries,
+}

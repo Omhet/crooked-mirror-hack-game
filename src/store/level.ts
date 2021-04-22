@@ -1,6 +1,6 @@
 import { loseAction, startGameAction, winAction } from "./gameState";
 import { createEvent, createStore } from "effector";
-import { Level } from "../types";
+import { GameOverReason, Level } from "../types";
 import { levels } from "../levels";
 
 type LevelStore = {
@@ -51,10 +51,10 @@ export const levelStore = createStore<LevelStore>(initialState)
 
 levelStore.watch(({ userTries, level, time }) => {
   if (level.tries !== undefined && level.tries - userTries <= 0) {
-    loseAction("Your computer burned out");
+    loseAction(GameOverReason.Tries);
   }
   if (level.time !== undefined && level.time - time <= 0) {
-    loseAction("Cops catched you");
+    loseAction(GameOverReason.Time);
   }
 });
 

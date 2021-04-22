@@ -1,17 +1,17 @@
 import { createEvent, createStore } from "effector";
-import { GameState } from "../types";
+import { GameOverReason, GameState } from "../types";
 
 type GameStateStore = {
   gameState: GameState;
-  gameOverReason: string;
+  gameOverReason: GameOverReason;
 };
-export const loseAction = createEvent<string>();
+export const loseAction = createEvent<GameOverReason>();
 export const winAction = createEvent();
 export const startGameAction = createEvent();
 export const playAction = createEvent();
 export const gameStateStore = createStore<GameStateStore>({
   gameState: GameState.Start,
-  gameOverReason: "Wasted",
+  gameOverReason: GameOverReason.Time,
 })
   .on(loseAction, (state, gameOverReason) => ({
     ...state,
