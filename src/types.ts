@@ -20,12 +20,29 @@ export type DrawStepOptions = {
   isAnimated?: boolean;
 };
 
+export enum ChatMessageFrom {
+  User,
+  Friend,
+  Police,
+}
+
+export type ChatMessage = {
+  from: ChatMessageFrom;
+  text: string;
+};
+
+export type Chat = {
+  startMessages: ChatMessage[];
+  endMessages: ChatMessage[];
+};
+
 export type Level = {
   img: string;
   initialSteps: DrawImageStep[];
   redundantSteps: DrawImageStep[];
   tries?: number;
   time?: number;
+  chat: Chat;
 };
 
 export enum GameState {

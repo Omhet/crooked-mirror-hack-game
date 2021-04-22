@@ -13,6 +13,7 @@ type LevelStore = {
 };
 
 export const nextLevelAction = createEvent();
+export const startLevelAction = createEvent<number>();
 export const userTryAction = createEvent();
 export const startTimerAction = createEvent<number>();
 export const increaseTimeAction = createEvent();
@@ -38,6 +39,7 @@ export const levelStore = createStore<LevelStore>(initialState)
   .on(nextLevelAction, (state) => {
     const levelNumber = state.levelNumber + 1;
     startTimerAction(levelNumber);
+    startLevelAction(levelNumber);
     if (levelNumber >= levels.length) {
       winAction();
       return;
@@ -70,3 +72,5 @@ startTimerAction.watch((levelNumber) => {
 loseAction.watch(() => {
   clearInterval(timer);
 });
+
+startGameAction.watch(() => console.log(0));

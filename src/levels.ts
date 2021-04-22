@@ -1,6 +1,25 @@
 import img0 from "./images/memes/0.jpg";
 import img1 from "./images/memes/1.jpg";
-import { Level } from "./types";
+import { ChatMessageFrom, Level, Chat } from "./types";
+
+const chats: Chat[] = [
+  {
+    startMessages: [
+      { from: ChatMessageFrom.Friend, text: "Hey! How are you doing, bro?" },
+    ],
+    endMessages: [],
+  },
+  {
+    startMessages: [
+      { from: ChatMessageFrom.Friend, text: "Hey! Can you hear me?" },
+    ],
+    endMessages: [],
+  },
+  {
+    startMessages: [],
+    endMessages: [],
+  },
+];
 
 export const levels: Level[] = [
   {
@@ -9,6 +28,7 @@ export const levels: Level[] = [
       { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
     ],
     redundantSteps: [{ imgOptions: { flipX: true } }],
+    chat: chats[0],
   },
   {
     img: img0,
@@ -18,6 +38,7 @@ export const levels: Level[] = [
     redundantSteps: [{ imgOptions: { flipX: true } }],
     tries: 2,
     time: 5,
+    chat: chats[1],
   },
   {
     img: img1,
@@ -29,5 +50,6 @@ export const levels: Level[] = [
     ],
     tries: 20,
     time: 50,
+    chat: chats[2],
   },
 ];
