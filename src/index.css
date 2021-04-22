@@ -5,6 +5,8 @@ html {
   --pink-dark: rgba(226, 0, 225, 0.35);
   --pink-darker: rgba(226, 0, 225, 0.1);
   --pink-header: rgba(226, 0, 225, 0.65);
+  --blue-dark: rgba(13, 158, 232, 0.35);
+
   --text-font: "IBM Plex Mono";
 }
 

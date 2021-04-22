@@ -5,7 +5,14 @@ import { ChatMessageFrom, Level, Chat } from "./types";
 const chats: Chat[] = [
   {
     startMessages: [
-      { from: ChatMessageFrom.Friend, text: "Hey! How are you doing, bro?" },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "Hey! How are you doing, bro?",
+      },
+      {
+        from: ChatMessageFrom.User,
+        text: "Alright. What's on your mind?",
+      },
     ],
     endMessages: [],
   },
@@ -37,7 +44,7 @@ export const levels: Level[] = [
     ],
     redundantSteps: [{ imgOptions: { flipX: true } }],
     tries: 2,
-    time: 5,
+    // time: 5,
     chat: chats[1],
   },
   {
