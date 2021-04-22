@@ -15,6 +15,8 @@ type LevelStore = {
 
 export const nextLevelAction = createEvent();
 export const userTryAction = createEvent();
+export const startTimerAction = createEvent<number>();
+export const increaseTimeAction = createEvent();
 
 const initialState: LevelStore = {
   clickedSet: new Set(),
@@ -26,12 +28,22 @@ const initialState: LevelStore = {
   level: levels[0],
 };
 export const levelStore = createStore<LevelStore>(initialState)
+  .on(startTimerAction, (state, levelNumber) => {
+    clearInterval(state.timer);
+    const timer = levels[levelNumber].time
+      ? setInterval(() => increaseTimeAction(), 1000)
+      : 0;
+    return { ...state, timer };
+  })
+  .on(increaseTimeAction, (state) => {
+    return { ...state, time: state.time + 1 };
+  })
   .on(userTryAction, (state) => {
     return { ...state, userTries: state.userTries + 1 };
   })
   .on(nextLevelAction, (state) => {
-    clearInterval(state.timer);
     const levelNumber = state.levelNumber + 1;
+    startTimerAction(levelNumber);
     if (levelNumber >= levels.length) {
       winAction();
       return;

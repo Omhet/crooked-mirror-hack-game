@@ -30,3 +30,9 @@ export const gameStateStore = createStore<GameStateStore>({
     ...state,
     gameState: GameState.Play,
   }));
+
+// gameStateStore.watch(({ gameState }) => {
+//   if (gameState === GameState.Play || gameState === GameState.Start) {
+//     nextLevelAction();
+//   }
+// });
