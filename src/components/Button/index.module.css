@@ -1,4 +1,7 @@
 .main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid var(--pink);
   background: var(--pink-darker);
   color: var(--pink);

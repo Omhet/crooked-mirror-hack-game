@@ -25,18 +25,8 @@
 
 .input {
   margin-top: 64px;
-  width: 100%;
   font-size: 18px;
-  padding: 8px 8px;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: var(--pink);
   border-bottom: 2px solid var(--pink);
-}
-
-.input::placeholder {
-  color: var(--text);
 }
 
 .storyText {

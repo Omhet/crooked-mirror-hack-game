@@ -37,6 +37,21 @@ h1 {
   color: #cc83cc;
 }
 
+input {
+  width: 100%;
+  font-size: 14px;
+  padding: 8px 8px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--pink);
+  font-family: var(--text-font);
+}
+
+input::placeholder {
+  color: var(--text);
+}
+
 body * {
   box-sizing: border-box;
 }

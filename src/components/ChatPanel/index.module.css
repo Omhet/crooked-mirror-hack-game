@@ -4,6 +4,9 @@
 
 .content {
   padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .message {
@@ -52,4 +55,17 @@
 }
 .police .name {
   color: var(--red);
+}
+
+.inputWrapper {
+  height: 44px;
+  display: flex;
+}
+.input {
+  background: var(--pink-darker);
+}
+
+.sendButton {
+  width: 80px;
+  border: none !important;
 }

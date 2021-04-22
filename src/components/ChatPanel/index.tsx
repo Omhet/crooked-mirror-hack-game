@@ -6,6 +6,8 @@ import { Panel } from "../Panel/Panel";
 import s from "./index.module.css";
 import { ChatMessageFrom } from "../../types";
 import { userStore } from "../../store/user";
+import { Button } from "../Button";
+import SendIcon from "../../images/send.svg";
 
 const MessageClassNameMap: Record<ChatMessageFrom, string> = {
   [ChatMessageFrom.Friend]: s.friend,
@@ -30,12 +32,28 @@ export const ChatPanel: FC = () => {
   return (
     <div className={s.main}>
       <Panel contentClassName={s.content} title="CHAT">
-        {messages.map(({ text, from }, index) => (
-          <div key={index} className={cs(s.message, MessageClassNameMap[from])}>
-            <h4 className={s.name}>{getAuthorName(from, userName)}</h4>
-            <p className={s.text}>{text}</p>
-          </div>
-        ))}
+        <div className={s.messages}>
+          {messages.map(({ text, from }, index) => (
+            <div
+              key={index}
+              className={cs(s.message, MessageClassNameMap[from])}
+            >
+              <h4 className={s.name}>{getAuthorName(from, userName)}</h4>
+              <p className={s.text}>{text}</p>
+            </div>
+          ))}
+        </div>
+        <div className={s.inputWrapper}>
+          <input
+            className={s.input}
+            type="text"
+            onChange={() => {}}
+            placeholder="Message here..."
+          />
+          <Button className={s.sendButton} onClick={() => {}}>
+            <SendIcon />
+          </Button>
+        </div>
       </Panel>
     </div>
   );
