@@ -29,9 +29,7 @@ export const Canvas: FC<CanvasProps> = ({}) => {
       canvas,
       baseImageUrl: img,
       updateStep,
-    })
-      .then(onUpdate)
-      .catch((err) => console.error(err));
+    });
   }, [updateStep, ctx, canvas]);
 
   useEffect(() => {
