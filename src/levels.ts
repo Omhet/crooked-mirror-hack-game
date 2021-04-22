@@ -13,6 +13,10 @@ const chats: Chat[] = [
         from: ChatMessageFrom.User,
         text: "Alright. What's on your mind?",
       },
+      {
+        from: ChatMessageFrom.Police,
+        text: "Hey y'all hackers!!!",
+      },
     ],
     endMessages: [],
   },

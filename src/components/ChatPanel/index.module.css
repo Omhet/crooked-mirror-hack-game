@@ -19,15 +19,30 @@
   margin-top: 24px;
 }
 
+.name {
+  font-size: 12px;
+  margin: 0;
+  font-weight: normal;
+}
+
 .friend {
   background: var(--blue-dark);
+}
+.friend .name {
+  color: var(--blue);
 }
 
 .user {
   background: var(--pink-dark);
   margin-left: auto;
 }
+.user .name {
+  color: var(--pink);
+}
 
 .police {
-  background: tomato;
+  background: var(--red-dark);
+}
+.police .name {
+  color: var(--red);
 }
