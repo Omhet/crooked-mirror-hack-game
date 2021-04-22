@@ -38,3 +38,11 @@
 .input::placeholder {
   color: var(--text);
 }
+
+.storyText {
+  font-size: 18px;
+  line-height: 28px;
+  max-width: 600px;
+  hyphens: auto;
+  white-space: pre-wrap;
+}
