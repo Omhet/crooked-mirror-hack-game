@@ -8,6 +8,7 @@ import { ChatMessageFrom } from "../../types";
 import { userStore } from "../../store/user";
 import { Button } from "../Button";
 import SendIcon from "../../images/send.svg";
+import { readyToPlayLevelAction, levelStore } from "../../store/level";
 
 const MessageClassNameMap: Record<ChatMessageFrom, string> = {
   [ChatMessageFrom.Friend]: s.friend,
@@ -26,8 +27,9 @@ const getAuthorName = (from: ChatMessageFrom, userName: string) => {
 };
 
 export const ChatPanel: FC = () => {
-  const { messages } = useStore(chatStore);
+  const { messages, showReadyToPlay, isBusy } = useStore(chatStore);
   const { name: userName } = useStore(userStore);
+  const { levelNumber } = useStore(levelStore);
 
   return (
     <div className={s.main}>
@@ -43,17 +45,27 @@ export const ChatPanel: FC = () => {
             </div>
           ))}
         </div>
-        <div className={s.inputWrapper}>
-          <input
-            className={s.input}
-            type="text"
-            onChange={() => {}}
-            placeholder="Message here..."
-          />
-          <Button className={s.sendButton} onClick={() => {}}>
-            <SendIcon />
+        {showReadyToPlay && (
+          <Button
+            className={s.readyButton}
+            onClick={() => readyToPlayLevelAction(levelNumber)}
+          >
+            Let's Hack
           </Button>
-        </div>
+        )}
+        {!isBusy && !showReadyToPlay && (
+          <div className={s.inputWrapper}>
+            <input
+              className={s.input}
+              type="text"
+              onChange={() => {}}
+              placeholder="Message here..."
+            />
+            <Button className={s.sendButton} onClick={() => {}}>
+              <SendIcon />
+            </Button>
+          </div>
+        )}
       </Panel>
     </div>
   );

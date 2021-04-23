@@ -1,25 +1,32 @@
 import { createStore, createEvent } from "effector";
 import { levels } from "../levels";
 import { Chat, ChatMessage, ChatMessageFrom } from "../types";
-import { startLevelAction } from "./level";
+import { startLevelAction, readyToPlayLevelAction } from "./level";
 
 type ChatStore = {
   messages: ChatMessage[];
   isBusy: boolean;
+  showReadyToPlay: boolean;
 };
 
 export const addMessageAction = createEvent<ChatMessage>();
 export const setBusyAction = createEvent<boolean>();
+export const setShowReadyToPlayAction = createEvent<boolean>();
 export const clearChatAction = createEvent();
 
 const initialState: ChatStore = {
   messages: [],
   isBusy: true,
+  showReadyToPlay: false,
 };
 export const chatStore = createStore<ChatStore>(initialState)
   .on(setBusyAction, (state, isBusy) => ({
     ...state,
     isBusy,
+  }))
+  .on(setShowReadyToPlayAction, (state, showReadyToPlay) => ({
+    ...state,
+    showReadyToPlay,
   }))
   .on(addMessageAction, (state, message) => ({
     ...state,
@@ -37,7 +44,7 @@ startLevelAction.watch(async (levelNumber) => {
   for (const message of startMessages) {
     await addMessageToChat(message);
   }
-  setBusyAction(false);
+  setShowReadyToPlayAction(true);
 });
 
 export const addMessageToChat = async (message: ChatMessage) => {
@@ -50,3 +57,10 @@ export const addMessageToChat = async (message: ChatMessage) => {
     }, timeout);
   });
 };
+
+// setShowReadyToPlayAction.watch((ready) => {
+//   if (ready) {
+//     setBusyAction(false);
+//     // readyToPlayLevelAction()
+//   }
+// });
