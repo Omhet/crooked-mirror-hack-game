@@ -42,7 +42,7 @@ export const chatStore = createStore<ChatStore>(initialState)
   }))
   .on(addMessageAction, (state, message) => ({
     ...state,
-    messages: [...state.messages, message],
+    messages: [message, ...state.messages],
   }))
   .on(clearChatAction, (state) => ({
     ...state,
@@ -70,9 +70,17 @@ endLevelAction.watch(async () => {
   setShowReadyForNextLevelAction(true);
 });
 
-export const addMessageToChat = async (message: ChatMessage) => {
-  const timeout =
+export const addMessageToChat = async (
+  message: ChatMessage,
+  messageTimeout?: number
+) => {
+  let timeout =
     message.from === ChatMessageFrom.User ? 1000 : Math.random() * 500 + 1500;
+
+  if (messageTimeout !== undefined) {
+    timeout = messageTimeout;
+  }
+
   return new Promise((resolve) => {
     setTimeout(() => {
       addMessageAction(message);

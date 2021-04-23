@@ -1,14 +1,14 @@
 import cs from "classnames";
 import { useStore } from "effector-react";
-import React, { FC } from "react";
+import React, { FC, useRef, useState } from "react";
 import SendIcon from "../../images/send.svg";
-import { chatStore } from "../../store/chat";
+import { addMessageToChat, chatStore } from "../../store/chat";
 import {
   readyToPlayLevelAction,
   readyToStartNextLevelAction,
 } from "../../store/level";
 import { userStore } from "../../store/user";
-import { ChatMessageFrom } from "../../types";
+import { ChatMessageFrom, ChatMessage } from "../../types";
 import { Button } from "../Button";
 import { Panel } from "../Panel/Panel";
 import s from "./index.module.css";
@@ -30,10 +30,17 @@ const getAuthorName = (from: ChatMessageFrom, userName: string) => {
 };
 
 export const ChatPanel: FC = () => {
+  const [input, setInput] = useState("");
   const { messages, showReadyToPlay, isBusy, showReadyForNextLevel } = useStore(
     chatStore
   );
   const { name: userName } = useStore(userStore);
+
+  const sendMessage = () => {
+    if (input.length === 0) return;
+    setInput("");
+    addMessageToChat({ from: ChatMessageFrom.User, text: input }, 0);
+  };
 
   return (
     <div className={s.main}>
@@ -68,12 +75,18 @@ export const ChatPanel: FC = () => {
         {!isBusy && !showReadyToPlay && (
           <div className={s.inputWrapper}>
             <input
+              onKeyUp={(e) => {
+                if (e.key === "Enter") {
+                  sendMessage();
+                }
+              }}
               className={s.input}
+              value={input}
               type="text"
-              onChange={() => {}}
+              onChange={(e) => setInput(e.target.value)}
               placeholder="Message here..."
             />
-            <Button className={s.sendButton} onClick={() => {}}>
+            <Button className={s.sendButton} onClick={() => sendMessage()}>
               <SendIcon />
             </Button>
           </div>
