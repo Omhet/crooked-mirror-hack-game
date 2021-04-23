@@ -70,12 +70,22 @@ endLevelAction.watch(async () => {
   setTimeout(() => setShowReadyForNextLevelAction(true), 1000);
 });
 
+addMessageAction.watch((message) => {
+  const { isBusy } = chatStore.getState();
+  if (!isBusy && message.from === ChatMessageFrom.User) {
+    addMessageToChat(
+      { from: ChatMessageFrom.Friend, text: getRandomFriendResponse() },
+      350
+    );
+  }
+});
+
 export const addMessageToChat = async (
   message: ChatMessage,
   messageTimeout?: number
 ) => {
   let timeout =
-    message.from === ChatMessageFrom.User ? 1000 : Math.random() * 500 + 1500;
+    message.from === ChatMessageFrom.User ? 1000 : Math.random() * 500 + 1000;
 
   if (messageTimeout !== undefined) {
     timeout = messageTimeout;
@@ -87,4 +97,14 @@ export const addMessageToChat = async (
       resolve(null);
     }, timeout);
   });
+};
+
+const friendResponses: string[] = [
+  "I hear you",
+  "Here is the link with the answers: http://tiny.cc/4nhwtz",
+  "Man, keep up",
+];
+export const getRandomFriendResponse = () => {
+  const randIndex = Math.floor(Math.random() * friendResponses.length);
+  return friendResponses[randIndex];
 };
