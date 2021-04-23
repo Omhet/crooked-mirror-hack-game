@@ -13,12 +13,14 @@ type ChatStore = {
   isBusy: boolean;
   showReadyToPlay: boolean;
   showReadyForNextLevel: boolean;
+  showReadyForFinalChoice: boolean;
 };
 
 export const addMessageAction = createEvent<ChatMessage>();
 export const setBusyAction = createEvent<boolean>();
 export const setShowReadyToPlayAction = createEvent<boolean>();
 export const setShowReadyForNextLevelAction = createEvent<boolean>();
+export const setShowReadyForFinalChoiceAction = createEvent<boolean>();
 export const clearChatAction = createEvent();
 
 const initialState: ChatStore = {
@@ -26,6 +28,7 @@ const initialState: ChatStore = {
   isBusy: true,
   showReadyToPlay: false,
   showReadyForNextLevel: false,
+  showReadyForFinalChoice: false,
 };
 export const chatStore = createStore<ChatStore>(initialState)
   .on(setBusyAction, (state, isBusy) => ({
@@ -39,6 +42,10 @@ export const chatStore = createStore<ChatStore>(initialState)
   .on(setShowReadyForNextLevelAction, (state, showReadyForNextLevel) => ({
     ...state,
     showReadyForNextLevel,
+  }))
+  .on(setShowReadyForFinalChoiceAction, (state, showReadyForFinalChoice) => ({
+    ...state,
+    showReadyForFinalChoice,
   }))
   .on(addMessageAction, (state, message) => ({
     ...state,
@@ -67,7 +74,13 @@ endLevelAction.watch(async () => {
   for (const message of endMessages) {
     await addMessageToChat(message);
   }
-  setTimeout(() => setShowReadyForNextLevelAction(true), 1000);
+  setTimeout(() => {
+    if (levelNumber === levels.length - 1) {
+      setShowReadyForFinalChoiceAction(true);
+    } else {
+      setShowReadyForNextLevelAction(true);
+    }
+  }, 1000);
 });
 
 addMessageAction.watch((message) => {

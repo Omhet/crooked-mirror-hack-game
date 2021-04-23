@@ -3,12 +3,13 @@ import { useStore } from "effector-react";
 import React, { FC, useRef, useState } from "react";
 import SendIcon from "../../images/send.svg";
 import { addMessageToChat, chatStore } from "../../store/chat";
+import { setFinalChoiceAction } from "../../store/gameState";
 import {
   readyToPlayLevelAction,
   readyToStartNextLevelAction,
 } from "../../store/level";
 import { userStore } from "../../store/user";
-import { ChatMessageFrom, ChatMessage } from "../../types";
+import { ChatMessageFrom, ChatMessage, GameFinalChoice } from "../../types";
 import { Button } from "../Button";
 import { Panel } from "../Panel/Panel";
 import s from "./index.module.css";
@@ -31,9 +32,13 @@ const getAuthorName = (from: ChatMessageFrom, userName: string) => {
 
 export const ChatPanel: FC = () => {
   const [input, setInput] = useState("");
-  const { messages, showReadyToPlay, isBusy, showReadyForNextLevel } = useStore(
-    chatStore
-  );
+  const {
+    messages,
+    showReadyToPlay,
+    isBusy,
+    showReadyForNextLevel,
+    showReadyForFinalChoice,
+  } = useStore(chatStore);
   const { name: userName } = useStore(userStore);
 
   const sendMessage = () => {
@@ -71,6 +76,26 @@ export const ChatPanel: FC = () => {
           >
             Go
           </Button>
+        )}
+        {showReadyForFinalChoice && (
+          <div className={s.finalChoice}>
+            <Button
+              onClick={() => {
+                setFinalChoiceAction(GameFinalChoice.Friend);
+                readyToStartNextLevelAction();
+              }}
+            >
+              Friend
+            </Button>
+            <Button
+              onClick={() => {
+                setFinalChoiceAction(GameFinalChoice.Police);
+                readyToStartNextLevelAction();
+              }}
+            >
+              Police
+            </Button>
+          </div>
         )}
         {!isBusy && !showReadyToPlay && (
           <div className={s.inputWrapper}>

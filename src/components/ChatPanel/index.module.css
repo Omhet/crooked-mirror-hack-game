@@ -83,3 +83,11 @@
   width: 80px;
   border: none !important;
 }
+
+.finalChoice {
+  display: flex;
+}
+
+.finalChoice > * {
+  flex: 1;
+}

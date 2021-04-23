@@ -1,8 +1,9 @@
 import React, { FC } from "react";
-import { stopGameAction } from "../../store/gameState";
+import { stopGameAction, gameStateStore } from "../../store/gameState";
 import { GameFinalChoice } from "../../types";
 import { Button } from "../Button";
 import s from "./index.module.css";
+import { useStore } from "effector-react";
 
 type Props = {};
 
@@ -15,10 +16,11 @@ User choosed ${choice === GameFinalChoice.Friend ? "friend" : "police"}
 `;
 
 export const GameWin: FC<Props> = ({}) => {
+  const { finalChoice } = useStore(gameStateStore);
   return (
     <div className={s.main}>
       <h2>The End</h2>
-      <p className={s.storyText}>{getStoryText(GameFinalChoice.Friend)}</p>
+      <p className={s.storyText}>{getStoryText(finalChoice)}</p>
       <Button onClick={stopGameAction}>back to the menu</Button>
     </div>
   );
