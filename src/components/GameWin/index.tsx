@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { stopGameAction } from "../../store/gameState";
 import { GameFinalChoice } from "../../types";
 import { Button } from "../Button";
 import s from "./index.module.css";
@@ -18,7 +19,7 @@ export const GameWin: FC<Props> = ({}) => {
     <div className={s.main}>
       <h2>The End</h2>
       <p className={s.storyText}>{getStoryText(GameFinalChoice.Friend)}</p>
-      <Button onClick={() => {}}>back to the menu</Button>
+      <Button onClick={stopGameAction}>back to the menu</Button>
     </div>
   );
 };
