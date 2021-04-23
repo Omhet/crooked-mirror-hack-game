@@ -1167,6 +1167,16 @@ q@^1.1.2:
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
+radio-browser-api@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/radio-browser-api/-/radio-browser-api-2.2.4.tgz#264f4d2fe8a067e6fb8c66c6265bd6e4ee1dfb8a"
+  integrity sha512-qgAqmWn+s7HcpLeqbu3GLJaUSpyeQN6gdwvSVwqzrF26/cTBat7Di0bcNkmDxXAD9GPgctQlkVzgzGkhJGtnag==
+
+radio-browser@^2.1.7:
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/radio-browser/-/radio-browser-2.1.7.tgz#5d308a3dc36f7d9df0cf0cad044c1dce5b4f5571"
+  integrity sha512-xUdg4Fok7IVkWwuJzHnddXrmK5/fP7IzKSneqJcvZQOTYFLX+bJR5ofxWt1UhFZv2T+fOPOfJNN/4DAB48mWlw==
+
 react-dom@^17.0.0:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"

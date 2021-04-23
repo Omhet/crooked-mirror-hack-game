@@ -1,3 +1,11 @@
 .main {
   grid-area: p;
 }
+
+.controls {
+  display: flex;
+}
+
+.controls > * {
+  flex: 1;
+}
