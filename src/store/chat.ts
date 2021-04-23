@@ -56,7 +56,7 @@ startLevelAction.watch(async (levelNumber) => {
   for (const message of startMessages) {
     await addMessageToChat(message);
   }
-  setShowReadyToPlayAction(true);
+  setTimeout(() => setShowReadyToPlayAction(true), 1000);
 });
 
 endLevelAction.watch(async () => {
@@ -67,7 +67,7 @@ endLevelAction.watch(async () => {
   for (const message of endMessages) {
     await addMessageToChat(message);
   }
-  setShowReadyForNextLevelAction(true);
+  setTimeout(() => setShowReadyForNextLevelAction(true), 1000);
 });
 
 export const addMessageToChat = async (
