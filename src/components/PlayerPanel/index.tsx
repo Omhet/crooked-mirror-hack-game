@@ -1,10 +1,12 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import { Panel } from "../Panel/Panel";
 import s from "./index.module.css";
 import { RadioBrowserApi } from "radio-browser-api";
 import { Button } from "../Button";
 import PrevIcon from "../../images/prev.svg";
 import NextIcon from "../../images/next.svg";
+import MuteIcon from "../../images/mute.svg";
+import UnmuteIcon from "../../images/unmute.svg";
 
 const api = new RadioBrowserApi(fetch.bind(window), "Crooked Mirror Game");
 
@@ -23,6 +25,9 @@ type Props = {};
 export const PlayerPanel: FC<Props> = ({}) => {
   const [stations, setStations] = useState<string[]>([]);
   const [stationIndex, setStationIndex] = useState<number>(0);
+  const [muted, setMuted] = useState<boolean>(false);
+
+  const audio = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
     getStations().then(setStations);
@@ -35,9 +40,9 @@ export const PlayerPanel: FC<Props> = ({}) => {
       <Panel title="PLAYER">
         {stations.length > 0 && (
           <audio
+            ref={audio}
             key={stationIndex}
             autoPlay
-            controls
             src={stations[stationIndex]}
           ></audio>
         )}
@@ -59,6 +64,16 @@ export const PlayerPanel: FC<Props> = ({}) => {
             }
           >
             <NextIcon />
+          </Button>
+          <Button
+            onClick={() => {
+              if (audio.current) {
+                setMuted(!audio.current.muted);
+                audio.current.muted = !audio.current.muted;
+              }
+            }}
+          >
+            {muted ? <UnmuteIcon /> : <MuteIcon />}
           </Button>
         </div>
       </Panel>
