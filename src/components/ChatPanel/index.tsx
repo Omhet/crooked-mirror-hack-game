@@ -1,18 +1,17 @@
+import cs from "classnames";
 import { useStore } from "effector-react";
 import React, { FC } from "react";
-import cs from "classnames";
-import { chatStore } from "../../store/chat";
-import { Panel } from "../Panel/Panel";
-import s from "./index.module.css";
-import { ChatMessageFrom } from "../../types";
-import { userStore } from "../../store/user";
-import { Button } from "../Button";
 import SendIcon from "../../images/send.svg";
+import { chatStore } from "../../store/chat";
 import {
   readyToPlayLevelAction,
-  levelStore,
   readyToStartNextLevelAction,
 } from "../../store/level";
+import { userStore } from "../../store/user";
+import { ChatMessageFrom } from "../../types";
+import { Button } from "../Button";
+import { Panel } from "../Panel/Panel";
+import s from "./index.module.css";
 
 const MessageClassNameMap: Record<ChatMessageFrom, string> = {
   [ChatMessageFrom.Friend]: s.friend,
@@ -35,7 +34,6 @@ export const ChatPanel: FC = () => {
     chatStore
   );
   const { name: userName } = useStore(userStore);
-  const { levelNumber } = useStore(levelStore);
 
   return (
     <div className={s.main}>
@@ -54,7 +52,7 @@ export const ChatPanel: FC = () => {
         {showReadyToPlay && (
           <Button
             className={s.readyButton}
-            onClick={() => readyToPlayLevelAction(levelNumber)}
+            onClick={() => readyToPlayLevelAction()}
           >
             Let's Hack
           </Button>

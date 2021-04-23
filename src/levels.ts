@@ -20,11 +20,11 @@ const chats: Chat[] = [
     ],
     endMessages: [
       {
-        from: ChatMessageFrom.User,
+        from: ChatMessageFrom.Friend,
         text: "Wow, you did it!",
       },
       {
-        from: ChatMessageFrom.User,
+        from: ChatMessageFrom.Friend,
         text: "You are so cool",
       },
     ],
