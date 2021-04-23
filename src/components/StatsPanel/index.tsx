@@ -12,12 +12,14 @@ import { levels } from "../../levels";
 import { levelStore } from "../../store/level";
 import { Button } from "../Button";
 import { imageStore, toggleShowOriginalAction } from "../../store/image";
+import { chatStore } from "../../store/chat";
 
 type Props = {};
 
 export const StatsPanel: FC<Props> = () => {
   const { levelNumber, time, userTries, level } = useStore(levelStore);
   const { showOriginal } = useStore(imageStore);
+  const { isBusy } = useStore(chatStore);
 
   const memesLeft = levels.length - levelNumber;
   const triesLeft =
@@ -30,37 +32,43 @@ export const StatsPanel: FC<Props> = () => {
   return (
     <div className={s.main}>
       <Panel contentClassName={s.content} title="STATS">
-        <Stat
-          title={`${memesLeft} memes left`}
-          description="till the Internet is free"
-          icon={<HackerIcon />}
-        />
-        {triesLeft && (
-          <Stat
-            title={`${triesLeft} tries left`}
-            description="till the computer burned out"
-            icon={<ComputerIcon />}
-          />
+        {isBusy ? (
+          <div>NO_DATA</div>
+        ) : (
+          <>
+            <Stat
+              title={`${memesLeft} memes left`}
+              description="till the Internet is free"
+              icon={<HackerIcon />}
+            />
+            {triesLeft && (
+              <Stat
+                title={`${triesLeft} tries left`}
+                description="till the computer burned out"
+                icon={<ComputerIcon />}
+              />
+            )}
+            {timeLeft && (
+              <Stat
+                title={<Progress percent={timeLeft} />}
+                description="till the cops catch you"
+                icon={<PoliceIcon />}
+              />
+            )}
+            <Stat
+              title={
+                <Button
+                  className={s.showOriginalButton}
+                  onClick={toggleShowOriginalAction}
+                  isClicked={showOriginal}
+                >
+                  <EyeIcon />
+                </Button>
+              }
+              description="shows the original"
+            />
+          </>
         )}
-        {timeLeft && (
-          <Stat
-            title={<Progress percent={timeLeft} />}
-            description="till the cops catch you"
-            icon={<PoliceIcon />}
-          />
-        )}
-        <Stat
-          title={
-            <Button
-              className={s.showOriginalButton}
-              onClick={toggleShowOriginalAction}
-              isClicked={showOriginal}
-            >
-              <EyeIcon />
-            </Button>
-          }
-          description="shows the original"
-        />
       </Panel>
     </div>
   );

@@ -28,7 +28,10 @@ const chats: Chat[] = [
     endMessages: [],
   },
   {
-    startMessages: [],
+    startMessages: [
+      { from: ChatMessageFrom.Friend, text: "Level 3" },
+      { from: ChatMessageFrom.User, text: "Oh yes" },
+    ],
     endMessages: [],
   },
 ];

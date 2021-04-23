@@ -11,7 +11,7 @@ import s from "./index.module.css";
 type Props = {};
 
 export const GamePanel: FC<Props> = ({}) => {
-  const { isLevelLoading, level } = useStore(levelStore);
+  const { level } = useStore(levelStore);
   const { showOriginal } = useStore(imageStore);
   const { isBusy } = useStore(chatStore);
 

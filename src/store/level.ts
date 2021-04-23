@@ -4,8 +4,6 @@ import { GameOverReason, Level } from "../types";
 import { levels } from "../levels";
 
 type LevelStore = {
-  clickedSet: Set<string>;
-  isLevelLoading: boolean;
   levelNumber: number;
   userTries: number;
   time: number;
@@ -19,8 +17,6 @@ export const startTimerAction = createEvent<number>();
 export const increaseTimeAction = createEvent();
 
 const initialState: LevelStore = {
-  clickedSet: new Set(),
-  isLevelLoading: false,
   levelNumber: 0,
   userTries: 0,
   time: 0,
