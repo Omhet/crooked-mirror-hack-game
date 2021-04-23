@@ -80,4 +80,4 @@ export const levels: Level[] = [
     time: 50,
     chat: chats[2],
   },
-];
+].slice(0, 1);

@@ -56,3 +56,8 @@ export enum GameOverReason {
   Time,
   Tries,
 }
+
+export enum GameFinalChoice {
+  Police,
+  Friend,
+}
