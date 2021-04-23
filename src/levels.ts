@@ -23,6 +23,7 @@ const chats: Chat[] = [
   {
     startMessages: [
       { from: ChatMessageFrom.Friend, text: "Hey! Can you hear me?" },
+      { from: ChatMessageFrom.Friend, text: "Hellooo???" },
     ],
     endMessages: [],
   },

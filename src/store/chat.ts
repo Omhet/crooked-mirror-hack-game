@@ -1,19 +1,43 @@
-import { createStore } from "effector";
+import { createStore, createEvent } from "effector";
 import { levels } from "../levels";
-import { Chat, ChatMessage } from "../types";
+import { Chat, ChatMessage, ChatMessageFrom } from "../types";
 import { startLevelAction } from "./level";
 
 type ChatStore = {
   messages: ChatMessage[];
 };
 
+export const addMessageAction = createEvent<ChatMessage>();
+export const clearChatAction = createEvent();
+
 const initialState: ChatStore = {
   messages: [],
 };
-export const chatStore = createStore<ChatStore>(initialState).on(
-  startLevelAction,
-  (state, levelNumber) => ({
+export const chatStore = createStore<ChatStore>(initialState)
+  .on(addMessageAction, (state, message) => ({
     ...state,
-    messages: levels[levelNumber].chat.startMessages,
-  })
-);
+    messages: [...state.messages, message],
+  }))
+  .on(clearChatAction, (state) => ({
+    ...state,
+    messages: [],
+  }));
+
+startLevelAction.watch(async (levelNumber) => {
+  const { startMessages } = levels[levelNumber].chat;
+  clearChatAction();
+  for (const message of startMessages) {
+    await addMessageToChat(message);
+  }
+});
+
+export const addMessageToChat = async (message: ChatMessage) => {
+  const timeout =
+    message.from === ChatMessageFrom.User ? 1000 : Math.random() * 500 + 1500;
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      addMessageAction(message);
+      resolve(null);
+    }, timeout);
+  });
+};
