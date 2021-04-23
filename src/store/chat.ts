@@ -1,23 +1,31 @@
 import { createStore, createEvent } from "effector";
 import { levels } from "../levels";
 import { Chat, ChatMessage, ChatMessageFrom } from "../types";
-import { startLevelAction, readyToPlayLevelAction } from "./level";
+import {
+  startLevelAction,
+  readyToPlayLevelAction,
+  endLevelAction,
+  levelStore,
+} from "./level";
 
 type ChatStore = {
   messages: ChatMessage[];
   isBusy: boolean;
   showReadyToPlay: boolean;
+  showReadyForNextLevel: boolean;
 };
 
 export const addMessageAction = createEvent<ChatMessage>();
 export const setBusyAction = createEvent<boolean>();
 export const setShowReadyToPlayAction = createEvent<boolean>();
+export const setShowReadyForNextLevelAction = createEvent<boolean>();
 export const clearChatAction = createEvent();
 
 const initialState: ChatStore = {
   messages: [],
   isBusy: true,
   showReadyToPlay: false,
+  showReadyForNextLevel: false,
 };
 export const chatStore = createStore<ChatStore>(initialState)
   .on(setBusyAction, (state, isBusy) => ({
@@ -27,6 +35,10 @@ export const chatStore = createStore<ChatStore>(initialState)
   .on(setShowReadyToPlayAction, (state, showReadyToPlay) => ({
     ...state,
     showReadyToPlay,
+  }))
+  .on(setShowReadyForNextLevelAction, (state, showReadyForNextLevel) => ({
+    ...state,
+    showReadyForNextLevel,
   }))
   .on(addMessageAction, (state, message) => ({
     ...state,
@@ -47,6 +59,17 @@ startLevelAction.watch(async (levelNumber) => {
   setShowReadyToPlayAction(true);
 });
 
+endLevelAction.watch(async () => {
+  const { levelNumber } = levelStore.getState();
+  const { endMessages } = levels[levelNumber].chat;
+  setBusyAction(true);
+  clearChatAction();
+  for (const message of endMessages) {
+    await addMessageToChat(message);
+  }
+  setShowReadyForNextLevelAction(true);
+});
+
 export const addMessageToChat = async (message: ChatMessage) => {
   const timeout =
     message.from === ChatMessageFrom.User ? 1000 : Math.random() * 500 + 1500;
@@ -57,10 +80,3 @@ export const addMessageToChat = async (message: ChatMessage) => {
     }, timeout);
   });
 };
-
-// setShowReadyToPlayAction.watch((ready) => {
-//   if (ready) {
-//     setBusyAction(false);
-//     // readyToPlayLevelAction()
-//   }
-// });

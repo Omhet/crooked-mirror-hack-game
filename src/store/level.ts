@@ -2,7 +2,11 @@ import { loseAction, startGameAction, winAction } from "./gameState";
 import { createEvent, createStore } from "effector";
 import { GameOverReason, Level } from "../types";
 import { levels } from "../levels";
-import { setBusyAction, setShowReadyToPlayAction } from "./chat";
+import {
+  setBusyAction,
+  setShowReadyToPlayAction,
+  setShowReadyForNextLevelAction,
+} from "./chat";
 
 type LevelStore = {
   levelNumber: number;
@@ -14,6 +18,8 @@ type LevelStore = {
 export const nextLevelAction = createEvent();
 export const startLevelAction = createEvent<number>();
 export const readyToPlayLevelAction = createEvent<number>();
+export const endLevelAction = createEvent();
+export const readyToStartNextLevelAction = createEvent();
 export const userTryAction = createEvent();
 export const startTimerAction = createEvent<number>();
 export const increaseTimeAction = createEvent();
@@ -78,4 +84,10 @@ readyToPlayLevelAction.watch((levelNumber) => {
   setBusyAction(false);
   setShowReadyToPlayAction(false);
   startTimerAction(levelNumber);
+});
+
+readyToStartNextLevelAction.watch(() => {
+  clearInterval(timer);
+  setShowReadyForNextLevelAction(false);
+  nextLevelAction();
 });

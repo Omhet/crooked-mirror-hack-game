@@ -8,7 +8,11 @@ import { ChatMessageFrom } from "../../types";
 import { userStore } from "../../store/user";
 import { Button } from "../Button";
 import SendIcon from "../../images/send.svg";
-import { readyToPlayLevelAction, levelStore } from "../../store/level";
+import {
+  readyToPlayLevelAction,
+  levelStore,
+  readyToStartNextLevelAction,
+} from "../../store/level";
 
 const MessageClassNameMap: Record<ChatMessageFrom, string> = {
   [ChatMessageFrom.Friend]: s.friend,
@@ -27,7 +31,9 @@ const getAuthorName = (from: ChatMessageFrom, userName: string) => {
 };
 
 export const ChatPanel: FC = () => {
-  const { messages, showReadyToPlay, isBusy } = useStore(chatStore);
+  const { messages, showReadyToPlay, isBusy, showReadyForNextLevel } = useStore(
+    chatStore
+  );
   const { name: userName } = useStore(userStore);
   const { levelNumber } = useStore(levelStore);
 
@@ -51,6 +57,14 @@ export const ChatPanel: FC = () => {
             onClick={() => readyToPlayLevelAction(levelNumber)}
           >
             Let's Hack
+          </Button>
+        )}
+        {showReadyForNextLevel && (
+          <Button
+            className={s.readyButton}
+            onClick={() => readyToStartNextLevelAction()}
+          >
+            Go
           </Button>
         )}
         {!isBusy && !showReadyToPlay && (

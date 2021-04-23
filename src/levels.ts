@@ -14,11 +14,20 @@ const chats: Chat[] = [
         text: "Alright. What's on your mind?",
       },
       {
-        from: ChatMessageFrom.Police,
-        text: "Hey y'all hackers!!!",
+        from: ChatMessageFrom.Friend,
+        text: "You need to restore those memes",
       },
     ],
-    endMessages: [],
+    endMessages: [
+      {
+        from: ChatMessageFrom.User,
+        text: "Wow, you did it!",
+      },
+      {
+        from: ChatMessageFrom.User,
+        text: "You are so cool",
+      },
+    ],
   },
   {
     startMessages: [
