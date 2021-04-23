@@ -17,6 +17,10 @@ const chats: Chat[] = [
         from: ChatMessageFrom.Friend,
         text: "You need to restore those memes",
       },
+      {
+        from: ChatMessageFrom.User,
+        text: "Ok",
+      },
     ],
     endMessages: [
       {
