@@ -2,8 +2,14 @@
   grid-area: p;
 }
 
+.content {
+  display: flex;
+  align-items: center;
+}
+
 .controls {
   display: flex;
+  flex: 1;
 }
 
 .controls > * {

@@ -13,7 +13,7 @@ const api = new RadioBrowserApi(fetch.bind(window), "Crooked Mirror Game");
 const getStations = async () => {
   const stations = await api.searchStations({
     language: "english",
-    tag: "techno",
+    tag: "punk",
     tagExact: true,
     limit: 5,
   });
@@ -33,11 +33,9 @@ export const PlayerPanel: FC<Props> = ({}) => {
     getStations().then(setStations);
   }, []);
 
-  console.log(stations);
-
   return (
     <div className={s.main}>
-      <Panel title="PLAYER">
+      <Panel contentClassName={s.content} title="PLAYER">
         {stations.length > 0 && (
           <audio
             ref={audio}
@@ -57,15 +55,6 @@ export const PlayerPanel: FC<Props> = ({}) => {
             <PrevIcon />
           </Button>
           <Button
-            onClick={() =>
-              setStationIndex((prev) =>
-                prev === stations.length - 1 ? 0 : prev + 1
-              )
-            }
-          >
-            <NextIcon />
-          </Button>
-          <Button
             onClick={() => {
               if (audio.current) {
                 setMuted(!audio.current.muted);
@@ -74,6 +63,15 @@ export const PlayerPanel: FC<Props> = ({}) => {
             }}
           >
             {muted ? <UnmuteIcon /> : <MuteIcon />}
+          </Button>
+          <Button
+            onClick={() =>
+              setStationIndex((prev) =>
+                prev === stations.length - 1 ? 0 : prev + 1
+              )
+            }
+          >
+            <NextIcon />
           </Button>
         </div>
       </Panel>
