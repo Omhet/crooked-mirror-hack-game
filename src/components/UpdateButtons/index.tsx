@@ -7,6 +7,7 @@ import s from "./index.module.css";
 import { DrawImageStep } from "../../types";
 import { updateStepAction, updateStepStore } from "../../store/updateStep";
 import { imageStore } from "../../store/image";
+import { chatStore } from "../../store/chat";
 
 type Props = {};
 
@@ -14,6 +15,7 @@ export const UpdateButtons: FC<Props> = () => {
   const { levelNumber, level } = useStore(levelStore);
   const { isStepUpdating } = useStore(updateStepStore);
   const { showOriginal } = useStore(imageStore);
+  const { isBusy } = useStore(chatStore);
 
   const [clickedSet, setClickedSet] = useState<Set<string>>(new Set());
 
@@ -38,7 +40,7 @@ export const UpdateButtons: FC<Props> = () => {
         return (
           <UpdateButton
             key={id}
-            isDisabled={isStepUpdating || showOriginal}
+            isDisabled={isStepUpdating || showOriginal || isBusy}
             isClicked={clickedSet.has(id)}
             step={step}
             onClick={(step) => handleClick(step, id)}

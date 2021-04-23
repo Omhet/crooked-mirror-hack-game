@@ -5,15 +5,22 @@ import { startLevelAction } from "./level";
 
 type ChatStore = {
   messages: ChatMessage[];
+  isBusy: boolean;
 };
 
 export const addMessageAction = createEvent<ChatMessage>();
+export const setBusyAction = createEvent<boolean>();
 export const clearChatAction = createEvent();
 
 const initialState: ChatStore = {
   messages: [],
+  isBusy: true,
 };
 export const chatStore = createStore<ChatStore>(initialState)
+  .on(setBusyAction, (state, isBusy) => ({
+    ...state,
+    isBusy,
+  }))
   .on(addMessageAction, (state, message) => ({
     ...state,
     messages: [...state.messages, message],
@@ -25,10 +32,12 @@ export const chatStore = createStore<ChatStore>(initialState)
 
 startLevelAction.watch(async (levelNumber) => {
   const { startMessages } = levels[levelNumber].chat;
+  setBusyAction(true);
   clearChatAction();
   for (const message of startMessages) {
     await addMessageToChat(message);
   }
+  setBusyAction(false);
 });
 
 export const addMessageToChat = async (message: ChatMessage) => {
