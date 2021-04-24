@@ -1,6 +1,7 @@
 import { createStore, createEvent } from "effector";
 import { levels } from "../levels";
 import { Chat, ChatMessage, ChatMessageFrom } from "../types";
+import { startGameAction } from "./gameState";
 import {
   startLevelAction,
   readyToPlayLevelAction,
@@ -55,6 +56,8 @@ export const chatStore = createStore<ChatStore>(initialState)
     ...state,
     messages: [],
   }));
+
+chatStore.reset(startGameAction);
 
 startLevelAction.watch(async (levelNumber) => {
   const { startMessages } = levels[levelNumber].chat;

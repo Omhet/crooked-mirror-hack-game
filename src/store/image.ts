@@ -1,4 +1,5 @@
 import { createEvent, createStore } from "effector";
+import { startGameAction } from "./gameState";
 
 type Store = {
   showOriginal: boolean;
@@ -12,3 +13,5 @@ export const imageStore = createStore<Store>({
   ...state,
   showOriginal: !state.showOriginal,
 }));
+
+imageStore.reset(startGameAction);

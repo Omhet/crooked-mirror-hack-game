@@ -29,10 +29,10 @@ export const updateStepStore = createStore<UpdateStepStore>({
     isStepUpdating,
   }));
 
+updateStepStore.reset(startGameAction);
+
 drawUpdatedStepFx.doneData.watch((isEqual) => {
   if (isEqual) {
     endLevelAction();
   }
 });
-
-updateStepStore.reset(startGameAction);
