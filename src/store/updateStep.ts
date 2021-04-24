@@ -3,7 +3,7 @@ import { drawUpdatedStepFx, drawSuccessFx } from "../components/Canvas/image";
 import { DrawImageStep } from "../types";
 import { startGameAction } from "./gameState";
 import { toggleShowSuccessAction } from "./image";
-import { nextLevelAction, endLevelAction } from "./level";
+import { nextLevelAction, endLevelAction, startLevelAction } from "./level";
 
 type UpdateStepStore = {
   updateStep?: DrawImageStep;
@@ -30,7 +30,7 @@ export const updateStepStore = createStore<UpdateStepStore>({
     isStepUpdating,
   }));
 
-updateStepStore.reset(startGameAction);
+updateStepStore.reset(startLevelAction);
 
 drawUpdatedStepFx.doneData.watch((isEqual) => {
   if (isEqual) {

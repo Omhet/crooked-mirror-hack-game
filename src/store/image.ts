@@ -1,5 +1,5 @@
 import { createEvent, createStore } from "effector";
-import { startGameAction } from "./gameState";
+import { startLevelAction } from "./level";
 
 type Store = {
   showOriginal: boolean;
@@ -22,4 +22,4 @@ export const imageStore = createStore<Store>({
     showSuccess: !state.showSuccess,
   }));
 
-imageStore.reset(startGameAction);
+imageStore.reset(startLevelAction);
