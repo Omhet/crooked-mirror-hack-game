@@ -13,7 +13,7 @@ type Props = {};
 
 export const UpdateButtons: FC<Props> = () => {
   const { levelNumber, level } = useStore(levelStore);
-  const { isStepUpdating } = useStore(updateStepStore);
+  const { isStepUpdating, isImageEqual } = useStore(updateStepStore);
   const { showOriginal } = useStore(imageStore);
   const { isBusy } = useStore(chatStore);
 
@@ -40,7 +40,9 @@ export const UpdateButtons: FC<Props> = () => {
         return (
           <UpdateButton
             key={id}
-            isDisabled={isStepUpdating || showOriginal || isBusy}
+            isDisabled={
+              isStepUpdating || showOriginal || isBusy || isImageEqual
+            }
             isClicked={clickedSet.has(id)}
             step={step}
             onClick={(step) => handleClick(step, id)}

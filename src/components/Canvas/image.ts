@@ -31,6 +31,31 @@ export const drawUpdatedStepFx = createEffect(
     return getPercentage() < 3;
   }
 );
+export const drawSuccessFx = createEffect(
+  async ({ ctx, canvas }: Pick<DrawUpdatedStepFx, "ctx" | "canvas">) => {
+    await drawSuccess(ctx, canvas);
+  }
+);
+
+export async function drawSuccess(
+  ctx: CanvasRenderingContext2D,
+  canvas: HTMLCanvasElement
+) {
+  return new Promise((resolve) => {
+    let d = 0;
+    function animate() {
+      drawEffect(ctx, 0, 0, canvas.width, canvas.height, "green");
+      if (d > 200) {
+        resolve(null);
+        return;
+      }
+      d += 5;
+      requestAnimationFrame(animate);
+    }
+    animate();
+  });
+}
+
 export async function drawSteps(
   ctx: CanvasRenderingContext2D,
   canvas: HTMLCanvasElement,
@@ -66,7 +91,7 @@ export async function drawStep(
   return new Promise((resolve) => {
     let d = 0;
     function animate() {
-      drawEffect(ctx, img, posOptions, imgOptions);
+      drawFlip(ctx, img, posOptions, imgOptions);
       if (d > 80) {
         drawImage(ctx, img, posOptions, imgOptions);
         resolve(null);
@@ -107,14 +132,24 @@ export function drawImage(
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
 
-export function drawEffect(
+export function drawFlip(
   ctx: CanvasRenderingContext2D,
   img: HTMLImageElement,
   posOptions: PosOptions = {},
   imageOptions: ImageOptions = {}
 ) {
   const { sx: x, sy: y, w, h } = getCoords(posOptions, imageOptions, img);
+  drawEffect(ctx, x, y, w, h);
+}
 
+export function drawEffect(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  color: string = Pink
+) {
   ctx.clearRect(x, y, w, h);
 
   ctx.fillStyle = Black;
@@ -126,7 +161,7 @@ export function drawEffect(
 
   for (let i = x + size - 1; i < wLimit; i += size) {
     for (let j = y + size - 1; j < hLimit; j += size) {
-      ctx.fillStyle = Math.random() * 2 > 1 ? Black : Pink;
+      ctx.fillStyle = Math.random() * 2 > 1 ? Black : color;
       ctx.fillRect(i, j, size, size);
     }
   }

@@ -1,7 +1,8 @@
 import { createEvent, createStore } from "effector";
-import { drawUpdatedStepFx } from "../components/Canvas/image";
+import { drawUpdatedStepFx, drawSuccessFx } from "../components/Canvas/image";
 import { DrawImageStep } from "../types";
 import { startGameAction } from "./gameState";
+import { toggleShowSuccessAction } from "./image";
 import { nextLevelAction, endLevelAction } from "./level";
 
 type UpdateStepStore = {
@@ -33,6 +34,12 @@ updateStepStore.reset(startGameAction);
 
 drawUpdatedStepFx.doneData.watch((isEqual) => {
   if (isEqual) {
-    endLevelAction();
+    setTimeout(() => {
+      toggleShowSuccessAction();
+    }, 700);
   }
+});
+
+drawSuccessFx.done.watch(() => {
+  endLevelAction();
 });
