@@ -51,7 +51,7 @@ const chats: Chat[] = [
 
 export const levels: Level[] = [
   {
-    img: img0,
+    img: img1,
     initialSteps: [
       { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
     ],

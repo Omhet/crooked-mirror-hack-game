@@ -28,7 +28,7 @@ export const drawUpdatedStepFx = createEffect(
       threshold: 50,
     });
 
-    return getPercentage() === 0;
+    return getPercentage() < 3;
   }
 );
 export async function drawSteps(
@@ -121,8 +121,10 @@ export function drawEffect(
   const size = 10;
   const realW = w + x;
   const realH = h + y;
-  const wLimit = w % size === 0 ? realW : realW - size;
-  const hLimit = h % size === 0 ? realH : realH - size;
+  // const wLimit = w % size === 0 ? realW : realW - size;
+  // const hLimit = h % size === 0 ? realH : realH - size;
+  const wLimit = realW - size - 1;
+  const hLimit = realH - size - 1;
 
   for (let i = x; i < wLimit; i += size) {
     for (let j = y; j < hLimit; j += size) {
@@ -141,17 +143,20 @@ function getCoords(
   const { flipX = false, flipY = false } = imageOptions;
   const rowM = !col ? gridSize : 1;
   const colM = !row ? gridSize : 1;
-  const sectorW = img.width / gridSize;
-  const sectorH = img.height / gridSize;
+  const sectorW = Math.round(img.width / gridSize);
+  const sectorH = Math.round(img.height / gridSize);
 
   const w = sectorW * rowM;
   const h = sectorH * colM;
+  const halfW = Math.round(w / 2);
+  const halfH = Math.round(h / 2);
+
   const sx = getCoord(sectorW, col);
   const sy = getCoord(sectorH, row);
-  const dx = -w / 2;
-  const dy = -h / 2;
-  const tx = w / 2 + sx;
-  const ty = h / 2 + sy;
+  const dx = -halfW;
+  const dy = -halfH;
+  const tx = halfW + sx;
+  const ty = halfH + sy;
 
   const fx = getFlipCoord(flipX);
   const fy = getFlipCoord(flipY);
