@@ -7,8 +7,12 @@ import PrevIcon from "../../images/prev.svg";
 import NextIcon from "../../images/next.svg";
 import MuteIcon from "../../images/mute.svg";
 import UnmuteIcon from "../../images/unmute.svg";
+import { useStore } from "effector-react";
+import { chatStore } from "../../store/chat";
+import { gameStateStore } from "../../store/gameState";
+import { GameState } from "../../types";
 
-const stationsList = [
+const stations = [
   "https://rautemusik-de-hz-fal-stream17.radiohost.de/rm-bass_mp3-192?ref=radiobrowser",
   "https://rautemusik-de-hz-fal-stream15.radiohost.de/rm-deutschrap-charts_mp3-192?ref=radiobrowser",
   "https://rautemusik-de-hz-fal-stream17.radiohost.de/rm-deutschrap-classic_mp3-192?ref=radiobrowser",
@@ -17,25 +21,30 @@ const stationsList = [
 ];
 
 export const PlayerPanel: FC = ({}) => {
-  const [stations, setStations] = useState<string[]>(stationsList);
   const [stationIndex, setStationIndex] = useState<number>(0);
   const [muted, setMuted] = useState<boolean>(false);
   const [wave] = useState(() => new Wave());
-
   const audio = useRef<HTMLAudioElement>(null);
+
+  const { isBusy } = useStore(chatStore);
+  const { gameState } = useStore(gameStateStore);
+
+  useEffect(() => {
+    setMuted(isBusy || gameState !== GameState.Play);
+  }, [isBusy, gameState]);
+
+  useEffect(() => {
+    if (audio.current) {
+      audio.current.muted = muted;
+    }
+  }, [muted]);
 
   useEffect(() => {
     wave.fromElement("radio", "radio-vis", {
       type: "bars",
-      colors: [
-        "rgba(226, 0, 225, 0.6)",
-        // "rgba(226, 0, 225, 0.6)",
-        // "rgba(226, 0, 225, 0.8)",
-      ],
+      colors: ["rgba(226, 0, 225, 0.6)"],
     });
   }, []);
-
-  console.log(stations);
 
   return (
     <div className={s.main}>
@@ -60,9 +69,8 @@ export const PlayerPanel: FC = ({}) => {
           </Button>
           <Button
             onClick={() => {
-              if (audio.current) {
-                setMuted(!audio.current.muted);
-                audio.current.muted = !audio.current.muted;
+              if (!isBusy) {
+                setMuted((prev) => !prev);
               }
             }}
           >
