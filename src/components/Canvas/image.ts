@@ -33,28 +33,11 @@ export const drawUpdatedStepFx = createEffect(
 );
 export const drawSuccessFx = createEffect(
   async ({ ctx, canvas }: Pick<DrawUpdatedStepFx, "ctx" | "canvas">) => {
-    await drawSuccess(ctx, canvas);
+    await animate(200, () =>
+      drawEffect(ctx, 0, 0, canvas.width, canvas.height, "green")
+    );
   }
 );
-
-export async function drawSuccess(
-  ctx: CanvasRenderingContext2D,
-  canvas: HTMLCanvasElement
-) {
-  return new Promise((resolve) => {
-    let d = 0;
-    function animate() {
-      drawEffect(ctx, 0, 0, canvas.width, canvas.height, "green");
-      if (d > 200) {
-        resolve(null);
-        return;
-      }
-      d += 5;
-      requestAnimationFrame(animate);
-    }
-    animate();
-  });
-}
 
 export async function drawSteps(
   ctx: CanvasRenderingContext2D,
@@ -88,20 +71,11 @@ export async function drawStep(
     return Promise.resolve();
   }
 
-  return new Promise((resolve) => {
-    let d = 0;
-    function animate() {
-      drawFlip(ctx, img, posOptions, imgOptions);
-      if (d > 80) {
-        drawImage(ctx, img, posOptions, imgOptions);
-        resolve(null);
-        return;
-      }
-      d += 5;
-      requestAnimationFrame(animate);
-    }
-    animate();
-  });
+  await animate(
+    80,
+    () => drawFlip(ctx, img, posOptions, imgOptions),
+    () => drawImage(ctx, img, posOptions, imgOptions)
+  );
 }
 
 export function drawEntireImage(
@@ -220,4 +194,21 @@ function getCoord(imgSize: number, rowOrCol = 1) {
 
 function clearCanvas(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+async function animate(max: number, stepCb: () => void, finalCb?: () => void) {
+  return new Promise((resolve) => {
+    let d = 0;
+    function animateStep() {
+      stepCb();
+      if (d > max) {
+        finalCb && finalCb();
+        resolve(null);
+        return;
+      }
+      d += 5;
+      requestAnimationFrame(animateStep);
+    }
+    animateStep();
+  });
 }
