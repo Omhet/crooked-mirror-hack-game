@@ -7,13 +7,15 @@ import { Canvas } from "../Canvas/Canvas";
 import { Panel } from "../Panel/Panel";
 import { UpdateButtons } from "../UpdateButtons";
 import s from "./index.module.css";
+import { statsStore } from "../../store/stats";
 
 type Props = {};
 
 export const GamePanel: FC<Props> = ({}) => {
-  const { level } = useStore(levelStore);
+  const { level, isLevelEnd } = useStore(levelStore);
   const { showOriginal } = useStore(imageStore);
   const { isBusy } = useStore(chatStore);
+  const { levelRating } = useStore(statsStore);
 
   return (
     <div className={s.main}>
@@ -26,6 +28,7 @@ export const GamePanel: FC<Props> = ({}) => {
         <UpdateButtons />
 
         {isBusy && <div className={s.overlay}>NO_DATA</div>}
+        {isLevelEnd && <div className={s.overlay}>Rating: {levelRating}</div>}
       </Panel>
     </div>
   );
