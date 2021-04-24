@@ -121,13 +121,11 @@ export function drawEffect(
   const size = 10;
   const realW = w + x;
   const realH = h + y;
-  // const wLimit = w % size === 0 ? realW : realW - size;
-  // const hLimit = h % size === 0 ? realH : realH - size;
   const wLimit = realW - size - 1;
   const hLimit = realH - size - 1;
 
-  for (let i = x; i < wLimit; i += size) {
-    for (let j = y; j < hLimit; j += size) {
+  for (let i = x + size - 1; i < wLimit; i += size) {
+    for (let j = y + size - 1; j < hLimit; j += size) {
       ctx.fillStyle = Math.random() * 2 > 1 ? Black : Pink;
       ctx.fillRect(i, j, size, size);
     }
