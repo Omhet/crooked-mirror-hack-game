@@ -64,6 +64,7 @@ export const levels: Level[] = [
       },
     ],
     chat: chats[0],
+    tries: 2,
   },
   {
     img: img0,

@@ -1,18 +1,18 @@
-import {
-  loseAction,
-  startGameAction,
-  winAction,
-  gameStateStore,
-} from "./gameState";
 import { createEvent, createStore } from "effector";
-import { GameOverReason, Level } from "../types";
 import { levels } from "../levels";
-import { setCheckpointAction } from "./gameState";
+import { GameOverReason, Level } from "../types";
 import {
   setBusyAction,
-  setShowReadyToPlayAction,
   setShowReadyForNextLevelAction,
+  setShowReadyToPlayAction,
 } from "./chat";
+import {
+  gameStateStore,
+  loseAction,
+  setCheckpointAction,
+  startGameAction,
+  winAction,
+} from "./gameState";
 
 type LevelStore = {
   levelNumber: number;
@@ -27,6 +27,7 @@ export const startLevelAction = createEvent<number>();
 export const readyToPlayLevelAction = createEvent();
 export const endLevelAction = createEvent();
 export const readyToStartNextLevelAction = createEvent();
+export const failLevelAction = createEvent<GameOverReason>();
 export const userTryAction = createEvent();
 export const startTimerAction = createEvent();
 export const increaseTimeAction = createEvent();
@@ -77,10 +78,10 @@ export const levelStore = createStore<LevelStore>(initialState)
 
 levelStore.watch(({ userTries, level, time }) => {
   if (level.tries !== undefined && level.tries - userTries <= 0) {
-    loseAction(GameOverReason.Tries);
+    failLevelAction(GameOverReason.Tries);
   }
   if (level.time !== undefined && level.time - time <= 0) {
-    loseAction(GameOverReason.Time);
+    failLevelAction(GameOverReason.Time);
   }
 });
 

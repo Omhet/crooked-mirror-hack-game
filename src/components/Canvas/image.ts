@@ -31,10 +31,19 @@ export const drawUpdatedStepFx = createEffect(
     return getPercentage() < 3;
   }
 );
+
 export const drawSuccessFx = createEffect(
   async ({ ctx, canvas }: Pick<DrawUpdatedStepFx, "ctx" | "canvas">) => {
     await animate(200, () =>
       drawEffect(ctx, 0, 0, canvas.width, canvas.height, "green")
+    );
+  }
+);
+
+export const drawFailFx = createEffect(
+  async ({ ctx, canvas }: Pick<DrawUpdatedStepFx, "ctx" | "canvas">) => {
+    await animate(200, () =>
+      drawEffect(ctx, 0, 0, canvas.width, canvas.height, "red")
     );
   }
 );

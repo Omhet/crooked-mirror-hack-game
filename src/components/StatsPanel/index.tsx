@@ -44,14 +44,14 @@ export const StatsPanel: FC<Props> = () => {
               description="till the Internet is free"
               icon={<HackerIcon />}
             />
-            {triesLeft && (
+            {triesLeft != undefined && (
               <Stat
                 title={`${triesLeft} tries left`}
                 description="till the computer burned out"
                 icon={<ComputerIcon />}
               />
             )}
-            {timeLeft && (
+            {timeLeft != undefined && (
               <Stat
                 title={<Progress percent={timeLeft} />}
                 description="till the cops catch you"

@@ -3,7 +3,12 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import { levelStore } from "../../store/level";
 import { updateStepStore } from "../../store/updateStep";
 import s from "./Canvas.module.css";
-import { drawSteps, drawUpdatedStepFx, drawSuccessFx } from "./image";
+import {
+  drawSteps,
+  drawUpdatedStepFx,
+  drawSuccessFx,
+  drawFailFx,
+} from "./image";
 import { imageStore } from "../../store/image";
 
 export type CanvasProps = {};
@@ -17,7 +22,7 @@ export const Canvas: FC<CanvasProps> = ({}) => {
     level: { img, initialSteps },
   } = useStore(levelStore);
   const { updateStep } = useStore(updateStepStore);
-  const { showSuccess } = useStore(imageStore);
+  const { showSuccess, showFail } = useStore(imageStore);
 
   useEffect(() => {
     if (!ctx || !canvas) return;
@@ -38,8 +43,10 @@ export const Canvas: FC<CanvasProps> = ({}) => {
     if (!ctx || !canvas) return;
     if (showSuccess) {
       drawSuccessFx({ ctx, canvas });
+    } else if (showFail) {
+      drawFailFx({ ctx, canvas });
     }
-  }, [ctx, canvas, showSuccess]);
+  }, [ctx, canvas, showSuccess, showFail]);
 
   useEffect(() => {
     const canvas = canvasRef.current;

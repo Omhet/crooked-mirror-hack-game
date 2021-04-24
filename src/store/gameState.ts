@@ -8,7 +8,8 @@ type GameStateStore = {
   checkpoint: number;
 };
 export const setCheckpointAction = createEvent<number>();
-export const loseAction = createEvent<GameOverReason>();
+export const loseAction = createEvent();
+export const setGameOverReasonAction = createEvent<GameOverReason>();
 export const setFinalChoiceAction = createEvent<GameFinalChoice>();
 export const winAction = createEvent();
 export const startGameAction = createEvent<number | undefined>();
@@ -24,10 +25,13 @@ export const gameStateStore = createStore<GameStateStore>({
     ...state,
     checkpoint,
   }))
-  .on(loseAction, (state, gameOverReason) => ({
+  .on(setGameOverReasonAction, (state, gameOverReason) => ({
+    ...state,
+    gameOverReason,
+  }))
+  .on(loseAction, (state) => ({
     ...state,
     gameState: GameState.Lose,
-    gameOverReason,
   }))
   .on(winAction, (state) => ({
     ...state,
