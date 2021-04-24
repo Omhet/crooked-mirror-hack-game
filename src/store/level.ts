@@ -1,7 +1,13 @@
-import { loseAction, startGameAction, winAction } from "./gameState";
+import {
+  loseAction,
+  startGameAction,
+  winAction,
+  gameStateStore,
+} from "./gameState";
 import { createEvent, createStore } from "effector";
 import { GameOverReason, Level } from "../types";
 import { levels } from "../levels";
+import { setCheckpointAction } from "./gameState";
 import {
   setBusyAction,
   setShowReadyToPlayAction,
@@ -87,7 +93,16 @@ loseAction.watch(() => {
   clearInterval(timer);
 });
 
-startGameAction.watch(() => startLevelAction(0));
+startGameAction.watch(() => {
+  const { checkpoint } = gameStateStore.getState();
+  startLevelAction(checkpoint);
+});
+
+startLevelAction.watch((levelNumber) => {
+  if (levels[levelNumber].isCheckpoint) {
+    setCheckpointAction(levelNumber);
+  }
+});
 
 readyToPlayLevelAction.watch(() => {
   setBusyAction(false);

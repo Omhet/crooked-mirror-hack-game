@@ -86,5 +86,6 @@ export const levels: Level[] = [
     tries: 20,
     time: 50,
     chat: chats[2],
+    isCheckpoint: true,
   },
-].slice(0, 1);
+].slice(0, 3);

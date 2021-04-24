@@ -43,6 +43,7 @@ export type Level = {
   tries?: number;
   time?: number;
   chat: Chat;
+  isCheckpoint?: boolean;
 };
 
 export enum GameState {

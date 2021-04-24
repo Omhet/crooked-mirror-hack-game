@@ -36,6 +36,9 @@ export const StatsPanel: FC<Props> = () => {
           <div>NO_DATA</div>
         ) : (
           <>
+            {level.isCheckpoint && (
+              <div className={s.checkpoint}>Checkpoint</div>
+            )}
             <Stat
               title={`${memesLeft} memes left`}
               description="till the Internet is free"
