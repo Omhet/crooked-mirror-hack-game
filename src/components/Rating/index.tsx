@@ -19,8 +19,11 @@ export const Rating: FC<Props> = ({}) => {
         {Array(3)
           .fill(0)
           .map((_, index) => (
-            <div className={cs({ [s.highlighted]: index <= levelRating - 1 })}>
-              <HackerIcon key={index} />
+            <div
+              key={index}
+              className={cs({ [s.highlighted]: index <= levelRating - 1 })}
+            >
+              <HackerIcon />
             </div>
           ))}
       </div>

@@ -24,7 +24,7 @@ export const StartScreen: FC = () => {
   const story = (
     <>
       <p className={s.storyText}>{getStoryText(name)}</p>
-      <Button onClick={startGameAction}>Ok. I'm ready</Button>
+      <Button onClick={() => startGameAction(0)}>Ok. I'm ready</Button>
     </>
   );
 

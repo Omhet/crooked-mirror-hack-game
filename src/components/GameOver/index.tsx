@@ -26,7 +26,7 @@ export const GameOver: FC = () => {
     <div className={s.main}>
       {icon}
       <h2>{reasonText}</h2>
-      <Button onClick={startGameAction}>RESET</Button>
+      <Button onClick={() => startGameAction()}>RESET</Button>
     </div>
   );
 };

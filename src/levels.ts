@@ -74,6 +74,7 @@ export const levels: Level[] = [
     tries: 2,
     // time: 5,
     chat: chats[1],
+    isCheckpoint: true,
   },
   {
     img: img1,
@@ -83,9 +84,8 @@ export const levels: Level[] = [
     redundantSteps: [
       { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
     ],
-    tries: 20,
+    tries: 2,
     time: 50,
     chat: chats[2],
-    isCheckpoint: true,
   },
 ].slice(0, 3);

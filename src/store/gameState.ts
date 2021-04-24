@@ -11,7 +11,7 @@ export const setCheckpointAction = createEvent<number>();
 export const loseAction = createEvent<GameOverReason>();
 export const setFinalChoiceAction = createEvent<GameFinalChoice>();
 export const winAction = createEvent();
-export const startGameAction = createEvent();
+export const startGameAction = createEvent<number | undefined>();
 export const stopGameAction = createEvent();
 
 export const gameStateStore = createStore<GameStateStore>({

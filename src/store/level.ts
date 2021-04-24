@@ -42,8 +42,13 @@ const initialState: LevelStore = {
 let timer = 0;
 
 export const levelStore = createStore<LevelStore>(initialState)
-  .on(startLevelAction, (state) => {
-    return { ...state, isLevelEnd: false };
+  .on(startLevelAction, (_state, levelNumber) => {
+    return {
+      ...initialState,
+      level: levels[levelNumber],
+      levelNumber,
+      isLevelEnd: false,
+    };
   })
   .on(endLevelAction, (state) => {
     return { ...state, isLevelEnd: true };
@@ -93,9 +98,11 @@ loseAction.watch(() => {
   clearInterval(timer);
 });
 
-startGameAction.watch(() => {
+startGameAction.watch((forceStartLevel?: number) => {
   const { checkpoint } = gameStateStore.getState();
-  startLevelAction(checkpoint);
+  const startLevel =
+    forceStartLevel !== undefined ? forceStartLevel : checkpoint;
+  startLevelAction(startLevel);
 });
 
 startLevelAction.watch((levelNumber) => {
