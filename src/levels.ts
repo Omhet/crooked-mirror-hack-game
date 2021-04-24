@@ -5,22 +5,22 @@ import { ChatMessageFrom, Level, Chat } from "./types";
 const chats: Chat[] = [
   {
     startMessages: [
-      {
-        from: ChatMessageFrom.Friend,
-        text: "Hey! How are you doing, bro?",
-      },
-      {
-        from: ChatMessageFrom.User,
-        text: "Alright. What's on your mind?",
-      },
-      {
-        from: ChatMessageFrom.Friend,
-        text: "You need to restore those memes",
-      },
-      {
-        from: ChatMessageFrom.User,
-        text: "Ok",
-      },
+      // {
+      //   from: ChatMessageFrom.Friend,
+      //   text: "Hey! How are you doing, bro?",
+      // },
+      // {
+      //   from: ChatMessageFrom.User,
+      //   text: "Alright. What's on your mind?",
+      // },
+      // {
+      //   from: ChatMessageFrom.Friend,
+      //   text: "You need to restore those memes",
+      // },
+      // {
+      //   from: ChatMessageFrom.User,
+      //   text: "Ok",
+      // },
     ],
     endMessages: [
       {
@@ -55,7 +55,14 @@ export const levels: Level[] = [
     initialSteps: [
       { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
     ],
-    redundantSteps: [{ imgOptions: { flipX: true } }],
+    redundantSteps: [
+      { imgOptions: { flipX: true } },
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 2, row: 2, col: 2 },
+      },
+    ],
     chat: chats[0],
   },
   {

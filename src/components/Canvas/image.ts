@@ -9,6 +9,9 @@ import {
 } from "../../types";
 import { loadImage } from "../../utils";
 
+const Pink = "#e200e1";
+const Black = "#0d0b16";
+
 type DrawUpdatedStepFx = {
   ctx: CanvasRenderingContext2D;
   canvas: HTMLCanvasElement;
@@ -61,14 +64,15 @@ export async function drawStep(
   }
 
   return new Promise((resolve) => {
-    let d = -100;
+    let d = 0;
     function animate() {
-      drawImage(ctx, img, posOptions, imgOptions, d / 100);
-      d += 5;
-      if (d > 100) {
+      drawImage(ctx, img, posOptions, imgOptions, isAnimated);
+      if (d > 80) {
+        drawImage(ctx, img, posOptions, imgOptions);
         resolve(null);
         return;
       }
+      d += 5;
       requestAnimationFrame(animate);
     }
     animate();
@@ -87,34 +91,53 @@ export function drawImage(
   img: HTMLImageElement,
   posOptions: PosOptions = {},
   imageOptions: ImageOptions = {},
-  scaleAmount = 1
+  isAnimated = false
 ) {
-  const { sx, sy, w, h, scaleX, scaleY } = getCoords(
+  const { sx, sy, dx, dy, tx, ty, w, h, scaleX, scaleY } = getCoords(
     posOptions,
     imageOptions,
-    img,
-    scaleAmount
+    img
   );
 
-  const x = sx;
-  const y = sy;
-  const dx = -w / 2;
-  const dy = -h / 2;
-  const tx = w / 2 + x;
-  const ty = h / 2 + y;
+  ctx.clearRect(sx, sy, w, h);
 
-  ctx.clearRect(x, y, w, h);
-  ctx.translate(tx, ty);
-  ctx.scale(scaleX, scaleY);
-  ctx.drawImage(img, x, y, w, h, dx, dy, w, h);
+  if (isAnimated) {
+    drawEffect(ctx, sx, sy, w, h);
+  } else {
+    ctx.translate(tx, ty);
+    ctx.scale(scaleX, scaleY);
+    ctx.drawImage(img, sx, sy, w, h, dx, dy, w, h);
+  }
+
   ctx.setTransform(1, 0, 0, 1, 0, 0);
+}
+
+export function drawEffect(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  w: number,
+  h: number
+) {
+  ctx.fillStyle = Black;
+  const size = 10;
+  const realW = w + x;
+  const realH = h + y;
+  const wLimit = w % size === 0 ? realW : realW - size;
+  const hLimit = h % size === 0 ? realH : realH - size;
+
+  for (let i = x; i < wLimit; i += size) {
+    for (let j = y; j < hLimit; j += size) {
+      ctx.fillStyle = Math.random() * 2 > 1 ? Black : Pink;
+      ctx.fillRect(i, j, size, size);
+    }
+  }
 }
 
 function getCoords(
   posOptions: PosOptions,
   imageOptions: ImageOptions,
-  img: HTMLImageElement,
-  scaleAmount: number
+  img: HTMLImageElement
 ) {
   const { gridSize = 1, row, col } = posOptions;
   const { flipX = false, flipY = false } = imageOptions;
@@ -122,18 +145,28 @@ function getCoords(
   const colM = !row ? gridSize : 1;
   const sectorW = img.width / gridSize;
   const sectorH = img.height / gridSize;
+
   const w = sectorW * rowM;
   const h = sectorH * colM;
   const sx = getCoord(sectorW, col);
   const sy = getCoord(sectorH, row);
+  const dx = -w / 2;
+  const dy = -h / 2;
+  const tx = w / 2 + sx;
+  const ty = h / 2 + sy;
+
   const fx = getFlipCoord(flipX);
   const fy = getFlipCoord(flipY);
-  const scaleX = flipX ? scaleAmount * fx : fx;
-  const scaleY = flipY ? scaleAmount * fy : fy;
+  const scaleX = fx;
+  const scaleY = fy;
 
   return {
     sx,
     sy,
+    dx,
+    dy,
+    tx,
+    ty,
     w,
     h,
     scaleX,
