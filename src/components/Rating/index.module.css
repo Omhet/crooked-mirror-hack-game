@@ -1,0 +1,21 @@
+.main {
+  display: grid;
+  place-items: center;
+  grid-gap: 16px;
+}
+
+.main svg {
+  width: 64px;
+  height: 64px;
+}
+
+.icons {
+  display: flex;
+}
+.icons path {
+  fill: var(--pink-dark);
+}
+
+.highlighted path {
+  fill: var(--pink);
+}
