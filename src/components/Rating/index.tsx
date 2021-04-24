@@ -4,11 +4,13 @@ import { statsStore } from "../../store/stats";
 import HackerIcon from "../../images/hacker.svg";
 import s from "./index.module.css";
 import cs from "classnames";
+import { levelStore } from "../../store/level";
 
 type Props = {};
 
 export const Rating: FC<Props> = ({}) => {
   const { levelRating } = useStore(statsStore);
+  const { userTries, level } = useStore(levelStore);
 
   return (
     <div className={s.main}>
@@ -22,6 +24,8 @@ export const Rating: FC<Props> = ({}) => {
             </div>
           ))}
       </div>
+      <h4>The image was encoded by {level.initialSteps.length} step(s)</h4>
+      <h4>And it took {userTries} tries for you to decode it</h4>
     </div>
   );
 };
