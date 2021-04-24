@@ -2,24 +2,12 @@ import React, { FC, useEffect, useRef, useState } from "react";
 import Wave from "@foobar404/wave";
 import { Panel } from "../Panel/Panel";
 import s from "./index.module.css";
-// import { RadioBrowserApi } from "radio-browser-api";
 import { Button } from "../Button";
 import PrevIcon from "../../images/prev.svg";
 import NextIcon from "../../images/next.svg";
 import MuteIcon from "../../images/mute.svg";
 import UnmuteIcon from "../../images/unmute.svg";
 
-// const api = new RadioBrowserApi(fetch.bind(window), "Crooked Mirror Game");
-
-// const getStations = async () => {
-//   const stations = await api.searchStations({
-//     language: "english",
-//     tag: "punk",
-//     tagExact: true,
-//     limit: 5,
-//   });
-//   return stations.map(({ urlResolved }) => urlResolved);
-// };
 const stationsList = [
   "https://rautemusik-de-hz-fal-stream17.radiohost.de/rm-bass_mp3-192?ref=radiobrowser",
   "https://rautemusik-de-hz-fal-stream15.radiohost.de/rm-deutschrap-charts_mp3-192?ref=radiobrowser",
@@ -37,8 +25,14 @@ export const PlayerPanel: FC = ({}) => {
   const audio = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
-    // getStations().then(setStations);
-    wave.fromElement("radio", "radio-vis", { type: "dualbars blocks" });
+    wave.fromElement("radio", "radio-vis", {
+      type: "bars",
+      colors: [
+        "rgba(226, 0, 225, 0.6)",
+        // "rgba(226, 0, 225, 0.6)",
+        // "rgba(226, 0, 225, 0.8)",
+      ],
+    });
   }, []);
 
   console.log(stations);
