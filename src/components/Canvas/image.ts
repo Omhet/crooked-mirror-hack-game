@@ -66,7 +66,7 @@ export async function drawStep(
   return new Promise((resolve) => {
     let d = 0;
     function animate() {
-      drawImage(ctx, img, posOptions, imgOptions, isAnimated);
+      drawEffect(ctx, img, posOptions, imgOptions);
       if (d > 80) {
         drawImage(ctx, img, posOptions, imgOptions);
         resolve(null);
@@ -90,8 +90,7 @@ export function drawImage(
   ctx: CanvasRenderingContext2D,
   img: HTMLImageElement,
   posOptions: PosOptions = {},
-  imageOptions: ImageOptions = {},
-  isAnimated = false
+  imageOptions: ImageOptions = {}
 ) {
   const { sx, sy, dx, dy, tx, ty, w, h, scaleX, scaleY } = getCoords(
     posOptions,
@@ -101,24 +100,23 @@ export function drawImage(
 
   ctx.clearRect(sx, sy, w, h);
 
-  if (isAnimated) {
-    drawEffect(ctx, sx, sy, w, h);
-  } else {
-    ctx.translate(tx, ty);
-    ctx.scale(scaleX, scaleY);
-    ctx.drawImage(img, sx, sy, w, h, dx, dy, w, h);
-  }
+  ctx.translate(tx, ty);
+  ctx.scale(scaleX, scaleY);
+  ctx.drawImage(img, sx, sy, w, h, dx, dy, w, h);
 
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
 
 export function drawEffect(
   ctx: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-  w: number,
-  h: number
+  img: HTMLImageElement,
+  posOptions: PosOptions = {},
+  imageOptions: ImageOptions = {}
 ) {
+  const { sx: x, sy: y, w, h } = getCoords(posOptions, imageOptions, img);
+
+  ctx.clearRect(x, y, w, h);
+
   ctx.fillStyle = Black;
   const size = 10;
   const realW = w + x;
