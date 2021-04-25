@@ -27,8 +27,12 @@ export const Rating: FC<Props> = ({}) => {
             </div>
           ))}
       </div>
-      <h4>The image was encoded by {level.initialSteps.length} step(s)</h4>
-      <h4>And it took {userTries} tries for you to decode it</h4>
+      <h4>
+        The image was encoded by <b>{level.initialSteps.length}</b> step(s)
+      </h4>
+      <h4>
+        And it took <b>{userTries}</b> tries for you to decode it
+      </h4>
     </div>
   );
 };

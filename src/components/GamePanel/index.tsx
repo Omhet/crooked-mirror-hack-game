@@ -29,6 +29,7 @@ export const GamePanel: FC<Props> = ({}) => {
         {isBusy && <div className={s.overlay}>NO_DATA</div>}
         {isLevelEnd && (
           <div className={s.overlay}>
+            <img className={s.finalOriginal} src={level.img} />
             <Rating />
           </div>
         )}
