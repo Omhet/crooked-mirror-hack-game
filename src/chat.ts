@@ -265,19 +265,152 @@ export const chats: Chat[] = [
     ],
   },
   {
-    startMessages: [{ from: ChatMessageFrom.Friend, text: "" }],
-    endMessages: [{ from: ChatMessageFrom.Friend, text: "" }],
+    startMessages: [
+      { from: ChatMessageFrom.Friend, text: "ok, it seems we are all settled" },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "yes, our system's security was not that perfect",
+      },
+      {
+        from: ChatMessageFrom.User,
+        text: "they nearly catched us. man, I'm scaried",
+      },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "actually me too",
+      },
+      {
+        from: ChatMessageFrom.Friend,
+        text:
+          "Also, they've upgraded their algorythm. now the encryption is way more serious",
+      },
+      {
+        from: ChatMessageFrom.User,
+        text: "That sounds shitty.",
+      },
+      {
+        from: ChatMessageFrom.User,
+        text:
+          " Ok, I will try to figure it out. And you will fix our security problems",
+      },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "deal",
+      },
+    ],
+    endMessages: [
+      { from: ChatMessageFrom.User, text: "This one was tough, but I did it" },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "You are so cool",
+      },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "In the meantime I have good news also",
+      },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "I have fixed all the security holes we have.",
+      },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "Now we are like in a tank. No one will breach",
+      },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "I want to believe",
+      },
+    ],
   },
   {
-    startMessages: [{ from: ChatMessageFrom.Friend, text: "" }],
-    endMessages: [{ from: ChatMessageFrom.Friend, text: "" }],
+    startMessages: [
+      {
+        from: ChatMessageFrom.User,
+        text: "hey, I'm ready to crack some more firewalls",
+      },
+      {
+        from: ChatMessageFrom.User,
+        text: "shit, it seems the connection is weak",
+      },
+      {
+        from: ChatMessageFrom.User,
+        text: "but the data was already prefetched so I can work",
+      },
+    ],
+    endMessages: [
+      { from: ChatMessageFrom.User, text: "Still didn't restored" },
+    ],
   },
   {
-    startMessages: [{ from: ChatMessageFrom.Friend, text: "" }],
-    endMessages: [{ from: ChatMessageFrom.Friend, text: "" }],
+    startMessages: [
+      { from: ChatMessageFrom.Friend, text: "man, I'm here. what did I miss?" },
+      {
+        from: ChatMessageFrom.User,
+        text:
+          "all is fine. as I can see we nearly finished the decryption algorythm",
+      },
+      { from: ChatMessageFrom.Friend, text: "yes, I'm so happy to see that" },
+      { from: ChatMessageFrom.Friend, text: "btw I have a cat now" },
+      { from: ChatMessageFrom.User, text: "oh really? what is its name?" },
+      { from: ChatMessageFrom.Friend, text: "Tweedledum" },
+      { from: ChatMessageFrom.User, text: "ahah" },
+      {
+        from: ChatMessageFrom.User,
+        text: "then I need to get a cat named Tweedledee",
+      },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "yes, I thought about giving one to you for your bd",
+      },
+      { from: ChatMessageFrom.User, text: "oh man, hilarious" },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "well, let's get back to the business",
+      },
+    ],
+    endMessages: [
+      {
+        from: ChatMessageFrom.Friend,
+        text: "We are getting famous on the net",
+      },
+      {
+        from: ChatMessageFrom.User,
+        text: "I don't think it's good news actually",
+      },
+      { from: ChatMessageFrom.Friend, text: "yeah, I know" },
+      {
+        from: ChatMessageFrom.Friend,
+        text:
+          "however people are getting excited about bringing the memes back",
+      },
+      { from: ChatMessageFrom.Friend, text: "we are now as heroes to them" },
+    ],
   },
   {
-    startMessages: [{ from: ChatMessageFrom.Friend, text: "" }],
-    endMessages: [{ from: ChatMessageFrom.Friend, text: "" }],
+    startMessages: [
+      { from: ChatMessageFrom.Friend, text: "Last push now, man" },
+      { from: ChatMessageFrom.User, text: "Let's do it" },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "Something tells me this one will be the hardest one",
+      },
+      { from: ChatMessageFrom.User, text: "hope it's not" },
+    ],
+    endMessages: [
+      { from: ChatMessageFrom.Friend, text: "Maaan, we finally did it" },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "we have enough data for our algorythm",
+      },
+      { from: ChatMessageFrom.User, text: "we are incredible" },
+      { from: ChatMessageFrom.User, text: "I cam smell the victory" },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "Let's meet. We need to discuss plans what to do next",
+      },
+      { from: ChatMessageFrom.Friend, text: "Sending the coordinates..." },
+      { from: ChatMessageFrom.Friend, text: "55.7500083, 37.5921972" },
+      { from: ChatMessageFrom.Friend, text: "meet you there" },
+    ],
   },
 ];
