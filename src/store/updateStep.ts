@@ -1,13 +1,13 @@
 import { createEvent, createStore } from "effector";
 import {
-  drawUpdatedStepFx,
-  drawSuccessFx,
   drawFailFx,
+  drawSuccessFx,
+  drawUpdatedStepFx,
 } from "../components/Canvas/image";
 import { DrawImageStep } from "../types";
-import { loseAction, startGameAction } from "./gameState";
+import { loseAction } from "./gameState";
 import { showSuccessAction } from "./image";
-import { nextLevelAction, endLevelAction, startLevelAction } from "./level";
+import { endLevelAction, startLevelAction } from "./level";
 
 type UpdateStepStore = {
   updateStep?: DrawImageStep;

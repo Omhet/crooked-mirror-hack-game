@@ -39,6 +39,7 @@ export const levels: Level[] = [
     ],
     redundantSteps: [{ imgOptions: { flipX: true } }],
     chat: chats[0],
+    tries: 3,
   },
   {
     img: img2, // Ok

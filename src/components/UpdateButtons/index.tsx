@@ -12,7 +12,7 @@ import { chatStore } from "../../store/chat";
 type Props = {};
 
 export const UpdateButtons: FC<Props> = () => {
-  const { levelNumber, level } = useStore(levelStore);
+  const { levelNumber, level, isLevelFail } = useStore(levelStore);
   const { isStepUpdating, isImageEqual } = useStore(updateStepStore);
   const { showOriginal } = useStore(imageStore);
   const { isBusy } = useStore(chatStore);
@@ -41,7 +41,11 @@ export const UpdateButtons: FC<Props> = () => {
           <UpdateButton
             key={id}
             isDisabled={
-              isStepUpdating || showOriginal || isBusy || isImageEqual
+              isStepUpdating ||
+              showOriginal ||
+              isBusy ||
+              isImageEqual ||
+              isLevelFail
             }
             isClicked={clickedSet.has(id)}
             step={step}

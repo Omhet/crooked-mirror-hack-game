@@ -75,9 +75,6 @@ export async function drawStep(
   const { imgOptions = {}, posOptions = {} } = step;
   const { isAnimated } = drawStepOptions;
 
-  drawImage(ctx, img, posOptions, imgOptions);
-  return Promise.resolve();
-
   if (!isAnimated) {
     drawImage(ctx, img, posOptions, imgOptions);
     return Promise.resolve();
@@ -162,13 +159,13 @@ function getCoords(
   const { flipX = false, flipY = false } = imageOptions;
   const rowM = !col ? gridSize : 1;
   const colM = !row ? gridSize : 1;
-  const sectorW = Math.ceil(img.width / gridSize);
-  const sectorH = Math.ceil(img.height / gridSize);
+  const sectorW = Math.floor(img.width / gridSize);
+  const sectorH = Math.floor(img.height / gridSize);
 
   const w = sectorW * rowM;
   const h = sectorH * colM;
-  const halfW = Math.ceil(w / 2);
-  const halfH = Math.ceil(h / 2);
+  const halfW = Math.floor(w / 2);
+  const halfH = Math.floor(h / 2);
 
   const sx = getCoord(sectorW, col);
   const sy = getCoord(sectorH, row);
