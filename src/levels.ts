@@ -248,4 +248,4 @@ export const levels: Level[] = [
     chat: chats[0],
     isCheckpoint: true,
   },
-];
+].slice(0, 1);

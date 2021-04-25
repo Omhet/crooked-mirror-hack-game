@@ -81,19 +81,10 @@ export const ChatPanel: FC = () => {
           <div className={s.finalChoice}>
             <Button
               onClick={() => {
-                setFinalChoiceAction(GameFinalChoice.Friend);
                 readyToStartNextLevelAction();
               }}
             >
-              Friend
-            </Button>
-            <Button
-              onClick={() => {
-                setFinalChoiceAction(GameFinalChoice.Police);
-                readyToStartNextLevelAction();
-              }}
-            >
-              Police
+              Go to the meeting
             </Button>
           </div>
         )}

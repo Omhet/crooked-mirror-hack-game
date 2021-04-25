@@ -19,3 +19,11 @@ button {
   hyphens: auto;
   white-space: pre-wrap;
 }
+
+.finalChoice {
+  display: flex;
+}
+
+.finalChoice > * {
+  flex: 1;
+}
