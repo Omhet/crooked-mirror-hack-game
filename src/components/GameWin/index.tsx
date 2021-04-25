@@ -53,7 +53,7 @@ This story has inspired millions of people to take action. "Looking Glass" has n
 
 const getFriendChoiceText = (friend: string, user: string) => `
 You've arrived at the meeting place, but didn't see ${friend} anywhere.
-- "It's not like him. He's very punctual"
+"It's not like him. He's very punctual"
 
 Suddenly, you felt a sharp pain. 
 Your hands were twisted.
