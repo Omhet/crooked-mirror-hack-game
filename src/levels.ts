@@ -12,26 +12,8 @@ import { ChatMessageFrom, Level, Chat } from "./types";
 
 const chats: Chat[] = [
   {
-    startMessages: [
-      {
-        from: ChatMessageFrom.Friend,
-        text: "Hey!",
-      },
-      {
-        from: ChatMessageFrom.User,
-        text: "Hey!",
-      },
-    ],
-    endMessages: [
-      {
-        from: ChatMessageFrom.Friend,
-        text: "Nice",
-      },
-      {
-        from: ChatMessageFrom.Friend,
-        text: "Thanks",
-      },
-    ],
+    startMessages: [],
+    endMessages: [],
   },
   {
     startMessages: [
@@ -59,7 +41,7 @@ export const levels: Level[] = [
     chat: chats[0],
   },
   {
-    img: img2, // Pic is too tall
+    img: img2, // Ok
     initialSteps: [
       { imgOptions: { flipY: true }, posOptions: { gridSize: 2, col: 2 } },
       { imgOptions: { flipX: true }, posOptions: {} },
@@ -89,32 +71,7 @@ export const levels: Level[] = [
     isCheckpoint: true,
   },
   {
-    img: img4, // Ok, easy to pass, but hard to get high score
-    // Dasha - hard
-    initialSteps: [
-      {
-        imgOptions: { flipX: true },
-        posOptions: { gridSize: 2, row: 1, col: 1 },
-      },
-      { imgOptions: { flipY: true }, posOptions: {} },
-      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 1 } },
-      {
-        imgOptions: { flipY: true },
-        posOptions: { gridSize: 2, row: 1, col: 2 },
-      },
-    ],
-    redundantSteps: [
-      { imgOptions: { flipX: true }, posOptions: {} },
-      {
-        imgOptions: { flipX: true },
-        posOptions: { gridSize: 2, row: 1 },
-      },
-    ],
-    tries: 15,
-    chat: chats[0],
-  },
-  {
-    img: img5, // Ok, easy
+    img: img4, // Ok, easy
     initialSteps: [
       { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
       { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
@@ -142,7 +99,32 @@ export const levels: Level[] = [
     chat: chats[0],
   },
   {
-    img: img6, // Not ok
+    img: img5, // Ok, easy to pass, but hard to get high score
+    // Dasha - hard
+    initialSteps: [
+      {
+        imgOptions: { flipX: true },
+        posOptions: { gridSize: 2, row: 1, col: 1 },
+      },
+      { imgOptions: { flipY: true }, posOptions: {} },
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 1 } },
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 2, row: 1, col: 2 },
+      },
+    ],
+    redundantSteps: [
+      { imgOptions: { flipX: true }, posOptions: {} },
+      {
+        imgOptions: { flipX: true },
+        posOptions: { gridSize: 2, row: 1 },
+      },
+    ],
+    tries: 15,
+    chat: chats[0],
+  },
+  {
+    img: img6,
     initialSteps: [
       {
         imgOptions: { flipY: true },
@@ -245,14 +227,9 @@ export const levels: Level[] = [
   {
     img: img10, // Ok
     initialSteps: [
-      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 1 } },
       { imgOptions: { flipY: true }, posOptions: { gridSize: 3, row: 1 } },
-      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
       { imgOptions: { flipY: true }, posOptions: { gridSize: 3, row: 3 } },
-
-      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, col: 1 } },
       { imgOptions: { flipX: true }, posOptions: { gridSize: 3, col: 1 } },
-      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, col: 2 } },
       { imgOptions: { flipX: true }, posOptions: { gridSize: 3, col: 3 } },
     ],
     redundantSteps: [
