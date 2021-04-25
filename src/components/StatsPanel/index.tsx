@@ -46,7 +46,6 @@ export const StatsPanel: FC<Props> = () => {
                   progress.
                 </div>
                 <div>
-                  {" "}
                   Also you can see the original meme, just click the button on
                   the right
                 </div>
@@ -54,12 +53,12 @@ export const StatsPanel: FC<Props> = () => {
             )}
             <Stat
               title={`${memesLeft} memes left`}
-              description="till the Internet is free"
+              description="till the algorythm is complete"
               icon={<HackerIcon />}
             />
             {triesLeft != undefined && (
               <Stat
-                title={`${triesLeft} tries left`}
+                title={`${triesLeft} flips left`}
                 description="till the computer burned out"
                 icon={<ComputerIcon />}
               />

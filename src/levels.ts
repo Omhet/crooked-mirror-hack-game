@@ -33,7 +33,7 @@ export const levels: Level[] = [
       { imgOptions: { flipX: true }, posOptions: {} },
     ],
     redundantSteps: [{ imgOptions: { flipY: true } }],
-    chat: chats[0],
+    chat: chats[1],
   },
   {
     img: img3, // Ok, easy
@@ -61,7 +61,7 @@ export const levels: Level[] = [
       },
     ],
     tries: 10,
-    chat: chats[0],
+    chat: chats[2],
   },
   {
     img: img4, // Ok
@@ -81,7 +81,7 @@ export const levels: Level[] = [
       },
     ],
     tries: 15,
-    chat: chats[0],
+    chat: chats[3],
     isCheckpoint: true,
   },
   {
@@ -107,7 +107,7 @@ export const levels: Level[] = [
       },
     ],
     tries: 15,
-    chat: chats[0],
+    chat: chats[4],
   },
   {
     img: img6, // Harder?
@@ -134,8 +134,8 @@ export const levels: Level[] = [
       { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
       { imgOptions: { flipY: true }, posOptions: { gridSize: 2, col: 2 } },
     ],
-    time: 120,
-    chat: chats[0],
+    time: 60,
+    chat: chats[5],
     isCheckpoint: true,
   },
   {
@@ -160,7 +160,7 @@ export const levels: Level[] = [
     ],
     tries: 10,
     time: 80,
-    chat: chats[0],
+    chat: chats[6],
   },
   {
     img: img8, // Ok
@@ -188,7 +188,7 @@ export const levels: Level[] = [
     ],
     tries: 6,
     time: 60,
-    chat: chats[0],
+    chat: chats[7],
     isCheckpoint: true,
   },
   {
@@ -209,7 +209,7 @@ export const levels: Level[] = [
     ],
     tries: 3,
     time: 15,
-    chat: chats[0],
+    chat: chats[8],
   },
   {
     img: img10, // Make harder
@@ -225,7 +225,7 @@ export const levels: Level[] = [
     ],
     tries: 15,
     time: 120,
-    chat: chats[0],
+    chat: chats[9],
     isCheckpoint: true,
   },
-].slice(0, 1);
+];

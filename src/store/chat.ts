@@ -100,8 +100,7 @@ export const addMessageToChat = async (
   message: ChatMessage,
   messageTimeout?: number
 ) => {
-  let timeout =
-    message.from === ChatMessageFrom.User ? 1000 : Math.random() * 500 + 1000;
+  let timeout = Math.random() * 500 + 1000;
 
   if (messageTimeout !== undefined) {
     timeout = messageTimeout;
