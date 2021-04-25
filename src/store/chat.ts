@@ -27,7 +27,7 @@ export const clearChatAction = createEvent();
 const initialState: ChatStore = {
   messages: [],
   isBusy: true,
-  showReadyToPlay: true,
+  showReadyToPlay: false,
   showReadyForNextLevel: false,
   showReadyForFinalChoice: false,
 };

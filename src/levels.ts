@@ -12,8 +12,14 @@ import { ChatMessageFrom, Level, Chat } from "./types";
 
 const chats: Chat[] = [
   {
-    startMessages: [],
-    endMessages: [],
+    startMessages: [
+      { from: ChatMessageFrom.Friend, text: "Hey! Can you hear me?" },
+      { from: ChatMessageFrom.User, text: "Hellooo???" },
+    ],
+    endMessages: [
+      { from: ChatMessageFrom.Friend, text: "Hey! Can you hear me?" },
+      { from: ChatMessageFrom.User, text: "Hellooo???" },
+    ],
   },
   {
     startMessages: [
@@ -39,7 +45,6 @@ export const levels: Level[] = [
     ],
     redundantSteps: [{ imgOptions: { flipX: true } }],
     chat: chats[0],
-    tries: 3,
   },
   {
     img: img2, // Ok
@@ -51,28 +56,7 @@ export const levels: Level[] = [
     chat: chats[0],
   },
   {
-    img: img3, // Ok
-    initialSteps: [
-      {
-        imgOptions: { flipY: true },
-        posOptions: { gridSize: 2, row: 1, col: 1 },
-      },
-      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 2 } },
-      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, col: 2 } },
-    ],
-    redundantSteps: [
-      { imgOptions: { flipY: true }, posOptions: {} },
-      {
-        imgOptions: { flipX: true },
-        posOptions: { gridSize: 2, row: 2, col: 2 },
-      },
-    ],
-    tries: 15,
-    chat: chats[0],
-    isCheckpoint: true,
-  },
-  {
-    img: img4, // Ok, easy
+    img: img3, // Ok, easy
     initialSteps: [
       { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
       { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
@@ -100,6 +84,27 @@ export const levels: Level[] = [
     chat: chats[0],
   },
   {
+    img: img4, // Ok
+    initialSteps: [
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 2, row: 1, col: 1 },
+      },
+      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 2 } },
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, col: 2 } },
+    ],
+    redundantSteps: [
+      { imgOptions: { flipY: true }, posOptions: {} },
+      {
+        imgOptions: { flipX: true },
+        posOptions: { gridSize: 2, row: 2, col: 2 },
+      },
+    ],
+    tries: 15,
+    chat: chats[0],
+    isCheckpoint: true,
+  },
+  {
     img: img5, // Ok, easy to pass, but hard to get high score
     // Dasha - hard
     initialSteps: [
@@ -125,7 +130,7 @@ export const levels: Level[] = [
     chat: chats[0],
   },
   {
-    img: img6,
+    img: img6, // Harder?
     initialSteps: [
       {
         imgOptions: { flipY: true },
@@ -174,10 +179,11 @@ export const levels: Level[] = [
       { imgOptions: { flipY: true }, posOptions: { gridSize: 3, col: 2 } },
     ],
     tries: 10,
+    time: 80,
     chat: chats[0],
   },
   {
-    img: img8, // No, image is not ok
+    img: img8, // Ok
     initialSteps: [
       {
         imgOptions: { flipX: true },
@@ -206,7 +212,7 @@ export const levels: Level[] = [
     isCheckpoint: true,
   },
   {
-    img: img9, // Ok
+    img: img9, // Make harder
     initialSteps: [
       { imgOptions: { flipX: true }, posOptions: {} },
       { imgOptions: { flipY: true }, posOptions: {} },
@@ -226,7 +232,7 @@ export const levels: Level[] = [
     chat: chats[0],
   },
   {
-    img: img10, // Ok
+    img: img10, // Make harder
     initialSteps: [
       { imgOptions: { flipY: true }, posOptions: { gridSize: 3, row: 1 } },
       { imgOptions: { flipY: true }, posOptions: { gridSize: 3, row: 3 } },

@@ -40,7 +40,7 @@ const initialState: LevelStore = {
   level: levels[0],
 };
 
-let timer = 0;
+export let timer = 0;
 
 export const levelStore = createStore<LevelStore>(initialState)
   .on(startLevelAction, (_state, levelNumber) => {

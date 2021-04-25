@@ -7,7 +7,7 @@ import {
 import { DrawImageStep } from "../types";
 import { loseAction } from "./gameState";
 import { showSuccessAction } from "./image";
-import { endLevelAction, startLevelAction } from "./level";
+import { endLevelAction, startLevelAction, timer } from "./level";
 
 type UpdateStepStore = {
   updateStep?: DrawImageStep;
@@ -38,6 +38,7 @@ updateStepStore.reset(startLevelAction);
 
 drawUpdatedStepFx.doneData.watch((isEqual) => {
   if (isEqual) {
+    clearInterval(timer);
     setTimeout(() => {
       showSuccessAction();
     }, 700);
