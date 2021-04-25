@@ -1,35 +1,35 @@
-import img0 from "./images/memes/0.jpg";
 import img1 from "./images/memes/1.jpg";
+import img2 from "./images/memes/2.jpg";
+import img3 from "./images/memes/3.jpg";
+import img4 from "./images/memes/4.jpg";
+import img5 from "./images/memes/5.jpg";
+import img6 from "./images/memes/6.jpg";
+import img7 from "./images/memes/7.jpg";
+import img8 from "./images/memes/8.jpg";
+import img9 from "./images/memes/9.jpg";
+import img10 from "./images/memes/10.jpg";
 import { ChatMessageFrom, Level, Chat } from "./types";
 
 const chats: Chat[] = [
   {
     startMessages: [
-      // {
-      //   from: ChatMessageFrom.Friend,
-      //   text: "Hey! How are you doing, bro?",
-      // },
-      // {
-      //   from: ChatMessageFrom.User,
-      //   text: "Alright. What's on your mind?",
-      // },
-      // {
-      //   from: ChatMessageFrom.Friend,
-      //   text: "You need to restore those memes",
-      // },
-      // {
-      //   from: ChatMessageFrom.User,
-      //   text: "Ok",
-      // },
+      {
+        from: ChatMessageFrom.Friend,
+        text: "Hey!",
+      },
+      {
+        from: ChatMessageFrom.User,
+        text: "Hey!",
+      },
     ],
     endMessages: [
       {
         from: ChatMessageFrom.Friend,
-        text: "Wow, you did it!",
+        text: "Nice",
       },
       {
         from: ChatMessageFrom.Friend,
-        text: "You are so cool",
+        text: "Thanks",
       },
     ],
   },
@@ -55,30 +55,41 @@ export const levels: Level[] = [
     initialSteps: [
       { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
     ],
-    redundantSteps: [
-      { imgOptions: { flipX: true } },
-      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
+    redundantSteps: [{ imgOptions: { flipX: true } }],
+    chat: chats[0],
+  },
+  {
+    img: img2,
+    initialSteps: [
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, col: 2 } },
+      { imgOptions: { flipX: true }, posOptions: {} },
+    ],
+    redundantSteps: [{ imgOptions: { flipY: true } }],
+    chat: chats[0],
+  },
+  {
+    img: img3,
+    initialSteps: [
       {
         imgOptions: { flipY: true },
+        posOptions: { gridSize: 2, row: 1, col: 1 },
+      },
+      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 2 } },
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, col: 2 } },
+    ],
+    redundantSteps: [
+      { imgOptions: { flipY: true }, posOptions: {} },
+      {
+        imgOptions: { flipX: true },
         posOptions: { gridSize: 2, row: 2, col: 2 },
       },
     ],
+    tries: 15,
     chat: chats[0],
-    tries: 2,
-  },
-  {
-    img: img0,
-    initialSteps: [
-      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
-    ],
-    redundantSteps: [{ imgOptions: { flipX: true } }],
-    tries: 2,
-    // time: 5,
-    chat: chats[1],
     isCheckpoint: true,
   },
   {
-    img: img1,
+    img: img4,
     initialSteps: [
       { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
     ],
@@ -87,6 +98,78 @@ export const levels: Level[] = [
     ],
     tries: 2,
     time: 50,
-    chat: chats[2],
+    chat: chats[0],
   },
-].slice(0, 3);
+  {
+    img: img5,
+    initialSteps: [
+      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
+    ],
+    redundantSteps: [
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
+    ],
+    tries: 2,
+    time: 50,
+    chat: chats[0],
+  },
+  {
+    img: img6,
+    initialSteps: [
+      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
+    ],
+    redundantSteps: [
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
+    ],
+    tries: 2,
+    time: 50,
+    chat: chats[0],
+  },
+  {
+    img: img7,
+    initialSteps: [
+      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
+    ],
+    redundantSteps: [
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
+    ],
+    tries: 2,
+    time: 50,
+    chat: chats[0],
+  },
+  {
+    img: img8,
+    initialSteps: [
+      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
+    ],
+    redundantSteps: [
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
+    ],
+    tries: 2,
+    time: 50,
+    chat: chats[0],
+  },
+  {
+    img: img9,
+    initialSteps: [
+      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
+    ],
+    redundantSteps: [
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
+    ],
+    tries: 2,
+    time: 50,
+    chat: chats[0],
+  },
+  {
+    img: img10,
+    initialSteps: [
+      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
+    ],
+    redundantSteps: [
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
+    ],
+    tries: 2,
+    time: 50,
+    chat: chats[0],
+  },
+];
