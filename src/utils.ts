@@ -1,4 +1,4 @@
-import { DrawImageStep, Level } from "./types";
+import { ChatMessageFrom, DrawImageStep, Level } from "./types";
 
 export function shuffle<T>(array: T[]) {
   let currentIndex = array.length;
@@ -28,3 +28,13 @@ export async function loadImage(src: string): Promise<HTMLImageElement> {
     img.onerror = reject;
   });
 }
+
+export const MessageAuthorNameMap: Record<ChatMessageFrom, string> = {
+  [ChatMessageFrom.Friend]: "w4LRu2",
+  [ChatMessageFrom.User]: "",
+  [ChatMessageFrom.Police]: 'Agent "Ja883RW0cky" Smith',
+};
+
+export const getAuthorName = (from: ChatMessageFrom, userName: string) => {
+  return from === ChatMessageFrom.User ? userName : MessageAuthorNameMap[from];
+};

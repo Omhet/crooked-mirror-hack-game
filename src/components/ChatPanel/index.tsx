@@ -1,15 +1,15 @@
 import cs from "classnames";
 import { useStore } from "effector-react";
-import React, { FC, useRef, useState } from "react";
+import React, { FC, useState } from "react";
 import SendIcon from "../../images/send.svg";
 import { addMessageToChat, chatStore } from "../../store/chat";
-import { setFinalChoiceAction } from "../../store/gameState";
 import {
   readyToPlayLevelAction,
   readyToStartNextLevelAction,
 } from "../../store/level";
 import { userStore } from "../../store/user";
-import { ChatMessageFrom, ChatMessage, GameFinalChoice } from "../../types";
+import { ChatMessageFrom } from "../../types";
+import { getAuthorName } from "../../utils";
 import { Button } from "../Button";
 import { Panel } from "../Panel/Panel";
 import s from "./index.module.css";
@@ -18,16 +18,6 @@ const MessageClassNameMap: Record<ChatMessageFrom, string> = {
   [ChatMessageFrom.Friend]: s.friend,
   [ChatMessageFrom.User]: s.user,
   [ChatMessageFrom.Police]: s.police,
-};
-
-const MessageAuthorNameMap: Record<ChatMessageFrom, string> = {
-  [ChatMessageFrom.Friend]: "w4LRu2",
-  [ChatMessageFrom.User]: "",
-  [ChatMessageFrom.Police]: 'Agent "Ja883RW0cky" Smith',
-};
-
-const getAuthorName = (from: ChatMessageFrom, userName: string) => {
-  return from === ChatMessageFrom.User ? userName : MessageAuthorNameMap[from];
 };
 
 export const ChatPanel: FC = () => {
