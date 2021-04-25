@@ -13,9 +13,12 @@ button {
 }
 
 .storyText {
+  padding: 32px 0;
   font-size: 18px;
   line-height: 28px;
   max-width: 600px;
+  max-height: 65vh;
+  overflow: auto;
   hyphens: auto;
   white-space: pre-wrap;
 }
@@ -27,4 +30,8 @@ button {
 
 .finalChoice > * {
   flex: 1;
+}
+
+.backButton {
+  justify-self: stretch;
 }
