@@ -28,7 +28,7 @@ export const drawUpdatedStepFx = createEffect(
       threshold: 50,
     });
 
-    return getPercentage() < 3;
+    return getPercentage() < 1;
   }
 );
 

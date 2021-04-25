@@ -74,7 +74,7 @@ export const ChatPanel: FC = () => {
             className={s.readyButton}
             onClick={() => readyToStartNextLevelAction()}
           >
-            Go
+            Next Level
           </Button>
         )}
         {showReadyForFinalChoice && (
