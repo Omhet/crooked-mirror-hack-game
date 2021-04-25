@@ -7,7 +7,7 @@ type Store = {
 };
 export const setUserNameAction = createEvent<string>();
 export const userStore = createStore<Store>({
-  name: "Anonymus",
+  name: "k4rp3NT3R",
 }).on(setUserNameAction, (state, name) => {
   return { ...state, name };
 });

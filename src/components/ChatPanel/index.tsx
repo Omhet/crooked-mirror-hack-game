@@ -21,9 +21,9 @@ const MessageClassNameMap: Record<ChatMessageFrom, string> = {
 };
 
 const MessageAuthorNameMap: Record<ChatMessageFrom, string> = {
-  [ChatMessageFrom.Friend]: "Nagibator",
+  [ChatMessageFrom.Friend]: "w4LRu2",
   [ChatMessageFrom.User]: "",
-  [ChatMessageFrom.Police]: "COP_14",
+  [ChatMessageFrom.Police]: 'Agent "Ja883RW0cky" Smith',
 };
 
 const getAuthorName = (from: ChatMessageFrom, userName: string) => {
