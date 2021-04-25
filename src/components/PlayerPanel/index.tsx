@@ -79,9 +79,7 @@ export const PlayerPanel: FC = ({}) => {
           </Button>
           <Button
             onClick={() => {
-              if (!isBusy) {
-                setMuted((prev) => !prev);
-              }
+              setMuted((prev) => !prev);
             }}
           >
             {muted ? <UnmuteIcon /> : <MuteIcon />}
