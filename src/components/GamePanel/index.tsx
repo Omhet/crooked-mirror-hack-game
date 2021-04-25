@@ -12,7 +12,7 @@ import s from "./index.module.css";
 type Props = {};
 
 export const GamePanel: FC<Props> = ({}) => {
-  const { level, isLevelEnd } = useStore(levelStore);
+  const { level, isLevelEnd, levelNumber } = useStore(levelStore);
   const { showOriginal } = useStore(imageStore);
   const { isBusy } = useStore(chatStore);
 
@@ -25,7 +25,9 @@ export const GamePanel: FC<Props> = ({}) => {
         </div>
 
         <UpdateButtons />
-
+        {levelNumber === 0 && (
+          <p>Push this buttons to flip parts of the image</p>
+        )}
         {isBusy && <div className={s.overlay}>NO_DATA</div>}
         {isLevelEnd && (
           <div className={s.overlay}>

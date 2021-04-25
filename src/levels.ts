@@ -1,4 +1,6 @@
+import { chats } from "./chat";
 import img1 from "./images/memes/1.jpg";
+import img10 from "./images/memes/10.jpg";
 import img2 from "./images/memes/2.jpg";
 import img3 from "./images/memes/3.jpg";
 import img4 from "./images/memes/4.jpg";
@@ -7,35 +9,7 @@ import img6 from "./images/memes/6.jpg";
 import img7 from "./images/memes/7.jpg";
 import img8 from "./images/memes/8.jpg";
 import img9 from "./images/memes/9.jpg";
-import img10 from "./images/memes/10.jpg";
-import { ChatMessageFrom, Level, Chat } from "./types";
-
-const chats: Chat[] = [
-  {
-    startMessages: [
-      { from: ChatMessageFrom.Friend, text: "Hey! Can you hear me?" },
-      { from: ChatMessageFrom.User, text: "Hellooo???" },
-    ],
-    endMessages: [
-      { from: ChatMessageFrom.Friend, text: "Hey! Can you hear me?" },
-      { from: ChatMessageFrom.User, text: "Hellooo???" },
-    ],
-  },
-  {
-    startMessages: [
-      { from: ChatMessageFrom.Friend, text: "Hey! Can you hear me?" },
-      { from: ChatMessageFrom.Friend, text: "Hellooo???" },
-    ],
-    endMessages: [],
-  },
-  {
-    startMessages: [
-      { from: ChatMessageFrom.Friend, text: "Level 3" },
-      { from: ChatMessageFrom.User, text: "Oh yes" },
-    ],
-    endMessages: [],
-  },
-];
+import { Level } from "./types";
 
 export const levels: Level[] = [
   {
@@ -43,7 +17,13 @@ export const levels: Level[] = [
     initialSteps: [
       { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
     ],
-    redundantSteps: [{ imgOptions: { flipX: true } }],
+    redundantSteps: [
+      { imgOptions: { flipX: true } },
+      { imgOptions: { flipY: true } },
+      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 2 } },
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, col: 1 } },
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, col: 2 } },
+    ],
     chat: chats[0],
   },
   {

@@ -39,6 +39,19 @@ export const StatsPanel: FC<Props> = () => {
             {level.isCheckpoint && (
               <div className={s.checkpoint}>Checkpoint</div>
             )}
+            {levelNumber === 0 && (
+              <p className={s.help}>
+                <div>
+                  Here you can see some info about the level and overall
+                  progress.
+                </div>
+                <div>
+                  {" "}
+                  Also you can see the original meme, just click the button on
+                  the right
+                </div>
+              </p>
+            )}
             <Stat
               title={`${memesLeft} memes left`}
               description="till the Internet is free"
