@@ -12,9 +12,9 @@ import { chatStore } from "../../store/chat";
 type Props = {};
 
 export const UpdateButtons: FC<Props> = () => {
-  const { levelNumber, level, isLevelFail } = useStore(levelStore);
+  const { levelNumber, level } = useStore(levelStore);
   const { isStepUpdating, isImageEqual } = useStore(updateStepStore);
-  const { showOriginal } = useStore(imageStore);
+  const { showOriginal, buttonsDisabeld } = useStore(imageStore);
   const { isBusy } = useStore(chatStore);
 
   const [clickedSet, setClickedSet] = useState<Set<string>>(new Set());
@@ -45,7 +45,7 @@ export const UpdateButtons: FC<Props> = () => {
               showOriginal ||
               isBusy ||
               isImageEqual ||
-              isLevelFail
+              buttonsDisabeld
             }
             isClicked={clickedSet.has(id)}
             step={step}

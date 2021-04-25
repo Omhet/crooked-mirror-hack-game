@@ -20,7 +20,6 @@ type LevelStore = {
   time: number;
   level: Level;
   isLevelEnd: boolean;
-  isLevelFail: boolean;
 };
 
 export const nextLevelAction = createEvent();
@@ -38,7 +37,6 @@ const initialState: LevelStore = {
   userTries: 0,
   time: 0,
   isLevelEnd: false,
-  isLevelFail: false,
   level: levels[0],
 };
 
@@ -55,9 +53,6 @@ export const levelStore = createStore<LevelStore>(initialState)
   })
   .on(endLevelAction, (state) => {
     return { ...state, isLevelEnd: true };
-  })
-  .on(failLevelAction, (state) => {
-    return { ...state, isLevelFail: true };
   })
   .on(increaseTimeAction, (state) => {
     return { ...state, time: state.time + 1 };
