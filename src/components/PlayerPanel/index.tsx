@@ -30,8 +30,18 @@ export const PlayerPanel: FC = ({}) => {
   const { gameState } = useStore(gameStateStore);
 
   useEffect(() => {
-    setMuted(isBusy || gameState !== GameState.Play);
-  }, [isBusy, gameState]);
+    setMuted(gameState !== GameState.Play);
+  }, [gameState]);
+
+  useEffect(() => {
+    if (audio.current) {
+      if (isBusy) {
+        audio.current.volume = 0.3;
+      } else {
+        audio.current.volume = 1;
+      }
+    }
+  }, [isBusy]);
 
   useEffect(() => {
     if (audio.current) {
