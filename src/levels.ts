@@ -306,4 +306,4 @@ export const levels: Level[] = [
     chat: chats[9],
     isCheckpoint: true,
   },
-].slice(9, 10);
+];
