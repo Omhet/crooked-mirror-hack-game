@@ -1,10 +1,10 @@
 .main {
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   position: relative;
 }
 
-@media min-width(1600px) {
+@media (min-width: 1600px) {
   .main {
     width: 72px;
     height: 72px;

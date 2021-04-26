@@ -3,7 +3,7 @@
   max-height: 320px;
 }
 
-@media min-width(1600px) {
+@media (min-width: 1600px) {
   .main {
     max-height: 440px;
   }

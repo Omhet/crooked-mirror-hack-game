@@ -4,10 +4,14 @@
 
 .content {
   position: relative;
-  display: flex;
+  display: grid;
+  place-items: center;
+  place-content: center;
+  grid-gap: 48px;
+  /* display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: center; */
 }
 
 .btnGrid {
@@ -44,7 +48,7 @@
   margin-right: 24px;
 }
 
-@media min-width(1600px) {
+@media (min-width: 1600px) {
   .finalOriginal {
     max-height: 440px;
     margin-right: 32px;
