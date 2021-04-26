@@ -26,6 +26,7 @@
 }
 
 .help {
+  margin: 0;
   position: absolute;
   top: 8px;
   left: 12px;

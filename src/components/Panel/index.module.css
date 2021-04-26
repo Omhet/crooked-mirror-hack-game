@@ -11,10 +11,17 @@
 }
 
 .content {
-  padding: 32px;
+  padding: 16px;
+  overflow: hidden;
   border: 1px solid var(--pink);
   /* box-shadow: 0px 1px 1px 1px var(--pink), 0px -1px 1px 1px var(--pink); */
 
   border-top: none;
   height: calc(100% - 24px);
+}
+
+@media min-width(1600px) {
+  .content {
+    padding: 32px;
+  }
 }

@@ -6,12 +6,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 }
 
 .btnGrid {
-  margin-top: 64px;
   display: grid;
   grid-gap: 16px;
   grid-auto-flow: column;
@@ -41,6 +40,13 @@
 }
 
 .finalOriginal {
-  max-height: 440px;
-  margin-right: 32px;
+  max-height: 320px;
+  margin-right: 24px;
+}
+
+@media min-width(1600px) {
+  .finalOriginal {
+    max-height: 440px;
+    margin-right: 32px;
+  }
 }

@@ -1,4 +1,10 @@
 .main {
   border: 1px solid var(--pink);
-  max-height: 440px;
+  max-height: 320px;
+}
+
+@media min-width(1600px) {
+  .main {
+    max-height: 440px;
+  }
 }
