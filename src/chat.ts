@@ -169,10 +169,10 @@ export const chats: Chat[] = [
         text:
           "really? but we only started and didn't tell anyone. how could they know?",
       },
-      { from: ChatMessageFrom.Friend, text: "idk but it is all suspicious" },
+      { from: ChatMessageFrom.Friend, text: "idk but it is suspicious" },
       {
         from: ChatMessageFrom.User,
-        text: "do you want to tell that I did this?",
+        text: "are you saing that was me?",
       },
       {
         from: ChatMessageFrom.Friend,

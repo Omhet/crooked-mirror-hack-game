@@ -7,7 +7,7 @@ import { setUserNameAction, userStore } from "../../store/user";
 import { useStore } from "effector-react";
 
 const getStoryText = (name: string) => `
-The year is 2077. People are completely lazy and instead of working, they hang out all day long on the Internet and watch memes. The governments of all countries have joined together to put an end to this. To make people work, they decided to ban all online entertainment, including memes.
+2077. People are completely lazy and instead of working they hang out all day long on the Internet and watch memes. The governments of all countries have joined together to put an end to this. To make people work, they decided to ban all online entertainment, including memes.
 
 Governments have hired the best people to create a global firewall that encrypts all memes on the web. And it worked. They created a powerful software called "Crooked Mirror". Now all memes are crooked and people are forced to work, because there is nothing else to do.
 
