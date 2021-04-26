@@ -1,13 +1,8 @@
-import { createStore, createEvent } from "effector";
+import { createEvent, createStore } from "effector";
 import { levels } from "../levels";
-import { Chat, ChatMessage, ChatMessageFrom } from "../types";
+import { ChatMessage, ChatMessageFrom } from "../types";
 import { startGameAction } from "./gameState";
-import {
-  startLevelAction,
-  readyToPlayLevelAction,
-  endLevelAction,
-  levelStore,
-} from "./level";
+import { endLevelAction, levelStore, startLevelAction } from "./level";
 
 type ChatStore = {
   messages: ChatMessage[];
@@ -27,7 +22,7 @@ export const clearChatAction = createEvent();
 const initialState: ChatStore = {
   messages: [],
   isBusy: true,
-  showReadyToPlay: true,
+  showReadyToPlay: false,
   showReadyForNextLevel: false,
   showReadyForFinalChoice: false,
 };
