@@ -17,7 +17,7 @@ They managed to recreate the algorithm of the "Crooked Mirror" and create softwa
 
 You, ${name}, are one of them. You shall help them to decrypt those memes and save the Internet.
 
-V1v4 L4 V1D4
+V1v4 L4 R3v0lu710N
 `;
 
 export const StartScreen: FC = () => {

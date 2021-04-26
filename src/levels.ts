@@ -32,15 +32,27 @@ export const levels: Level[] = [
       { imgOptions: { flipY: true }, posOptions: { gridSize: 2, col: 2 } },
       { imgOptions: { flipX: true }, posOptions: {} },
     ],
-    redundantSteps: [{ imgOptions: { flipY: true } }],
+    redundantSteps: [
+      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 2 } },
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, col: 1 } },
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, col: 2 } },
+    ],
     chat: chats[1],
   },
   {
-    img: img3, // Ok, easy
+    img: img3, // Ok
     initialSteps: [
       { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
       { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
       { imgOptions: { flipY: true }, posOptions: { gridSize: 2, col: 2 } },
+      {
+        imgOptions: { flipX: true },
+        posOptions: { gridSize: 2, row: 1, col: 1 },
+      },
+      {
+        imgOptions: { flipX: true },
+        posOptions: { gridSize: 2, row: 1, col: 2 },
+      },
     ],
     redundantSteps: [
       {
@@ -48,7 +60,7 @@ export const levels: Level[] = [
         posOptions: { gridSize: 2, row: 2, col: 1 },
       },
       {
-        imgOptions: { flipX: true },
+        imgOptions: { flipY: true },
         posOptions: { gridSize: 2, row: 1, col: 1 },
       },
       {
@@ -56,11 +68,11 @@ export const levels: Level[] = [
         posOptions: { gridSize: 2, row: 2, col: 2 },
       },
       {
-        imgOptions: { flipX: true },
+        imgOptions: { flipY: true },
         posOptions: { gridSize: 2, row: 1, col: 2 },
       },
     ],
-    tries: 10,
+    tries: 15,
     chat: chats[2],
   },
   {
@@ -72,15 +84,20 @@ export const levels: Level[] = [
       },
       { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 2 } },
       { imgOptions: { flipY: true }, posOptions: { gridSize: 2, col: 2 } },
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 3, row: 2, col: 2 },
+      },
     ],
     redundantSteps: [
-      { imgOptions: { flipY: true }, posOptions: {} },
+      { imgOptions: { flipX: true }, posOptions: {} },
       {
         imgOptions: { flipX: true },
         posOptions: { gridSize: 2, row: 2, col: 2 },
       },
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
     ],
-    tries: 15,
+    tries: 10,
     chat: chats[3],
     isCheckpoint: true,
   },
@@ -105,20 +122,24 @@ export const levels: Level[] = [
         imgOptions: { flipX: true },
         posOptions: { gridSize: 2, row: 1 },
       },
+      {
+        imgOptions: { flipX: true },
+        posOptions: { gridSize: 2, row: 1 },
+      },
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 3, row: 2, col: 3 },
+      },
     ],
-    tries: 15,
+    tries: 10,
     chat: chats[4],
   },
   {
-    img: img6, // Harder?
+    img: img6, // Ok
     initialSteps: [
       {
         imgOptions: { flipY: true },
         posOptions: { gridSize: 2, row: 2, col: 1 },
-      },
-      {
-        imgOptions: { flipX: true },
-        posOptions: { gridSize: 2, row: 1, col: 1 },
       },
       {
         imgOptions: { flipY: true },
@@ -126,15 +147,35 @@ export const levels: Level[] = [
       },
       {
         imgOptions: { flipX: true },
+        posOptions: { gridSize: 2, row: 1, col: 1 },
+      },
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 2, row: 1 },
+      },
+      {
+        imgOptions: { flipX: true },
         posOptions: { gridSize: 2, row: 1, col: 2 },
       },
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 3, row: 3, col: 1 },
+      },
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 3, row: 3, col: 3 },
+      },
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 3, row: 1, col: 1 },
+      },
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 3, row: 1, col: 3 },
+      },
     ],
-    redundantSteps: [
-      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 1 } },
-      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
-      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, col: 2 } },
-    ],
-    time: 60,
+    redundantSteps: [],
+    time: 100,
     chat: chats[5],
     isCheckpoint: true,
   },
@@ -166,66 +207,103 @@ export const levels: Level[] = [
     img: img8, // Ok
     initialSteps: [
       {
-        imgOptions: { flipX: true },
-        posOptions: { gridSize: 3, row: 1, col: 1 },
-      },
-      {
-        imgOptions: { flipX: true },
-        posOptions: { gridSize: 3, row: 3, col: 3 },
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 3, row: 1 },
       },
       {
         imgOptions: { flipY: true },
-        posOptions: { gridSize: 3, row: 1, col: 3 },
+        posOptions: { gridSize: 2, row: 1 },
       },
       {
         imgOptions: { flipY: true },
-        posOptions: { gridSize: 3, row: 3, col: 1 },
+        posOptions: { gridSize: 3, row: 3 },
       },
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 2, row: 2 },
+      },
+      { imgOptions: { flipX: true }, posOptions: {} },
     ],
     redundantSteps: [
-      { imgOptions: { flipY: true }, posOptions: { gridSize: 2, row: 2 } },
+      { imgOptions: { flipX: true }, posOptions: { gridSize: 2, row: 2 } },
       { imgOptions: { flipY: true }, posOptions: {} },
     ],
-    tries: 6,
+    tries: 8,
     time: 60,
     chat: chats[7],
     isCheckpoint: true,
   },
   {
-    img: img9, // Make harder
+    img: img9, // Ok
     initialSteps: [
+      {
+        imgOptions: { flipX: true },
+        posOptions: { gridSize: 3, row: 1, col: 1 },
+      },
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 3, row: 1, col: 2 },
+      },
+      {
+        imgOptions: { flipX: true },
+        posOptions: { gridSize: 3, row: 1, col: 3 },
+      },
+
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 3, row: 2, col: 1 },
+      },
+      {
+        imgOptions: { flipX: true },
+        posOptions: { gridSize: 3, row: 2, col: 2 },
+      },
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 3, row: 2, col: 3 },
+      },
+
+      {
+        imgOptions: { flipX: true },
+        posOptions: { gridSize: 3, row: 3, col: 1 },
+      },
+      {
+        imgOptions: { flipY: true },
+        posOptions: { gridSize: 3, row: 3, col: 2 },
+      },
+      {
+        imgOptions: { flipX: true },
+        posOptions: { gridSize: 3, row: 3, col: 3 },
+      },
+    ],
+    redundantSteps: [],
+    tries: 11,
+    time: 30,
+    chat: chats[8],
+  },
+  {
+    img: img10, // Ok
+    initialSteps: [
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 4, col: 1 } },
+      { imgOptions: { flipY: true }, posOptions: { gridSize: 4, col: 4 } },
       { imgOptions: { flipX: true }, posOptions: {} },
       { imgOptions: { flipY: true }, posOptions: {} },
-    ],
-    redundantSteps: [
-      { imgOptions: { flipX: true }, posOptions: { gridSize: 3, row: 1 } },
-      { imgOptions: { flipX: true }, posOptions: { gridSize: 3, row: 3 } },
-      { imgOptions: { flipY: true }, posOptions: { gridSize: 3, col: 1 } },
-      { imgOptions: { flipY: true }, posOptions: { gridSize: 3, col: 3 } },
+      { imgOptions: { flipX: true }, posOptions: { gridSize: 3, col: 2 } },
       {
         imgOptions: { flipY: true },
         posOptions: { gridSize: 3, row: 2, col: 2 },
       },
+      {
+        imgOptions: { flipX: true },
+        posOptions: { gridSize: 3, row: 2, col: 2 },
+      },
     ],
-    tries: 3,
-    time: 15,
-    chat: chats[8],
-  },
-  {
-    img: img10, // Make harder
-    initialSteps: [
-      { imgOptions: { flipY: true }, posOptions: { gridSize: 3, row: 1 } },
-      { imgOptions: { flipY: true }, posOptions: { gridSize: 3, row: 3 } },
+    redundantSteps: [
       { imgOptions: { flipX: true }, posOptions: { gridSize: 3, col: 1 } },
       { imgOptions: { flipX: true }, posOptions: { gridSize: 3, col: 3 } },
     ],
-    redundantSteps: [
-      { imgOptions: { flipY: true }, posOptions: { gridSize: 3, row: 2 } },
-      { imgOptions: { flipX: true }, posOptions: { gridSize: 3, col: 2 } },
-    ],
-    tries: 15,
-    time: 120,
+    tries: 9,
+    time: 60,
     chat: chats[9],
     isCheckpoint: true,
   },
-];
+].slice(9, 10);
