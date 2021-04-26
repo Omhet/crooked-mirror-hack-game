@@ -130,7 +130,7 @@ export const chats: Chat[] = [
     endMessages: [
       {
         from: ChatMessageFrom.Friend,
-        text: "this one was so freaking relatable",
+        text: "this one is so freaking relatable",
       },
       { from: ChatMessageFrom.User, text: "ahah yeah" },
       { from: ChatMessageFrom.User, text: "people will like it" },
@@ -203,10 +203,10 @@ export const chats: Chat[] = [
       { from: ChatMessageFrom.User, text: "busy doing what???" },
     ],
     endMessages: [
-      { from: ChatMessageFrom.Friend, text: "That was easy." },
-      { from: ChatMessageFrom.Friend, text: "are you still busy?" },
+      { from: ChatMessageFrom.User, text: "That was easy." },
+      { from: ChatMessageFrom.User, text: "are you still busy?" },
       {
-        from: ChatMessageFrom.Friend,
+        from: ChatMessageFrom.User,
         text: "i'm startig to worry. wtf happened?",
       },
     ],
@@ -269,7 +269,7 @@ export const chats: Chat[] = [
       { from: ChatMessageFrom.Friend, text: "ok, it seems we are all settled" },
       {
         from: ChatMessageFrom.Friend,
-        text: "yes, our system's security was not that perfect",
+        text: "I agree that our system's security was not that perfect",
       },
       {
         from: ChatMessageFrom.User,
