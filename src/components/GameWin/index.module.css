@@ -13,6 +13,7 @@ button {
 }
 
 .storyText {
+  padding-right: 8px;
   margin-top: 0;
   font-size: 18px;
   line-height: 28px;

@@ -30,6 +30,7 @@
 }
 
 .storyText {
+  padding-right: 8px;
   font-size: 18px;
   line-height: 28px;
   max-width: 600px;
